@@ -1,0 +1,91 @@
+@import "../../../asset/style/dominant.scss";
+$button-raduis:5px;
+$button-height:25px;
+$pagination-fontSize:14px;
+@mixin textFontStyle{
+  display: inline-block;
+  color: $pagination-fontColor;
+  font-size: $pagination-fontSize;
+  span.numberText{
+    display: inline-block;
+    margin: 0 5px;
+    color: $font-number-fontColor;
+  }
+}
+@mixin leftButtonInput{
+  background-color: transparent;
+  border: 1px solid $button-borderColor;
+  text-align: center;
+  border-radius: $button-raduis;
+}
+//分页样式
+.pagination-area{
+  margin-top: 15px;
+  padding: 0 10px;
+  display: flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:center;
+  .leftItem{
+    p{
+      @include textFontStyle;
+      &:first-child{margin-right: 20px}
+    }
+    div.selectPage{
+      margin-right: 20px;
+      @include textFontStyle;
+      .JokerSelect{
+        margin:0 10px;
+      }
+    }
+    p.goPage{
+      input{
+        @include leftButtonInput;
+        height: $button-height;
+        width: 45px;
+        margin: 0 10px;
+      }
+      button{
+        height: $button-height+2px;
+        @include leftButtonInput;
+        cursor: pointer;
+        padding: 0 10px;
+        color: $pagination-fontColor;
+        &:hover{
+          border: 1px solid $button-hover-bgColor;
+          background-color: $button-hover-bgColor;
+        }
+      }
+    }
+  }
+  .rightItem{
+    button{
+      height: $button-height+2px;
+      @include leftButtonInput;
+      cursor: pointer;
+      padding: 0 10px;
+      color: $pagination-fontColor;
+      &:hover{
+        border: 1px solid $button-hover-bgColor;
+        background-color: $button-hover-bgColor;
+      }
+    }
+    button.lastPage{
+      margin-right: 15px;
+    }
+    button.nextPage{
+      margin-left: 5px;
+    }
+    button.numSign{
+      margin-right:10px;
+    }
+    button.active{
+      background-color: $dominant-hue;
+      color:#fff;
+      border-color: $dominant-hue;
+    }
+    button.notShow{
+      display: none;
+    }
+  }
+}
