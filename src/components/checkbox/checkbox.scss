@@ -1,0 +1,44 @@
+@import "../../asset/style/dominant.scss";
+$checkBox-lableFontSize:14px;
+$checkBox-size:14px;
+$checkBox-out-size:$checkBox-size+2;
+div.checkBox {
+  overflow: hidden;
+  height: $checkBox-out-size;
+  display: inline-block;
+  vertical-align: middle;
+  >span:first-child{
+    display: inline-block;
+    width: $checkBox-size;
+    height: $checkBox-size;
+    border: 1px solid $checkBox-borderColor;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all .2s linear;
+    margin-right: 5px;
+    position: relative;
+    &:hover{
+      border: 1px solid $checkBox-selectColor;
+      transition: all .2s linear;
+    }
+  }
+  >span.Checked{
+    background-color: $checkBox-selectColor;
+    border: 1px solid $checkBox-selectColor;
+  }
+  >span.Checked:after{
+    position: absolute;
+    top: -4px;
+    left: 2px;
+    content: '\2714';
+    font-size: 14px;
+    color: white;
+  }
+  >span:last-child{
+    font-size: $checkBox-lableFontSize;
+    color: $checkBox-lableColor;
+    cursor: pointer;
+    position: relative;
+    top: -3px;
+  }
+}

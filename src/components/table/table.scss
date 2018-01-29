@@ -1,0 +1,93 @@
+@import "../../asset/style/dominant.scss";
+$sort-shortSize:4px;//排序三角行短边的大小
+$sort-longSize:6px;//排序三角行长边的大小
+div.tableBox{
+  overflow-x: auto;
+  table{
+    font-size: $table-fontSize;
+    border:1px solid $table-borderColor;
+    border-bottom: none;
+    background-color: $table-bgColor;
+    width: 100%;
+    div.checkBox{
+      >span:first-child{
+        display: inline-block;
+        border: 1px solid $table-fontColor;
+        transition: all .1s linear;
+      }
+      >span.Checked{
+        border: 1px solid $dominant-hue;
+        transition: all .1s linear;
+      }
+    }
+    thead{
+      background-color: $thead-bgColor;
+      height: 50px;
+    }
+    th{
+      border-bottom: 1px solid $table-borderColor;
+      ul.attachSign{
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 5px;
+        li{
+          list-style: none;
+          width: 0;
+          height: 0;
+          cursor: pointer;
+          &.asc{
+            border-left: $sort-shortSize solid transparent;
+            border-right: $sort-shortSize solid transparent;
+            border-bottom: $sort-longSize solid $table-borderColor;
+            margin-bottom: 3px;
+            transition: all .1s linear;
+            &:hover{
+              border-bottom: $sort-longSize solid $dominant-hue;
+              transition: all .1s linear;
+            }
+          }
+          &.des{
+            border-left: $sort-shortSize solid transparent;
+            border-right: $sort-shortSize solid transparent;
+            border-top: $sort-longSize solid $table-borderColor;
+            transition: all .1s linear;
+            &:hover{
+              border-top: $sort-longSize solid $dominant-hue;
+              transition: all .1s linear;
+            }
+          }
+        }
+      }
+    }
+  }
+  .tbodyControl{
+      text-align: center;
+       tr{
+         height: 40px;
+         transition: all .1s linear;
+         &:nth-child(even){background:$table-even-bgColor;}
+         &:hover{
+           background-color: $tr-hover-bgColor;
+           transition: all .1s linear;
+         }
+         td{
+           color: $table-fontColor;
+           border-bottom: 1px solid $table-borderColor;
+         }
+       }
+  }
+}
+div.hasBoder{
+    th{
+      border-right:1px solid $table-borderColor;
+      &:last-child{
+        border-right: none;
+      }
+    }
+    td{
+      border-right:1px solid $table-borderColor;
+      &:last-child{
+        border-right: none;
+      }
+    }
+}
