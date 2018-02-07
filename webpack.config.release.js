@@ -120,8 +120,8 @@ module.exports={
         }),
         new HtmlWebpackPlugin({
             title:"Collect",
-            template:"public/indexModal.html",
-            // favicon:"public/favicon.ico",
+            template:"./public/indexModal.html",
+            // favicon:"./public/favicon.ico",
             inject:"body",
             chunks:["main","vendor"],
             hash:true,
