@@ -3,6 +3,7 @@ const path=require("path");
 const HtmlWebpackPlugin=require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");//独立打包css模块;
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;//包体组成分析
+const CleanWebpackPlugin = require("clean-webpack-plugin");//生产打包清空目录下文件
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");//压缩CSS模块;
 module.exports={
     entry:{
@@ -74,6 +75,7 @@ module.exports={
         ]
     },
     plugins:[
+        new CleanWebpackPlugin(["dist/*.*"]),
         new BundleAnalyzerPlugin({
             generateStatsFile: true
         }),//包体分析

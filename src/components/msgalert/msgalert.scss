@@ -6,38 +6,34 @@
   right: 0;
   display: flex;
   align-items: center;
-  z-index: 999;
   justify-content: center;
+  z-index: 1002;
   >div{
     z-index: 999;
     min-width: 200px;
-    max-width: 400px;
+    max-width: 800px;
     border-radius: 5px;
     background: rgba(76,76,76,0.6);
     box-shadow: 0 0 15px rgba(0,0,0,0.15);
     text-align: right;
+    padding: 18px 15px;
+    animation:fadeInOut 1.5s linear both;
     >p{
       text-align: left;
-      color: white;
-      margin: 0 20px 20px 20px;
+      color: #fff;
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: 1px;
       >img{
         vertical-align: middle;
-        overflow: hidden;
         margin-right: 10px;
       }
     }
-    >.closeTips{
-      width: 12px;
-      height: 12px;
-      display: inline-block;
-      margin: 10px 10px 0 0;
-      background-image: url("./close.png");
-      background-repeat: no-repeat;
-      background-position: 0 0;
-      &:hover{
-        cursor: pointer;
-        background-position: 0 -14px;
-      }
-    }
   }
+}
+@keyframes fadeInOut {
+  0% {opacity: 0}
+  25% {opacity: 1}
+  75% {opacity: 1}
+  100% {opacity: 0}
 }

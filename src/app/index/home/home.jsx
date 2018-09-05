@@ -1,24 +1,26 @@
 import React from "react";
 import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import PropTypes from "prop-types";
 
-import {changeLoginState} from "../../redux/login/loginAction.jsx";//Action Creator
+import * as loginAction from "../../../redux/login/loginAction.jsx";//Action Creator
+
 @connect(
     state=>({loginInfo:state.loginInfo}),//从redux状态树用什么取什么
-    dispatch => {
-        return {
-            cancelLogin(type,data){dispatch(changeLoginState(type,data))}
-        }
-    }
+    dispatch=>bindActionCreators({...loginAction},dispatch)
 )
 
 class Home extends React.Component{
+    static propTypes = {
+        changeLoginState:PropTypes.func,
+    };
     constructor(props){
         super(props);
         this.goCancelLogin=this.goCancelLogin.bind(this);
     }
     goCancelLogin(){
         let type="CANCEL_LOGIN_STATE",data={userName:"改变后的用户名"};
-        this.props.cancelLogin(type,data)
+        this.props.changeLoginState(type,data)
     }
     render(){
         let {userName}=this.props.loginInfo.userInfo;

@@ -1,26 +1,27 @@
 import React from "react";
 import Particles from "react-particles-js";
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import {connect} from "react-redux";
-
+import {bindActionCreators} from "redux";
 import Checkbox from "../../components/checkbox/checkbox.jsx";
 import Api from "../../api/api.jsx";
-import Util from "../../util.jsx";
+import {fetchRequest} from "../../util/util.jsx";
 import Cookie from "../../components/cookie/cookie.jsx";
+import msgAlert from "../../components/msgalert/msgalert.jsx";
 import "./login.scss";
 
-import {changeLoginState} from "../../redux/login/loginAction.jsx";//Action Creator
+import * as loginAction from "../../redux/login/loginAction.jsx";//Action Creator
 
 @connect(
     null,
-    dispatch => {
-        return {
-            goLogin(type,data){dispatch(changeLoginState(type,data))}
-        }
-    }
+    dispatch=>bindActionCreators({...loginAction},dispatch)
 )
 
 class Login extends React.Component{
+    static propTypes = {
+        changeLoginState:PropTypes.func,
+    };
     constructor(props){
         super(props);
         this.state={
@@ -35,17 +36,13 @@ class Login extends React.Component{
         this.onCheckedChange=this.onCheckedChange.bind(this);
         this.goLogin=this.goLogin.bind(this);
         this.rememberPwd=this.rememberPwd.bind(this);
-        this.setStorage=this.setStorage.bind(this);
     }
     componentWillMount(){
-        document.addEventListener('keyup',(e)=>{
-            if(e.keyCode == 13){
+        document.addEventListener("keyup",(e)=>{
+            if(e.keyCode === 13){
                 this.goLogin()
             }
         });
-    }
-    setStorage(data){
-        Cookie.setCookie("username",data.userName,1);
     }
     onCheckedChange(ischecked){
         this.setState({
@@ -86,21 +83,19 @@ class Login extends React.Component{
             username: userName,
             password: uesPwd,
         };
-        Util.fetchHandler({
+        fetchRequest({
             url:Api.login,
-            type:"get",
-            success:(data)=>{
-                this.setStorage(data);
-                if(isRemberPed){
-                    this.rememberPwd();
-                }
-                this.props.history.push("/");
-                let type="STORE_LOGIN_STATE";
-                this.props.goLogin(type,data)
-            },
-            error:(data)=>{
-                this.showTips(data.errorMsg);
+            type:"get"
+        }).then((data)=>{
+            if(isRemberPed){
+                this.rememberPwd();
             }
+            sessionStorage.setItem("username",data.name);
+            this.props.history.push("/");
+            let type="STORE_LOGIN_STATE";
+            this.props.changeLoginState(type,data)
+        }).catch((data)=>{
+            this.showTips(data.errorMsg);
         })
     }
     render(){
