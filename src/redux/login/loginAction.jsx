@@ -1,6 +1,8 @@
-export function changeLoginState(type,data={}){
+function changeLoginState(type,data={}){
     return {
         type,
         data
     };
 }
+
+export {changeLoginState}

@@ -14,7 +14,7 @@ new WebpackDevServer(webpack(config),{
     //         // pathRewrite: {'^/manhour' : ''},
     //     }
     // }
-}).listen(3000,"localhost",function (err,result) {
+}).listen(3300,"localhost",function (err,result) {
     if(err){
         console.log(err)
     }

@@ -1,13 +1,13 @@
 import React from "react";
 import {Route} from "react-router-dom";
-import Aside from "./aside/aside.jsx";
-import asyncComponent from "../asyncComponent/asyncComponent.jsx";//按需加载
+import Aside from "./components/aside/aside.jsx";
+import asyncComponent from "../../route/asyncComponent/asyncComponent.jsx";//按需加载
 
-const Home=asyncComponent(()=>import("../../app/home/home.jsx"));//登录后主页
-const PageOne=asyncComponent(()=>import("../../app/pageOne/pageOne.jsx"));//第一页
-const PageTwo=asyncComponent(()=>import("../../app/PageTwo/PageTwo.jsx"));//第二页
+const Home=asyncComponent(()=>import("./home/home.jsx"));//登录后主页
+const PageOne=asyncComponent(()=>import("./pageOne/pageOne.jsx"));//第一页
+const PageTwo=asyncComponent(()=>import("./PageTwo/PageTwo.jsx"));//第二页
 
-class Layout extends React.Component{
+class Index extends React.Component{
     constructor(props){
         super(props);
     }
@@ -27,4 +27,4 @@ class Layout extends React.Component{
     }
 }
 
-export default Layout
+export default Index
