@@ -30,7 +30,7 @@ class Aside extends React.Component{
         return(
             <div id="asideNav">
                 <div className="logArea">
-                    <NavLink to={"/"}><img src={require("../../../../asset/images/logo.png")}/></NavLink>
+                    <NavLink exact to={"/"}><img src={require("../../../../asset/images/logo.png")}/></NavLink>
                 </div>
                 <div className="nav">
                     <p>组件列表</p>
