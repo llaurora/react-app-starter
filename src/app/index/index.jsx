@@ -1,5 +1,5 @@
 import React from "react";
-import {Route} from "react-router-dom";
+import {Route,Switch} from "react-router-dom";
 import Aside from "./components/aside/aside.jsx";
 import asyncComponent from "../../route/asyncComponent/asyncComponent.jsx";//按需加载
 
@@ -15,7 +15,7 @@ class Index extends React.Component{
         return(
             <div className="mainBox">
                 <div className="bodyBox">
-                    <Aside history={this.props.history}/>
+                    <Aside history={this.props.history} pathname={this.props.location}/>
                     <div>
                         <Route exact path="/" component={Home}/>
                         <Route path="/pageone" component={PageOne}/>
