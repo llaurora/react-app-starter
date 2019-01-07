@@ -11,7 +11,7 @@ module.exports={
         vendor: ["react", "react-dom","react-router-dom","moment","react-particles-js","whatwg-fetch"]
     },
     output:{
-        path:path.resolve(process.cwd(),"dist"),
+        path:path.resolve(process.cwd(),"build"),
         filename:"[name].min.js",
         publicPath:"./",
         chunkFilename: "[name].[chunkhash:5].js"
@@ -126,8 +126,8 @@ module.exports={
             // favicon:"./public/favicon.ico",
             inject:"body",
             chunks:["main","vendor"],
-            hash:true,
-            filename:path.join(__dirname,"./dist/index.html"),
+            hash:true,//防止缓存
+            filename:path.join(__dirname,"./build/index.html"),
             minify:{
                 removeComments:true,
                 collapseWhitespace:true
