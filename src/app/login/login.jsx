@@ -37,7 +37,7 @@ class Login extends React.Component{
         this.goLogin=this.goLogin.bind(this);
         this.rememberPwd=this.rememberPwd.bind(this);
     }
-    componentWillMount(){
+    componentDidMount(){
         document.addEventListener("keyup",(e)=>{
             if(e.keyCode === 13){
                 this.goLogin()
