@@ -1,11 +1,11 @@
 {
-  "name": "o2m-promotion",
+  "name": "react-redux-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.jsx",
   "scripts": {
-    "release": "webpack --config webpack.config.release.js",
-    "debug": "node server.js"
+    "build": "webpack --config webpack.build.config.js",
+    "dev": "node server.js"
   },
   "author": "",
   "license": "ISC",
