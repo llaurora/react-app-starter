@@ -151,7 +151,7 @@ class Login extends React.Component{
                                 {/*"width": 2*/}
                             {/*},*/}
                             {/*"move": {*/}
-                            
+
                                 {/*"enable": true,*/}
                                 {/*"speed": 2,*/}
                                 {/*"direction": "none",*/}
