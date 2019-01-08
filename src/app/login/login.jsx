@@ -1,5 +1,5 @@
 import React from "react";
-import Particles from "react-particles-js";
+// import Particles from "react-particles-js";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
