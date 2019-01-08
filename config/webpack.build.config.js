@@ -56,7 +56,7 @@ const wepackBuildConfig = {
             }
         }),
         new HtmlWebpackPlugin({
-            title:'Collect',
+            title:'react-redux-app',
             template:'./public/indexModal.html',
             // favicon:'./public/favicon.ico',
             inject:'body',
