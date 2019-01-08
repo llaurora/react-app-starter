@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.5",
+    "lodash": "^4.17.11",
     "moment": "^2.20.1",
     "path": "^0.12.7",
     "prop-types": "^15.5.10",
