@@ -1,7 +1,6 @@
 const path = require('path');
-const _ = require('lodash');
 const webpack = require('webpack');
-const merge = require('webpack-merge');
+const webpackMerge = require('webpack-merge');
 const webpackCommonConfig = require('./webpack.common.config');
 
 const wepackDevConfig = {
@@ -33,19 +32,4 @@ const wepackDevConfig = {
     devtool:'inline-source-map'
 };
 
-module.exports = merge(
-    {
-        customizeArray(common, dev, key) {
-            if (key === 'plugins') {
-                return _.uniq([...common, ...dev]);
-            }
-            return undefined;
-        },
-        customizeObject(common, dev, key) {
-            if (key === 'module') {
-                return _.merge({}, common, dev);
-            }
-            return undefined;
-        }
-    }
-)(webpackCommonConfig,wepackDevConfig);
+module.exports = webpackMerge(webpackCommonConfig,wepackDevConfig);
