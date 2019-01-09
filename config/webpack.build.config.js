@@ -1,7 +1,6 @@
 const webpack=require('webpack');
 const path=require('path');
-const _ = require('lodash');
-const merge = require('webpack-merge');
+const webpackMerge = require('webpack-merge');
 const HtmlWebpackPlugin=require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');//生产打包清空目录下文件
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;//包体组成分析
@@ -72,19 +71,4 @@ const wepackBuildConfig = {
     devtool:'sourceMap'
 };
 
-module.exports = merge(
-    {
-        customizeArray(common, dev, key) {
-            if (key === 'plugins') {
-                return _.uniq([...common, ...dev]);
-            }
-            return undefined;
-        },
-        customizeObject(common, dev, key) {
-            if (key === 'module') {
-                return _.merge({}, common, dev);
-            }
-            return undefined;
-        }
-    }
-)(webpackCommonConfig,wepackBuildConfig);
+module.exports = webpackMerge(webpackCommonConfig,wepackBuildConfig);
