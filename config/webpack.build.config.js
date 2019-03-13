@@ -9,7 +9,7 @@ const webpackCommonConfig = require('./webpack.common.config');
 const wepackBuildConfig = {
     entry:{
         main:'./src/main.jsx',
-        vendor: ['react', 'react-dom','react-router-dom','moment','react-particles-js','whatwg-fetch']
+        vendor: ['react', 'react-dom','react-router-dom','moment','whatwg-fetch']
     },
     output:{
         // path.resolve()方法可以将多个路径解析为一个规范化的绝对路径;
@@ -23,9 +23,9 @@ const wepackBuildConfig = {
     },
     plugins:[
         new CleanWebpackPlugin(['build/*.*']),
-        new BundleAnalyzerPlugin({
-            generateStatsFile: true
-        }),//包体分析
+        // new BundleAnalyzerPlugin({
+        //     generateStatsFile: true
+        // }),//包体分析
         new webpack.ContextReplacementPlugin(
             /moment[\\\/]locale$/,
             /^\.\/(zh-cn)$/
