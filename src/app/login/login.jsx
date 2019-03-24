@@ -229,7 +229,7 @@ class Login extends React.Component{
                     <div className="ieRemPwd">
                         <Checkbox defaultChecked={isRemberPed} labelText="记住密码" onCheckedChange={this.onCheckedChange}/>
                     </div>
-                    <button onClick={this.goLogin}>立即登录gggg</button>
+                    <button onClick={this.goLogin}>立即登录</button>
                     <p className={classNames({fadeAnimation:showFade})}>*{errorTips}</p>
                 </div>
             </div>
