@@ -1,10 +1,10 @@
 import React from "react";
-import thunk from 'redux-thunk';
-import {Route,BrowserRouter as Router,Switch,Redirect} from "react-router-dom";
+import {Route,BrowserRouter as Router,Switch,Redirect,NavLink} from "react-router-dom";
 import {Provider} from "react-redux";
 import {createStore,applyMiddleware} from "redux";
-// import {hot} from "react-hot-loader/root"
 import {composeWithDevTools} from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import logger from "redux-logger";
 
 import asyncComponent from "./asyncComponent/asyncComponent.jsx";//按需加载
 import rootReducer from "../redux/indexRuducer.jsx";//引入Reducer 一般一个项目把所有redcer集中在一个Reducer返回
@@ -43,5 +43,5 @@ const Routers =()=>{
         )
 };
 
+
 export default Routers;
-// export default hot(Routers);

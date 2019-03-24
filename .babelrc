@@ -1,22 +1,12 @@
 {
   "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "loose": true,
-        //我们目前的配置,babel会把ES6模块定义转为CommonJS定义，但webpack自己可以处理import和export,而且webpack处理import时会做代码优化，把没用到的部分代码删除掉。因此我们通过babel提供的modules: false选项把ES6模块转为CommonJS模块的功能给关闭掉
-        "modules": false,
-        "targets" : {
-          "browsers": ["last 2 versions", "ie > 8"]
-        }
+    ["env", {
+      "targets": {
+        "browsers": ["last 2 versions", "safari >= 7"]
       }
-    ],
-    "@babel/preset-react"
+    }],
+    "react",
+    "stage-0"
   ],
-  "plugins": [
-//    "react-hot-loader/babel",
-    "@babel/plugin-syntax-dynamic-import",
-    ["@babel/plugin-proposal-decorators", { "legacy": true }],
-    "@babel/plugin-proposal-class-properties"
-  ]
+  "plugins": ["transform-decorators-legacy"]
 }
