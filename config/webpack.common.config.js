@@ -10,11 +10,7 @@ const webpackCommonConfig = {
     mode: devMode ? 'development' : 'production',//模式
     entry: {
         vendor: ['react','react-dom','react-router-dom','classnames'],
-        main: devMode ?
-            [
-                // 'react-hot-loader/patch',
-                './src/main.jsx'
-            ] : ['./src/main.jsx']
+        main: ['./src/main.jsx']
     },
     performance: {
         //是否关闭当输出的js文件的大小超过推荐限制大小(244k)时出现warning警告
@@ -62,6 +58,29 @@ const webpackCommonConfig = {
                                 return [
                                     require('autoprefixer')({browsers:['last 40 versions']})]
                             }
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.html$/,
+                use: [
+                    {
+                        loader: 'html-loader',
+                        options: {
+                            attrs: ['img:src', 'link:href']
+                        }
+                    }
+                ]
+            },
+            {
+                //匹配 favicon.png,上面的 html-loader 会把入口 index.html 引用的 favicon.png 图标文件解析出来进行打包
+                test: /favicon\.png$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: devMode ? 'images/favicon.[ext]' : 'images/favicon.[hash:8].[ext]'
                         }
                     }
                 ]

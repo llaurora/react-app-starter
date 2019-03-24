@@ -20,7 +20,7 @@ class PageTwo extends React.Component{
                 <hr/>
                 <h2>现在计数为{count}</h2>
                 <button onClick={this.add}>Count+</button>
-                <h2>dff</h2>
+                <h2>dffl</h2>
             </div>
         )
     }

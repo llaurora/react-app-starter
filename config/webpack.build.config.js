@@ -23,33 +23,6 @@ const wepackBuildConfig = {
         filename: 'js/[name].[contenthash:12].js',
         chunkFilename: 'js/[id].[contenthash:12].js'
     },
-    module: {
-        rules: [
-            {
-                test: /\.html$/,
-                use: [
-                    {
-                        loader: 'html-loader',
-                        options: {
-                            attrs: ['img:src', 'link:href']
-                        }
-                    }
-                ]
-            },
-            {
-                //匹配 favicon.png,上面的 html-loader 会把入口 index.html 引用的 favicon.png 图标文件解析出来进行打包
-                test: /favicon\.png$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: 'images/favicon.[hash:8].[ext]'
-                        }
-                    }
-                ]
-            },
-        ]
-    },
     optimization: {
         minimize: true,//生产环境production下，默认为true，告诉webpack使用TerserPlugin压缩模块
         minimizer: [

@@ -28,8 +28,7 @@ const wepackDevConfig = {
         runtimeChunk: true,
     },
     plugins:[
-        //热加载
-        new webpack.HotModuleReplacementPlugin(),
+        new webpack.HotModuleReplacementPlugin(),//热加载，当设置mode为development时，此插件已内置
         new FriendlyErrorsPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html', // 文件写入路径，前面的路径与devServer中 contentBase 对应
@@ -63,7 +62,7 @@ const wepackDevConfig = {
 		    然后刷新页面试试。是不是发现刷新后404了。为什么？dist文件夹里面并没有page1.html,当然会404了，所以我们需要配置
 		    historyApiFallback，让所有的404定位到index.html
          */
-        // clientLogLevel: 'warning', // 输出日志级别
+        clientLogLevel: 'warning', // 输出日志级别
         historyApiFallback: true,//true不跳转
         // 在页面上全屏输出报错信息
         overlay: {
