@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import Checkbox from "../../components/checkbox/checkbox.jsx";
-import Api from "../../api/api.jsx";
-import {fetchRequest} from "../../util/util.jsx";
+import Api from "@api";
+import {fetchRequest} from "@util";
 import Cookie from "../../components/cookie/cookie.jsx";
 import msgAlert from "../../components/msgalert/msgalert.jsx";
 import "./login.scss";
@@ -229,7 +229,7 @@ class Login extends React.Component{
                     <div className="ieRemPwd">
                         <Checkbox defaultChecked={isRemberPed} labelText="记住密码" onCheckedChange={this.onCheckedChange}/>
                     </div>
-                    <button onClick={this.goLogin}>立即登录</button>
+                    <button onClick={this.goLogin}>立即登录gggg</button>
                     <p className={classNames({fadeAnimation:showFade})}>*{errorTips}</p>
                 </div>
             </div>

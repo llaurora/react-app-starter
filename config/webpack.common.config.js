@@ -1,11 +1,30 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');//独立打包css模块;
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');//压缩CSS模块;
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');//抽取所有js中的css独立打包到一个css中,减少http请求
+const devMode = process.env.NODE_ENV === 'development';
+
+function resolve(dir) {
+    return path.resolve(process.cwd(), dir)
+}
+
 const webpackCommonConfig = {
+    mode: devMode ? 'development' : 'production',//模式
+    entry: {
+        vendor: ['react','react-dom','react-router-dom','classnames'],
+        main: devMode ?
+            [
+                // 'react-hot-loader/patch',
+                './src/main.jsx'
+            ] : ['./src/main.jsx']
+    },
+    performance: {
+        //是否关闭当输出的js文件的大小超过推荐限制大小(244k)时出现warning警告
+        hints: devMode ? false : 'warning'
+    },
     module:{
         rules:[
             {
                 test: /\.jsx|js$/,
-                exclude: /(node_modules)/,
+                // include: [resolve("src")],//限制范围，提高打包速度
                 use:[
                     {
                         loader:'babel-loader'
@@ -13,34 +32,45 @@ const webpackCommonConfig = {
                 ]
             },
             {
-                test: /\.css|scss$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        {
-                            loader:'css-loader' ,
-                            options:{
-                                importLoaders: 1
-                            }
-                        },
-                        'resolve-url-loader',
-                        'sass-loader?sourceMap',
-                        {
-                            loader: 'postcss-loader', //自动给css添加浏览器兼容前缀
-                            options: {
-                                sourceMap: true,
-                                plugins: function () {
-                                    return [
-                                        require('autoprefixer')({browsers:['last 40 versions']})]
-                                }
+                test: /\.(sa|sc|c)ss$/,
+                // include: [resolve("src")],
+                use: [
+                    devMode ? 'style-loader' : {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: '../' //修改css中如背景图片的路径引用
+                        }
+                    },
+                    {
+                        loader:'css-loader' ,
+                        options:{
+                            importLoaders: 1
+                        }
+                    },
+                    'resolve-url-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true//配置source map是为了当出现错误时候方便我们进行定位调试
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader', //自动给css添加浏览器兼容前缀
+                        options: {
+                            sourceMap: true,
+                            plugins: function () {
+                                return [
+                                    require('autoprefixer')({browsers:['last 40 versions']})]
                             }
                         }
-                    ],
-                    // publicPath: './asset' //修改css中如背景图片的路径引用
-                })
+                    }
+                ]
             },
             {
-                test: /\.png|jpg|gif|svg|jpeg|ico$/,
+                test: /\.(png|jpg|gif|svg|jpeg|ico)$/,
+                // 生产环境排除 favicon.png, 因为它已经有loader处理过了,如果不排除掉，它会被这个loader再处理一遍
+                exclude: /favicon\.png$/,
+                // include: [resolve("src")],
                 use:[
                     {
                         loader : 'url-loader', //url-loader是file-loader的加强版。url-loader不依赖于file-loader，即使用url-loader时，只需要安装url-loader即可，不需要安装file-loader，因为url-loader内置了file-loader
@@ -57,6 +87,7 @@ const webpackCommonConfig = {
             },
             {
                 test: /\.(eot|woff|ttf|woff2|appcache)(\?|$)/,
+                include: [resolve("src")],
                 use: [
                     {
                         loader: 'file-loader',
@@ -69,22 +100,25 @@ const webpackCommonConfig = {
         ]
     },
     resolve: {
-        extensions: ['.js','.jsx']
+        extensions: ['.js','.jsx'],
+        alias: {
+            '@api': resolve('src/api'),
+            '@util': resolve('src/util'),
+        }
     },
     plugins:[
-        //从js中抽离css,属性disable为true表示禁用此插件并不抽离css，为false表示不禁用此插件，抽离css并打包成单独的css文件
-        new ExtractTextPlugin({
-            filename: '[name].min.css',
-            disable: false,
-            allChunks: true
-        }),
-        //压缩css（注:因为没有用style-loader打包到js里所以webpack.optimize.UglifyJsPlugin的压缩本身对独立css不管用）;
-        new OptimizeCssAssetsPlugin({
-            assetNameRegExp: /\.css$/g,                //正则匹配后缀.css文件;
-            cssProcessor: require('cssnano'),            //加载‘cssnano’css优化插件;
-            cssProcessorOptions: { discardComments: {removeAll: true } }, //插件设置,删除所有注释;
-            canPrint: true                             //设置是否可以向控制台打日志,默认为true;
-        }),
+        new MiniCssExtractPlugin({
+            /*
+                filename 是指在你入口文件entry中引入生成出来的文件名;
+                chunkname是指那些未被在入口文件entry引入，但又通过按需加载（异步）模块的时候引入的文件;
+                使用contenthash代替hash以解决js内容改变引起css文件的哈希值变化；
+                contenthash的出现主要是为了解决，让css文件不受js文件的影响。比如foo.css被foo.js引用了，所以它们共用相同的chunkhash值。但这样子是有问题的，如果foo.js修改了代码，css文件就算内容没有任何改变，由于是该模块的 hash 发生了改变，其css文件的hash也会随之改变。
+                这个时候我们就可以使用contenthash了，保证即使css文件所处的模块里有任何内容的改变，只要 css 文件内容不变，那么它的hash就不会发生变化。
+                contenthash 你可以简单理解为是 moduleId + content 所生成的 hash。
+             */
+            filename: devMode ? '[name].css' : 'css/[name].[contenthash].css',
+            chunkFilename: devMode ? '[id].css' : 'css/[id].[contenthash].css',
+        })
     ],
 };
 module.exports = webpackCommonConfig;
