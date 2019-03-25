@@ -5,6 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const webpackCommonConfig = require('./webpack.common.config');
 const publicPath = '/';
+const devServerHost = '127.0.0.1';
+const devServerPort = '8888';
 
 const wepackDevConfig = {
     devtool:'cheap-module-eval-source-map', //调试工具,
@@ -26,20 +28,6 @@ const wepackDevConfig = {
             chunks: 'all',
         },
         runtimeChunk: true,
-    },
-    plugins:[
-        new webpack.HotModuleReplacementPlugin(),//热加载，当设置mode为development时，此插件已内置
-        new FriendlyErrorsPlugin(),
-        new HtmlWebpackPlugin({
-            filename: 'index.html', // 文件写入路径，前面的路径与devServer中 contentBase 对应
-            template: path.resolve(process.cwd(),'./public/indexModal.html'),// 模板文件路径
-            inject: true
-        })
-    ],
-    watchOptions: {
-        poll: 1000,//监测修改的时间(ms)
-        aggregateTimeout: 500,//第一个文件更改后，在重建之前添加延迟。这允许webpack将在此时间段内所做的任何其他更改聚合到一个重建中
-        ignored: /node_modules/,//不监测
     },
     devServer: { //开发服务器
         /*
@@ -64,6 +52,7 @@ const wepackDevConfig = {
          */
         clientLogLevel: 'warning', // 输出日志级别
         historyApiFallback: true,//true不跳转
+        quiet: true,//使用webpack-dev-server，需要设为true，禁止显示devServer的console信息
         // 在页面上全屏输出报错信息
         overlay: {
             warnings: true,
@@ -72,8 +61,8 @@ const wepackDevConfig = {
         compress: true,// 启用gzip压缩
         inline: true,// 设置为true，当源文件改变时会自动刷新页面
         hot: true,// 模块热更新，取决于HotModuleReplacementPlugin
-        host: '127.0.0.1',// 设置默认监听域名，如果省略，默认为“localhost”
-        port: 8888,// 设置默认监听端口，如果省略，默认为“8080”
+        host: devServerHost,// 设置默认监听域名，如果省略，默认为“localhost”
+        port: devServerPort,// 设置默认监听端口，如果省略，默认为“8080”
         // proxy: {//代理配置
         //     '/manhour': {
         //         target: 'http://10.112.75.15',//代理配置
@@ -82,7 +71,25 @@ const wepackDevConfig = {
         //         pathRewrite: {'^/manhour' : ''},
         //     }
         // }
-    }
+    },
+    watchOptions: {
+        poll: 1000,//监测修改的时间(ms)
+        aggregateTimeout: 400,//第一个文件更改后，在重建之前添加延迟。这允许webpack将在此时间段内所做的任何其他更改聚合到一个重建中
+        ignored: /node_modules/,//不监测
+    },
+    plugins:[
+        //new webpack.HotModuleReplacementPlugin(),//热加载，当配置了devServer的hot和inline参数之后，webpack会帮我们把HotModuleReplacementPlugin自动添加进来而不用我们再手动添加
+        new FriendlyErrorsPlugin({
+                compilationSuccessInfo: {
+                    messages: [`You application is running here：http://${devServerHost}:${devServerPort}`],
+                }
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'index.html', // 文件写入路径，前面的路径与devServer中 contentBase 对应
+            template: path.resolve(process.cwd(),'./public/indexModal.html'),// 模板文件路径
+            inject: true
+        })
+    ]
 };
 
 module.exports = webpackMerge(webpackCommonConfig,wepackDevConfig);
