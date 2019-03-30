@@ -1,29 +1,29 @@
-import React,{lazy} from "react";
-import {Route} from "react-router-dom";
-import Aside from "./components/aside/aside.jsx";
+import React, { lazy } from 'react';
+import propTypes from 'prop-types';
+import { Route } from 'react-router-dom';
+import Aside from './components/Aside';
+import './style.scss';
 
-const Home=lazy(()=>import("./home/home.jsx"));//登录后主页
-const PageOne=lazy(()=>import("./pageOne/pageOne.jsx"));//第一页
-const PageTwo=lazy(()=>import("./PageTwo/PageTwo.jsx"));//第二页
+const Home = lazy(() => import('./home')); // 登录后主页
+const PageOne = lazy(() => import('./PageOne')); // 第一页
+const PageTwo = lazy(() => import('./PageTwo')); // 第二页
+const PageThree = lazy(() => import('./PageThree')); // 第三页
 
-class Index extends React.Component{
-    constructor(props){
-        super(props);
-    }
-    render(){
-        return(
-            <div className="mainBox">
-                <div className="bodyBox">
-                    <Aside history={this.props.history} pathname={this.props.location}/>
-                    <div>
-                        <Route exact path="/" component={Home}/>
-                        <Route path="/pageone" component={PageOne}/>
-                        <Route path="/pagetwo" component={PageTwo}/>
-                    </div>
-                </div>
-            </div>
-        )
-    }
+export default function Index({ history, location }) {
+  return (
+    <div id="indexArea">
+      <Aside history={history} location={location} />
+      <div id="routeContent">
+        <Route exact path="/" component={Home} />
+        <Route path="/pageone" component={PageOne} />
+        <Route path="/pagetwo" component={PageTwo} />
+        <Route path="/pagethree" component={PageThree} />
+      </div>
+    </div>
+  );
 }
 
-export default Index
+Index.propTypes = {
+  location: propTypes.object,
+  history: propTypes.object,
+};
