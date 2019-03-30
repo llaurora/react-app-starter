@@ -1,12 +1,14 @@
-export default function loginReducer(loginInfo={isLogin:false,userInfo:{}}, action) {
-    switch (action.type) {
-        case "STORE_LOGIN_STATE":
-            return Object.assign({},loginInfo,{isLogin:true,userInfo:action.data});
-        case "CANCEL_LOGIN_STATE":
-            return Object.assign({},loginInfo,{isLogin:false,userInfo:action.data});
-        case "LOGIN-OFF":
-            return Object.assign({},loginInfo,{isLogin:false,userInfo:action.data});
-        default:
-            return {...loginInfo}
-    }
+const initialState = { isLogin: false, userInfo: {} };
+export default function loginInfo(state = { ...initialState }, action) {
+  switch (action.type) {
+    case 'CANCEL_LOGIN_STATE':
+      return {
+        ...state,
+        ...{ isLogin: !state.isLogin, userInfo: action.data },
+      };
+    case 'CLEAR_LOGIN_STATE':
+      return { ...initialState };
+    default:
+      return { ...initialState };
+  }
 }
