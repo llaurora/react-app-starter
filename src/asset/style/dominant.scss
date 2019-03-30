@@ -1,32 +1,6 @@
 $dominant-hue:#f73352;//主色调
-$body-bgColor:#e3d3ba;//body背景颜色
 $default-fontColor:#333;//默认字体颜色
 
-$login-bgColor:rgba(252,251,247,0.85);//登录盒子背景颜色
-$login-inputFontColor:#c2c2c1;//登录输入框字体颜色
-$login-inputSignColor:#f46178; //登录输入框获取焦点后的线框颜色
-$button-borderColor:$default-fontColor;//按钮边框颜色
-
-$nav-bgColor:#202731;//左边导航背景颜色
-
-$table-borderColor:#d8d8d8;//表格边框颜色
-$table-bgColor:#fff;//表格背景颜色
-$table-even-bgColor:#fdfcfc;//表格背景换色
-$table-fontColor:#626161;//表格字体颜色
-$table-fontSize:14px;//表格字体大小
-$thead-bgColor:#f8f8f8;//表头背景颜色
-$tr-hover-bgColor:#fee5e9;//每行移入背景颜色
-
-$pagination-fontColor:#5c5c5c;//分页字体颜色
-$font-number-fontColor: #272733;//数字颜色
-$button-borderColor:#999;
-$button-hover-bgColor:#fee5e9;
-
-$checkBox-selectColor:$dominant-hue;//复选框选中颜色
-$checkBox-borderColor:$default-fontColor;//复选框边框颜色
-$checkBox-lableColor:#666;//复选框字体颜色
-
-$btn-hue-hover-color:#ff667e;
 $dialog-shadow-bgColor:rgba(49,49,49,0.3);
 $dialog-border-color:#eee;
 $dialog-box-shadow-color:rgba(255,255,255,0.3);

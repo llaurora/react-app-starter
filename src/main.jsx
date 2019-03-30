@@ -1,7 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Routers from "./route/route.jsx";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Routers from './route';
 
-ReactDOM.render(<Routers/>,document.getElementById("root"));
-
-
+ReactDOM.render(<Routers />, document.getElementById('root'));

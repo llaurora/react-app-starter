@@ -1,51 +1,21 @@
-@import "dominant.scss";
+@import "./dominant";
 *{
-  font-family: "Helvetica Neue",Helvetica,Arial,microsoft yahei,simsun;
-  padding: 0;
+  font-family: "Helvetica Neue",Helvetica,Arial,"Micros≈oft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+  color: $default-fontColor;
   margin: 0;
-  color: $default-fontColor
+  padding: 0;
 }
 li{list-style: none}
 button,input,select{outline: none}
-@mixin flexItem{
-  display: flex;
-  justify-content:flex-start;
-  align-items:flex-start;
-}
-
 a{
   text-decoration: none;
-  color: white;
+  color: $default-fontColor;
   &:hover{
     color: $dominant-hue;
   }
 }
-body{
-  background-color: $body-bgColor;
-}
-.mainBox{
-  >.bodyBox{
-    @include flexItem;
-    >div:last-child{
-      margin-left: 220px;
-      width: 100%;
-    }
-  }
-  button.btnCommon{
-    border: 1px solid $button-borderColor;
-    background-color: transparent;
-    height: 28px;
-    padding: 0 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all .1s linear;
-    margin-right: 10px;
-    &:hover{
-      border: 1px solid $dominant-hue;
-      color: $dominant-hue;
-      transition: all .1s linear;
-    }
-  }
+html,body,#root{
+  height: 100%;
 }
 ::-moz-focus-inner{border:none;}/*火狐按钮点击后虚线框去除*/
 input:-webkit-autofill{
@@ -54,7 +24,7 @@ input:-webkit-autofill{
 }
 @-webkit-keyframes autofill {
   to{
-    color: $login-inputFontColor;
+    color: $default-fontColor;
     background: transparent;
   }
 }
