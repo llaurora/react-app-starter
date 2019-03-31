@@ -115,9 +115,9 @@ const wepackBuildConfig = {
       inject: true, // true或者body：所有JavaScript资源插入到body元素的底部
       chunks: 'all', // 允许插入到模板中的一些chunk，不配置此项默认会将entry中所有的thunk注入到模板中
       /*
-              hash:true|false，是否为所有注入的静态资源添加webpack每次编译产生的唯一hash值，添加hash形式如下所示：
-              html <script type="text/javascript" src="common.js?a3e1396b501cdd9041be"></script>
-             */
+        hash:true|false，是否为所有注入的静态资源添加webpack每次编译产生的唯一hash值，添加hash形式如下所示：
+        html <script type="text/javascript" src="common.js?a3e1396b501cdd9041be"></script>
+       */
       hash: true, // 给生成的js文件一个独特的 hash 值
       chunksSortMode: 'none',
       minify: {
