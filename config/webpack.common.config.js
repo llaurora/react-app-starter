@@ -10,7 +10,7 @@ function resolve(dir) {
 const webpackCommonConfig = {
   mode: devMode ? 'development' : 'production', // 模式
   entry: {
-    vendor: ['react', 'react-dom', 'react-router-dom', 'classnames'],
+    vendor: ['react', 'react-dom', 'react-router-dom'],
     main: ['./src/main.jsx'],
   },
   performance: {
@@ -22,11 +22,7 @@ const webpackCommonConfig = {
       {
         test: /\.jsx|js$/,
         include: [resolve('src')], // 限制范围，提高打包速度
-        use: [
-          {
-            loader: 'babel-loader',
-          },
-        ],
+        use: ['babel-loader'],
       },
       {
         test: /\.(sa|sc|c)ss$/,
@@ -36,11 +32,11 @@ const webpackCommonConfig = {
             ? 'style-loader'
             : {
               /* eslint-disable */
-                loader: MiniCssExtractPlugin.loader,
-                options: {
-                  publicPath: '../', // 修改css中如背景图片的路径引用
-                },
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                publicPath: '../', // 修改css中如背景图片的路径引用
               },
+            },
           {
             loader: 'css-loader',
             options: {
@@ -77,7 +73,7 @@ const webpackCommonConfig = {
         ],
       },
       {
-        // 匹配 favicon.png,上面的 html-loader 会把入口 index.html 引用的 favicon.png 图标文件解析出来进行打包
+        // 匹配 favicon.png,上面的 html-loader 会把入口 Index.html 引用的 favicon.png 图标文件解析出来进行打包
         test: /favicon\.png$/,
         use: [
           {
@@ -94,7 +90,7 @@ const webpackCommonConfig = {
         test: /\.(png|jpg|gif|svg|jpeg|ico)$/,
         // 生产环境排除 favicon.png, 因为它已经有loader处理过了,如果不排除掉，它会被这个loader再处理一遍
         exclude: /favicon\.png$/,
-        include: [resolve("src")],
+        include: [resolve('src')],
         use: [
           {
             loader: 'url-loader', // url-loader是file-loader的加强版。url-loader不依赖于file-loader，即使用url-loader时，只需要安装url-loader即可，不需要安装file-loader，因为url-loader内置了file-loader
