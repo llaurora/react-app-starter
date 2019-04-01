@@ -6,7 +6,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.build.config.js --progress --hide-modules --display-optimization-bailout",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.config.js --progress",
-    "lint": "eslint --ext .js --ext .jsx src"
+    "lint": "eslint --ext .js --ext .jsx src --fix"
   },
   "author": "",
   "license": "ISC",
