@@ -14,8 +14,8 @@ export default function Index({ history, location }) {
     <div id="indexArea">
       <Aside history={history} location={location} />
       <div id="routeContent">
-        <Route exact path="/" component={Home} />
-        <Route path="/pageone" component={PageOne}/>
+        <Route exact path="/" component={Home}/>
+        <Route path="/pageone" component={PageOne} />
         <Route path="/pagetwo" component={PageTwo} />
         <Route path="/pagethree" component={PageThree} />
       </div>
