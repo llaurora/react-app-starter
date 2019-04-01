@@ -126,11 +126,10 @@ const webpackCommonConfig = {
       '@api': resolve('src/api'),
       '@util': resolve('src/util'),
     },
-    // modules: [
-    //   // 指定webpack在解析模块时应该搜索哪些目录
-    //   resolve('src'),
-    //   resolve('node_modules'),
-    // ],
+    modules: [
+      // 指定webpack在解析模块时应该搜索哪些目录
+      './src', 'node_modules'
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
