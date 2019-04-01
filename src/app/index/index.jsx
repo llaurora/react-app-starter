@@ -11,7 +11,7 @@ const PageThree = lazy(() => import('./PageThree')); // 第三页
 
 export default function Index({ history, location }) {
   return (
-    <div id='indexArea'>
+    <div id="indexArea">
       <Aside history={history} location={location} />
       <div id="routeContent">
         <Route exact path="/" component={Home} />
