@@ -3,8 +3,15 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 @connect(
-  state => ({
-    userName: state.loginInfo.userInfo.userName,
+  // state => ({
+  //   userName: state.loginInfo.userInfo.userName,
+  // }), // 从redux状态树用什么取什么
+  ({
+    loginInfo: {
+      userInfo: { userName },
+    },
+  }) => ({
+    userName,
   }), // 从redux状态树用什么取什么
   null,
 )
