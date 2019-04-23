@@ -1,6 +1,6 @@
 import 'whatwg-fetch';
 
-function fetchRequest(payload) {
+export function fetchRequest(payload) {
   // fetch请求封装
   function setOptions() {
     const headers = payload.headers || {
@@ -40,5 +40,3 @@ function fetchRequest(payload) {
       Promise.reject(data);
     });
 }
-
-export { fetchRequest };
