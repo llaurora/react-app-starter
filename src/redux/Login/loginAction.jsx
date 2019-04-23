@@ -1,11 +1,11 @@
-function changeLoginState(type, data = {}) {
+export function changeLoginState(type, data = {}) {
   return {
     type,
     data,
   };
 }
 
-// const getAnalyseAllotRateChartData = (url, body) => dispatch => {
+// export const getAnalyseAllotRateChartData = (url, body) => dispatch => {
 //   dispatch({ type: 'LOADING_SHOW' });
 //   Util.fetchHandler({ url, body }).then(resdata => {
 //     dispatch({ type: 'LOADING_HIDDEN' });
@@ -33,5 +33,3 @@ function changeLoginState(type, data = {}) {
 //     });
 //   });
 // };
-
-export { changeLoginState };
