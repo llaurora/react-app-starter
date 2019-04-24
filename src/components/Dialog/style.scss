@@ -1,83 +1,95 @@
 @import "../../asset/style/dominant";
 $dialog-border-radius:5px;
 $dialog-header-height:50px;
-div.modal{
+
+div.modal {
   position: fixed;
-  left: 0;
-  right: 0;
+  top: 0;
   bottom: 0;
-  top:0;
-  z-index: 100;
-  background-color: $dialog-shadow-bgColor;
+  right: 0;
+  left: 0;
   display: flex;
-  flex-wrap:wrap;
-  justify-content:center ;
-  align-items:center;
-  div.modalArea{
+  align-items: center;
+  justify-content: center;
+  background-color: $dialog-shadow-bgColor;
+  z-index: 100;
+  flex-wrap: wrap;
+
+  div.modalArea {
+    overflow: hidden;
     background-color: #fff;
     border-radius: $dialog-border-radius;
-    box-shadow:$dialog-box-shadow-color;
-    overflow: hidden;
-    header{
-      height:$dialog-header-height;
-      background-color: $dialog-header-bgColor;
+    box-shadow: $dialog-box-shadow-color;
+
+    header {
       display: flex;
-      flex-wrap:nowrap;
-      justify-content:space-between;
-      align-items:center;
+      align-items: center;
+      justify-content: space-between;
       padding: 0 15px;
+      height: $dialog-header-height;
+      background-color: $dialog-header-bgColor;
+      flex-wrap: nowrap;
       border-bottom: 1px solid $dialog-border-color;
-      p{
+
+      p {
         font-size: 18px;
-        color: $dialog-header-title-fontColor;
         font-weight: 400;
+        color: $dialog-header-title-fontColor;
       }
-      .cancleSign:after{
-        content: "\2716";
+
+      .cancleSign::after {
         font-size: 18px;
         color: $dialog-header-title-fontColor;
-        transition: all .1s linear;
+        transition: all 0.1s linear;
+        content: "\2716";
       }
-      .cancleSign:hover:after{
+
+      .cancleSign:hover::after {
         color: $dominant-hue;
+        transition: all 0.1s linear;
         cursor: pointer;
-        transition: all .1s linear;
       }
     }
-    section{
-      padding:15px;
+
+    section {
+      padding: 15px;
     }
-    footer{
-      border-top: 1px solid $dialog-line-color;
-      text-align: center;
+
+    footer {
       padding: 15px 0;
-      button{
-        outline: 0;
-        border: 1px solid $dialog-btn-border-color;
-        background-color: transparent;
-        height: 28px;
+      text-align: center;
+      border-top: 1px solid $dialog-line-color;
+
+      button {
         padding: 0 10px;
-        border-radius: 5px;
-        cursor: pointer;
+        height: 28px;
         color: $dialog-btn-fontColor;
-        transition: all .1s linear;
-        &.btnConfirm{
-          border: 1px solid $dominant-hue;
-          background-color: $dominant-hue;
-          color: white;
-          transition: all .1s linear;
+        background-color: transparent;
+        border: 1px solid $dialog-btn-border-color;
+        border-radius: 5px;
+        outline: 0;
+        transition: all 0.1s linear;
+        cursor: pointer;
+
+        &.btnConfirm {
           margin-right: 10px;
-          &:hover{
-            border: 1px solid $btn-hue-hover-color;
+          color: white;
+          background-color: $dominant-hue;
+          border: 1px solid $dominant-hue;
+          transition: all 0.1s linear;
+
+          &:hover {
             background-color: $btn-hue-hover-color;
-            transition: all .1s linear;
+            border: 1px solid $btn-hue-hover-color;
+            transition: all 0.1s linear;
           }
         }
+
         &.btn-cancel {
           &:hover {
-            border: 1px solid $dominant-hue;
             color: $dominant-hue;
-            transition: all .1s linear;
+            border: 1px solid $dominant-hue;
+            transition: all 0.1s linear;
           }
         }
       }
