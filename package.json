@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.jsx",
+  "author": "DlLucky",
+  "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.config.js --progress",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.build.config.js --progress --hide-modules --display-optimization-bailout",
@@ -13,8 +15,6 @@
     "stylelint:fix": "yarn run stylelint --fix",
     "lint:fix": "yarn run eslint:fix && yarn run stylelint:fix"
   },
-  "author": "DlLucky",
-  "license": "MIT",
   "dependencies": {
     "classnames": "^2.2.6",
     "moment": "^2.24.0",
@@ -62,8 +62,10 @@
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^1.3.1",
     "imagemin": "^6.1.0",
     "img-loader": "^3.0.1",
+    "lint-staged": "^8.1.5",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
@@ -89,9 +91,21 @@
     "webpack-dev-server": "^3.2.1",
     "webpack-merge": "^4.2.1"
   },
-  "pre-commit": [
-    "lint"
-  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "yarn run eslint:fix",
+      "git add"
+    ],
+    "src/**/*.s?(a|c)ss": [
+      "yarn run stylelint:fix",
+      "git add"
+    ]
+  },
   "engines": {
     "node": ">=9.10.0"
   }
