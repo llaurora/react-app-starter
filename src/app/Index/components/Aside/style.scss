@@ -1,34 +1,41 @@
 @import "../../../../asset/style/dominant";
-#asideArea{
-  border-right: 1px solid;
-  box-shadow: 1px 0 15px 0 $default-fontColor;
-  height: 100%;
-  width: 115px;
-  margin-right: 20px;
-  padding-left: 15px;
+
+#asideArea {
   display: flex;
   justify-content: space-between;
+  margin-right: 20px;
+  padding-left: 15px;
+  width: 115px;
+  height: 100%;
+  box-shadow: 1px 0 15px 0 $default-fontColor;
+  border-right: 1px solid;
   flex-direction: column;
-  >ul{
+
+  > ul {
     margin-top: 10px;
-    >li{
-      &:first-child{
+
+    > li {
+      &:first-child {
         font-weight: bold;
         margin-bottom: 10px;
       }
-      &:not(:first-child){
+
+      &:not(:first-child) {
         margin-bottom: 5px;
       }
-      .activeLink{
+
+      .activeLink {
         color: $dominant-hue;
       }
     }
   }
-  >span{
-    margin-bottom: 20px;
+
+  > span {
     text-decoration: underline;
+    margin-bottom: 20px;
     cursor: pointer;
-    &:hover{
+
+    &:hover {
       color: $dominant-hue;
     }
   }
