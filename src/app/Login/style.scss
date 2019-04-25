@@ -9,17 +9,17 @@ $login-button-width: 180px;
   right: 0;
   left: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
   > ul {
     &.loginContent {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       width: 340px;
       min-height: 246px;
+      display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
 
       > li {
         &.title {
@@ -28,11 +28,11 @@ $login-button-width: 180px;
         }
 
         &.userItemBox {
-          display: flex;
-          align-items: center;
-          justify-content: center;
           width: 70%;
+          display: flex;
           flex-direction: column;
+          justify-content: center;
+          align-items: center;
 
           input {
             width: 100%;
@@ -49,8 +49,8 @@ $login-button-width: 180px;
 
         &.loading {
           display: flex;
-          align-items: center;
           justify-content: center;
+          align-items: center;
 
           > img {
             margin-right: 5px;

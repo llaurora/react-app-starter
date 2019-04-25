@@ -1,8 +1,8 @@
 #indexArea {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
   height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 
   > #routeContent {
     height: 100%;
