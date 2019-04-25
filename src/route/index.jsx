@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { hot } from 'react-hot-loader/root';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import globalLoading from '../asset/images/globalLoading.gif';
 import '../asset/style/common.scss';
 import rootReducer from '../redux/indexRuducer'; // 引入Reducer 一般一个项目把所有redcer集中在一个Reducer返回
 const store = createStore(
@@ -45,9 +46,27 @@ IndexRoute.propTypes = {
   location: propTypes.object,
 };
 
+const Loading = () => {
+  const style = {
+    position: 'fixed',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  };
+  return (
+    <div style={{ ...style }}>
+      <img src={globalLoading} alt="加载中..." />
+    </div>
+  );
+};
+
 const Routers = () => (
   <Provider store={store}>
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loading />}>
       <Router>
         <Switch>
           <Route path="/login" component={Login} />

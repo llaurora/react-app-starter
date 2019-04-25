@@ -3,16 +3,16 @@ $dialog-border-radius:5px;
 $dialog-header-height:50px;
 
 div.modal {
+  background-color: $dialog-shadow-bgColor;
   position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: $dialog-shadow-bgColor;
   z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
 
   div.modalArea {
@@ -22,12 +22,12 @@ div.modal {
     box-shadow: $dialog-box-shadow-color;
 
     header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 15px;
       height: $dialog-header-height;
+      padding: 0 15px;
       background-color: $dialog-header-bgColor;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       flex-wrap: nowrap;
       border-bottom: 1px solid $dialog-border-color;
 
@@ -56,14 +56,14 @@ div.modal {
     }
 
     footer {
-      padding: 15px 0;
       text-align: center;
+      padding: 15px 0;
       border-top: 1px solid $dialog-line-color;
 
       button {
-        padding: 0 10px;
-        height: 28px;
         color: $dialog-btn-fontColor;
+        height: 28px;
+        padding: 0 10px;
         background-color: transparent;
         border: 1px solid $dialog-btn-border-color;
         border-radius: 5px;
@@ -72,8 +72,8 @@ div.modal {
         cursor: pointer;
 
         &.btnConfirm {
-          margin-right: 10px;
           color: white;
+          margin-right: 10px;
           background-color: $dominant-hue;
           border: 1px solid $dominant-hue;
           transition: all 0.1s linear;

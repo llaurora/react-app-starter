@@ -1,10 +1,10 @@
 @import "./dominant";
 
 * {
-  margin: 0;
-  padding: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, "Micros≈oft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
   color: $default-fontColor;
+  margin: 0;
+  padding: 0;
 }
 
 li { list-style: none; }
