@@ -48,7 +48,7 @@ export default class Login extends Component {
     this.setState({ loading: true });
     fetchRequest({
       url: Api.login,
-      type: 'get',
+      method: 'get',
     })
       .then(data => {
         setTimeout(() => {
@@ -58,8 +58,8 @@ export default class Login extends Component {
           this.props.changeLoginState('CANCEL_LOGIN_STATE', data);
         }, 1500);
       })
-      .catch(data => {
-        alert(data.errorMsg);
+      .catch(() => {
+        this.setState({ loading: false });
       });
   };
 

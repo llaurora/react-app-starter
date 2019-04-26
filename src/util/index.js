@@ -1,42 +1,50 @@
 import 'whatwg-fetch';
 
-export function fetchRequest(payload) {
+export function fetchRequest({
   // fetch请求封装
-  function setOptions() {
-    const headers = payload.headers || {
-      'Content-Type': 'application/json;charset=utf-8',
-    };
-    const body = payload.body || {};
-    return {
-      url: payload.url,
-      method: payload.type || 'post',
-      credentials: 'include',
-      headers,
-      body:
-        payload.type === 'get' || payload.type === 'head'
-          ? undefined
-          : JSON.stringify(body),
-    };
-  }
-  function checkStatus(response) {
+  url,
+  method = 'post',
+  headers = { 'Content-Type': 'application/json;charset=utf-8' },
+  body,
+}) {
+  const timeout = 25000; // 超时时间
+  const timeoutPromise = new Promise((resolve, reject) => {
+    setTimeout(() => reject(new Error('Timeout：网络请求超时')), timeout);
+  });
+  const checkStatus = response => {
     if (response.status >= 200 && response.status < 300) {
       return response;
     }
     const error = new Error(response.statusText);
     error.response = response;
     throw error;
-  }
-  function parseJSON(response) {
-    return response.json();
-  }
-  const options = setOptions(payload);
-  return fetch(options.url, options)
+  };
+  const sendUrl = () => {
+    let formatUrl = url;
+    if (method === 'get' && body) {
+      // 如果是get请求，将body里面的键值拼接到url上
+      const paramsArr = [];
+      Object.keys(body).forEach(key => paramsArr.push(`${key}=${body[key]}`));
+      formatUrl +=
+        formatUrl.search(/\?/) === -1
+          ? `?${paramsArr.join('&')}`
+          : `&${paramsArr.join('&')}`;
+    }
+    return formatUrl;
+  };
+  const options = {
+    headers,
+    method,
+    credentials: 'include',
+    body: ['get', 'head'].includes(method) ? undefined : JSON.stringify(body),
+  };
+  return Promise.race([fetch(sendUrl(), options), timeoutPromise])
     .then(checkStatus)
-    .then(parseJSON)
+    .then(response => response.json())
     .then(data => (data.success ? data.result : Promise.reject(data)))
     .catch(data => {
-      alert(data.msg || data.errorMsg || '网络异常，稍后再试');
       console.log('request failed');
-      Promise.reject(data);
+      alert(data.message || data.errorMsg || '网络异常，稍后再试');
+      return Promise.reject(data);
     });
 }
