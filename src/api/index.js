@@ -1,5 +1,5 @@
 const baseUrl = `http://${window.location.host}`;
 
 export default {
-  login: `${baseUrl}/mokeJson/login.json`,
+  login: `${baseUrl}/mockJson/login.json`,
 };
