@@ -83,7 +83,7 @@ const wepackDevConfig = {
     new FriendlyErrorsPlugin({
       compilationSuccessInfo: {
         messages: [
-          `You application is running here：http://${devServerHost}:${devServerPort}`,
+          `Your application is running here：http://${devServerHost}:${devServerPort}`,
         ],
       },
     }),
