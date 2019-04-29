@@ -107,7 +107,9 @@ const wepackBuildConfig = {
       logLevel: 'info',
     }),
     new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn/),
-    new CopyWebpackPlugin([{ from: 'mokeJson', to: 'mokeJson' }]),
+    new CopyWebpackPlugin([
+      { from: 'mockJson/**/*', to: './', ignore: ['*.js'] },
+    ]),
     new HtmlWebpackPlugin({
       template: path.resolve(process.cwd(), './public/indexModal.html'),
       filename: path.resolve(process.cwd(), './build/Index.html'),
