@@ -29,16 +29,16 @@ module.exports = {
     window:true,
     node:true
   },
-  rules: { // "off"或者0表示关闭规则，"warn"或者1将规则打开为警告（不影响退出代码),"error"或者2- 将规则打开为错误（触发时退出代码为1）
+  rules: { // 'off'或者0表示关闭规则，'warn'或者1将规则打开为警告（不影响退出代码),'error'或者2- 将规则打开为错误（触发时退出代码为1）
     'prettier/prettier': ['error', prettierOptions],
-    'arrow-body-style': [2, 'as-needed'], // 强制或禁止在箭头函数体的周围使用大括号,"as-needed"表示在没有大括号的地方可以省略
+    'arrow-body-style': [2, 'as-needed'], // 强制或禁止在箭头函数体的周围使用大括号,'as-needed'表示在没有大括号的地方可以省略
     'comma-dangle': [2, 'always-multiline'], // 在对象和数组文字中使用尾随逗号规则
     'quotes': [2, 'single', { // 字符串必须使用单引号
       'avoidEscape': true, // 允许包含单引号的字符串使用双引号
       'allowTemplateLiterals': true, // 允许使用模板字符串
       }
     ],
-    "camelcase": 2, // 使用驼峰式命名对象、函数和实例
+    'camelcase': 2, // 使用驼峰式命名对象、函数和实例
     'space-infix-ops': 2, // 操作符前后要加空格
     'import/imports-first': 0,
     'import/newline-after-import': 0,
@@ -48,11 +48,11 @@ module.exports = {
     'import/no-unresolved': 2,
     'import/no-webpack-loader-syntax': 0,
     'import/prefer-default-export': 0,
-    "indent": [
+    'indent': [
       2,
       2,
       {
-        "SwitchCase": 1,
+        'SwitchCase': 1,
       },
     ],
     'jsx-a11y/aria-props': 2,
@@ -60,7 +60,7 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': [
       2,
       {
-        "controlComponents": ['Input'],
+        'controlComponents': ['Input'],
       },
     ],
     'jsx-a11y/click-events-have-key-events': 0,
@@ -70,7 +70,7 @@ module.exports = {
     'jsx-a11y/mouse-events-have-key-events': 2,
     'jsx-a11y/role-has-required-aria-props': 2,
     'jsx-a11y/role-supports-aria-props': 2,
-    "jsx-quotes": 1, // 是否强制在JSX属性中一致地使用双引号或单引号
+    'jsx-quotes': 1, // 是否强制在JSX属性中一致地使用双引号或单引号
     'no-new-wrappers': 2, // 禁止 new Boolean、Number或String
     'prefer-rest-params': 2, // 必须使用解构 ...args 来代替 arguments
     'max-len': 0, // 此规则规定执行最大行长度以增加代码的可读性和可维护性
@@ -95,12 +95,12 @@ module.exports = {
     'require-yield': 0,
   },
   settings: {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js",".jsx"]
+    'import/resolver': {
+      'node': {
+        'extensions': ['.js','.jsx']
       },
-      "webpack": {
-        "config": path.resolve(process.cwd(), 'config/webpack.common.config.js'),
+      'webpack': {
+        'config': path.resolve(process.cwd(), 'config/webpack.common.config.js'),
       },
     }
   },
