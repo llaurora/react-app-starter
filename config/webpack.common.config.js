@@ -12,7 +12,6 @@ function resolve(dir) {
 const webpackCommonConfig = {
   mode: devMode ? 'development' : 'production', // 模式
   entry: {
-    vendor: ['react', 'react-dom', 'react-router-dom'],
     main: ['./src/main.jsx'],
   },
   performance: {
