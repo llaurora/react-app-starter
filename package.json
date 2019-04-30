@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.config.js --progress",
+    "dev:mock": "concurrently \"node ./mock/server.js\" \"cross-env NODE_STAGE=mock yarn run dev\"",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.build.config.js --progress --hide-modules --display-optimization-bailout",
     "eslint": "eslint 'src/**/*.{js,jsx}'",
     "stylelint": "stylelint 'src/**/*.s?(a|c)ss'",
@@ -16,7 +17,11 @@
     "lint:fix": "yarn run eslint:fix && yarn run stylelint:fix"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "classnames": "^2.2.6",
+    "concurrently": "^4.1.0",
+    "express": "4.16.3",
+    "mockjs": "^1.0.1-beta3",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react": "16.7.0",
@@ -44,7 +49,7 @@
     "clean-webpack-plugin": "^2.0.1",
     "compression-webpack-plugin": "^2.0.0",
     "copy-webpack-plugin": "^5.0.1",
-    "core-js": "3",
+    "core-js": "^3.0.1",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
     "cssnano": "^4.1.10",
