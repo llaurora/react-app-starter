@@ -1,11 +1,15 @@
+const webpack = require('webpack');
 const path = require('path');
 const webpackMerge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const webpackCommonConfig = require('./webpack.common.config');
+const {
+  devServerHost,
+  devServerPort,
+  devMockPort,
+} = require('./server.config');
 const publicPath = '/';
-const devServerHost = '127.0.0.1';
-const devServerPort = '8888';
 
 const wepackDevConfig = {
   devtool: 'cheap-module-eval-source-map', // 调试工具,
@@ -63,15 +67,15 @@ const wepackDevConfig = {
     hot: true, // 模块热更新，取决于HotModuleReplacementPlugin
     host: devServerHost, // 设置默认监听域名，如果省略，默认为“localhost”
     port: devServerPort, // 设置默认监听端口，如果省略，默认为“8080”
-    // proxy: {
-    //   // 代理配置
-    //   '/manhour': {
-    //     target: 'http://10.112.75.15', // 代理配置
-    //     secure: false,
-    //     changeOrigin: true,
-    //     pathRewrite: { '^/manhour': '' },
-    //   },
-    // },
+    proxy: {
+      // 代理配置
+      '/devmock': {
+        target: 'http://localhost:3000', // 代理配置
+        secure: false,
+        changeOrigin: true,
+        // pathRewrite: { '^/devmock': '' },
+      },
+    },
   },
   watchOptions: {
     poll: 1000, // 监测修改的时间(ms)
@@ -80,14 +84,27 @@ const wepackDevConfig = {
   },
   plugins: [
     // new webpack.HotModuleReplacementPlugin(),//热加载，当配置了devServer的hot和inline参数之后，webpack会帮我们把HotModuleReplacementPlugin自动添加进来而不用我们再手动添加
+    new webpack.DefinePlugin({
+      'process.env.NODE_STAGE': JSON.stringify(process.env.NODE_STAGE),
+    }),
     new FriendlyErrorsPlugin({
       compilationSuccessInfo: {
-        messages: [
-          `Your application is running here：http://${devServerHost}:${devServerPort}`,
-        ],
+        messages:
+          process.env.NODE_STAGE === 'mock'
+            /* eslint-disable */
+            ? [
+              `Your mockServer is running here：http://${devServerHost}:${devMockPort}`,
+              "-------------------------✂️✂️✂️-----------------------",
+              `Your application is running here：http://${devServerHost}:${devServerPort}`,
+            ]
+            : [
+              `Your application is running here：http://${devServerHost}:${devServerPort}`,
+            ],
+        /* eslint-enable */
       },
     }),
     new HtmlWebpackPlugin({
+      title: 'react-redux-app',
       filename: 'index.html', // 文件写入路径，前面的路径与devServer中 contentBase 对应
       template: path.resolve(process.cwd(), './public/indexModal.html'), // 模板文件路径
       inject: true,
