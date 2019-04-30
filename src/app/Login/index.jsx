@@ -46,8 +46,13 @@ export default class Login extends Component {
       alert('请输入密码');
     }
     this.setState({ loading: true });
+    const loginUrl =
+      process.env.NODE_ENV === 'development' &&
+      process.env.NODE_STAGE === 'mock'
+        ? 'loginMock'
+        : 'loginJson';
     fetchRequest({
-      url: Api.login,
+      url: Api[loginUrl],
       method: 'get',
     })
       .then(data => {
