@@ -107,9 +107,8 @@ const wepackBuildConfig = {
       logLevel: 'info',
     }),
     new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn/),
-    new CopyWebpackPlugin([{ from: 'mokeJson', to: 'mokeJson' }]),
+    new CopyWebpackPlugin([{ from: 'mock/**/*', to: './', ignore: ['*.js'] }]),
     new HtmlWebpackPlugin({
-      title: 'react-redux-app',
       template: path.resolve(process.cwd(), './public/indexModal.html'),
       filename: path.resolve(process.cwd(), './build/Index.html'),
       inject: true, // true或者body：所有JavaScript资源插入到body元素的底部
