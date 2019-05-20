@@ -1,5 +1,5 @@
 import React, { lazy } from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import Aside from './components/Aside';
 import './style.scss';
@@ -24,6 +24,6 @@ export default function Index({ history, location }) {
 }
 
 Index.propTypes = {
-  location: propTypes.object,
-  history: propTypes.object,
+  location: PropTypes.object,
+  history: PropTypes.object,
 };
