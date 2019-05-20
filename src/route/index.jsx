@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import thunk from 'redux-thunk';
 import {
   Route,
@@ -42,8 +42,8 @@ const IndexRoute = ({ component: Component, ...rest }) => (
 );
 
 IndexRoute.propTypes = {
-  component: propTypes.any,
-  location: propTypes.object,
+  component: PropTypes.any,
+  location: PropTypes.object,
 };
 
 const Loading = () => {
