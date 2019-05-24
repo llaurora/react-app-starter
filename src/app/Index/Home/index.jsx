@@ -1,8 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-@connect(
+function Home({ userName }) {
+  return <span>Hi,欢迎你，{userName}</span>;
+}
+
+Home.propTypes = {
+  userName: PropTypes.string,
+};
+
+export default connect(
   // state => ({
   //   userName: state.loginInfo.userInfo.userName,
   // }), // 从redux状态树用什么取什么
@@ -14,14 +22,4 @@ import PropTypes from 'prop-types';
     userName,
   }), // 从redux状态树用什么取什么
   null,
-)
-export default class Home extends Component {
-  static propTypes = {
-    userName: PropTypes.string,
-  };
-
-  render() {
-    const { userName } = this.props;
-    return <span>Hi,欢迎你，{userName}</span>;
-  }
-}
+)(Home);
