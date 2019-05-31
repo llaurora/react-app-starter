@@ -1,5 +1,5 @@
 const initialState = { isLogin: false, userInfo: {} };
-export default function loginInfo(state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case 'CANCEL_LOGIN_STATE':
       return {
