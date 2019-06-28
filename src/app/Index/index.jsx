@@ -8,7 +8,7 @@ const Home = lazy(() => import('./Home')); // 登录后主页
 const PageOne = lazy(() => import('./PageOne')); // 第一页
 const PageTwo = lazy(() => import('./PageTwo')); // 第二页
 const PageThree = lazy(() => import('./PageThree')); // 第三页
-const PageFour = lazy(() => import('./PageFour')); // 第三页
+const PageFour = lazy(() => import('./PageFour')); // 第四页
 
 export default function Index({ history, location }) {
   return (

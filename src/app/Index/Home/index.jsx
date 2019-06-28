@@ -21,5 +21,4 @@ export default connect(
   }) => ({
     userName,
   }), // 从redux状态树用什么取什么
-  null,
 )(Home);

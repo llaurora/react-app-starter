@@ -13,7 +13,7 @@ router.use('/profile', (req, res) => {
   return res.json(data);
 });
 
-router.use('/loginMock', (req, res) => {
+router.use('/checkLogin', (req, res) => {
   const data = Mock.mock({
     success: true,
     errorMsg: null,
