@@ -1,24 +1,17 @@
 import React, { lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
-import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import { hot } from 'react-hot-loader/root';
+import { PersistGate } from 'redux-persist/integration/react';
 import {
   Route,
   BrowserRouter as Router,
   Switch,
   Redirect,
 } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import { hot } from 'react-hot-loader/root';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { store, persistor } from './configureStore';
 import globalLoading from '../asset/images/globalLoading.gif';
 import '../asset/style/common.scss';
-import rootReducer from '../redux/indexRuducer'; // 引入Reducer 一般一个项目把所有redcer集中在一个Reducer返回
-const store = createStore(
-  // 创建应用的唯一的store
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunk)), // applyMiddleware(thunk,logger)
-);
 
 const Login = lazy(() => import('../app/Login')); // 登录页面
 const Index = lazy(() => import('../app/Index')); // 登录后主页
@@ -66,14 +59,16 @@ const Loading = () => {
 
 const Routers = () => (
   <Provider store={store}>
-    <Suspense fallback={<Loading />}>
-      <Router>
-        <Switch>
-          <Route path="/login" component={Login} />
-          <IndexRoute path="/" component={Index} />
-        </Switch>
-      </Router>
-    </Suspense>
+    <PersistGate loading={null} persistor={persistor}>
+      <Suspense fallback={<Loading />}>
+        <Router>
+          <Switch>
+            <Route path="/login" component={Login} />
+            <IndexRoute path="/" component={Index} />
+          </Switch>
+        </Router>
+      </Suspense>
+    </PersistGate>
   </Provider>
 );
 

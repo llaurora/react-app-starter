@@ -47,6 +47,11 @@ export default class Aside extends Component {
               第四页
             </NavLink>
           </li>
+          <li>
+            <NavLink exact to="/pagefive" activeClassName="activeLink">
+              第五页
+            </NavLink>
+          </li>
         </ul>
         <span onClick={this.goLogOff}>退出登录</span>
       </div>
