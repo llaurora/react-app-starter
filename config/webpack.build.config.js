@@ -136,6 +136,7 @@ const wepackBuildConfig = {
       logLevel: 'info',
     }),
     new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn/),
+    // 正式项目开发的时候，根据项目需要拷贝文件和文件夹
     new CopyWebpackPlugin([{ from: 'mock/**/*', to: './', ignore: ['*.js'] }]),
     new HtmlWebpackPlugin({
       template: path.resolve(process.cwd(), './public/indexModal.html'),

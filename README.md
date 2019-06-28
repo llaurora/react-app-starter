@@ -22,6 +22,7 @@ $ yarn run build
 | `dev` | 启动开发环境，代码热更新HRM开启 |
 | `dev:mock` | 启动mock服务模拟数据并启动开发环境，代码热更新HRM开启 |
 | `build` | 生产环境打包，编译程序到build目录下 |
+| `test0` | test0生产环境打包，编译程序到build目录下 |
 | `eslint` | 检查所有js和jsx文件是否规范 |
 | `stylelint` | 检查所有样式文件(scss/sass/css)文件是否符合规范 |
 | `lint` | 启动 `yarn run eslint` 和`yarn run stylelint` |
@@ -29,5 +30,5 @@ $ yarn run build
 | `stylelint:fix` | 检查所有样式文件(scss/sass/css)文件是否符合规范，并尽可能的修复它们 |
 | `lint:fix` | 启动`yarn run eslint:fix` 和`yarn run stylelint:fix` |
 
-
+> Tips: 用于正式项目开发的时候，去掉dev:mock脚本里面的无用设置cross-env NODE_STAGE=mock
 
