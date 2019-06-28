@@ -46,18 +46,13 @@ export default class Login extends Component {
       alert('请输入密码');
     }
     this.setState({ loading: true });
-    const loginUrl =
-      process.env.NODE_ENV === 'development' &&
-      process.env.NODE_STAGE === 'mock'
-        ? 'loginMock'
-        : 'loginJson';
     fetchRequest({
-      url: Api[loginUrl],
+      url: Api.loginUrl,
       method: 'get',
     })
       .then(data => {
         setTimeout(() => {
-          sessionStorage.setItem('username', data.name);
+          sessionStorage.setItem('username', data.userName);
           this.setState({ loading: false });
           this.props.history.push('/');
           this.props.changeLoginState('CANCEL_LOGIN_STATE', data);
