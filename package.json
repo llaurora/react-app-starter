@@ -9,7 +9,7 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.config.js --progress",
     "dev:mock": "concurrently \"node ./mock/server.js\" \"cross-env NODE_STAGE=mock yarn run dev\"",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.build.config.js --progress --hide-modules --display-optimization-bailout",
-    "test0": "cross-env NODE_STAGE=test0 yarn run build",
+    "build:test0": "cross-env NODE_STAGE=test0 yarn run build",
     "eslint": "eslint 'src/**/*.{js,jsx}'",
     "stylelint": "stylelint 'src/**/*.s?(a|c)ss'",
     "lint": "yarn run eslint && yarn run stylelint",
