@@ -6,7 +6,7 @@ export default function PageFour() {
     name: 'hooks',
   });
   return (
-    <div className="App">
+    <div>
       <h3>这是第4页</h3>
       <hr />
       Count: {obj.count}

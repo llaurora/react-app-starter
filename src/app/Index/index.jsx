@@ -10,6 +10,7 @@ const PageTwo = lazy(() => import('./PageTwo')); // 第二页
 const PageThree = lazy(() => import('./PageThree')); // 第三页
 const PageFour = lazy(() => import('./PageFour')); // 第四页
 const PageFive = lazy(() => import('./PageFive')); // 第五页
+const PageSix = lazy(() => import('./PageSix')); // 第六页
 
 export default function Index({ history, location }) {
   return (
@@ -22,6 +23,7 @@ export default function Index({ history, location }) {
         <Route path="/pagethree" component={PageThree} />
         <Route path="/pagefour" component={PageFour} />
         <Route path="/pagefive" component={PageFive} />
+        <Route path="/pagesix" component={PageSix} />
       </div>
     </div>
   );
