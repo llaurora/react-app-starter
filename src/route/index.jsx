@@ -57,11 +57,13 @@ const Loading = () => {
   );
 };
 
+const supportsHistory = 'pushState' in window.history;
+
 const Routers = () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <Suspense fallback={<Loading />}>
-        <Router>
+        <Router forceRefresh={!supportsHistory}>
           <Switch>
             <Route path="/login" component={Login} />
             <IndexRoute path="/" component={Index} />
