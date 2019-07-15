@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 抽取所有js中的css独立打包到一个css中,减少http请求
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+const WebpackBar = require('webpackbar');
 const autoprefixer = require('autoprefixer');
 const devMode = process.env.NODE_ENV === 'development';
 
@@ -136,6 +137,7 @@ const webpackCommonConfig = {
     ],
   },
   plugins: [
+    new WebpackBar(),
     new StyleLintPlugin({
       context: 'src',
       files: ['**/*.s?(a|c)ss'],
