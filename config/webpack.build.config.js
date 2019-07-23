@@ -11,6 +11,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 生产打包�
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer'); // 包体组成分析
 const eslintFriendlyFormatter = require('eslint-friendly-formatter');
 const webpackCommonConfig = require('./webpack.common.config');
+const { analyzerHost, analyzerPort } = require('./server.config');
 
 function resolve(dir) {
   return path.resolve(process.cwd(), dir);
@@ -125,15 +126,9 @@ const wepackBuildConfig = {
     new CleanWebpackPlugin(),
     new BundleAnalyzerPlugin({
       // 可视化包块分析
-      analyzerMode: 'server',
-      analyzerHost: '127.0.0.1',
-      analyzerPort: 8080,
-      reportFilename: 'analyse.html',
-      defaultSizes: 'parsed',
-      openAnalyzer: true,
-      generateStatsFile: false,
-      statsFilename: 'stats.json',
-      logLevel: 'info',
+      analyzerHost,
+      analyzerPort,
+      openAnalyzer: false, // 默认为true，自动在默认浏览器里面打开分析报告
     }),
     new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn/),
     // 正式项目开发的时候，根据项目需要拷贝文件和文件夹
