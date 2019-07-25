@@ -1,0 +1,14 @@
+.sevenChildLayout {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  > div {
+    &:first-child {
+      height: 500px;
+      margin-right: 50px;
+      padding-right: 50px;
+      border-right: 1px solid red;
+    }
+  }
+}
