@@ -6,14 +6,14 @@ const prettierOptions = JSON.parse(
 );
 
 module.exports = {
-  parser: 'babel-eslint', // 此项是用来指定eslint解析器的，解析器必须符合规则，babel-eslint解析器是对babel解析器的包装使其与ESLint解析
+  parser: 'babel-eslint', // 此项是用来指定 eslint 解析器的，解析器必须符合规则，babel-eslint 解析器是对 babel 解析器的包装使其与 ESLint 解析
   extends: ['airbnb', 'prettier', 'prettier/react'],
-  plugins: ['prettier', 'react', 'jsx-a11y'], // 插件配置，eslint-plugin-前缀可以从插件名称被省略
+  plugins: ['prettier', 'react', 'jsx-a11y', 'react-hooks'], // 插件配置，eslint-plugin- 前缀可以从插件名称被省略
   env: { // 指定脚本的运行环境,环境定义了预定义的全局变量
     jest: true,
     browser: true, // 浏览器全局变量
-    node: true, // Node.js全局变量和Node.js范围
-    es6: true, // 启用除模块外的所有ECMAScript 6功能（这会自动将ecmaVersion解析器选项设置为6）
+    node: true, // Node.js 全局变量和 Node.js 范围
+    es6: true, // 启用除模块外的所有 ECMAScript 6 功能（这会自动将 ecmaVersion 解析器选项设置为6）
   },
   parserOptions: { // 指定解析器选项
     ecmaVersion: 6,
@@ -70,14 +70,14 @@ module.exports = {
     'jsx-a11y/mouse-events-have-key-events': 2,
     'jsx-a11y/role-has-required-aria-props': 2,
     'jsx-a11y/role-supports-aria-props': 2,
-    'jsx-quotes': 1, // 是否强制在JSX属性中一致地使用双引号或单引号
-    'no-new-wrappers': 2, // 禁止 new Boolean、Number或String
+    'jsx-quotes': 1, // 是否强制在 JSX 属性中一致地使用双引号或单引号
+    'no-new-wrappers': 2, // 禁止 new Boolean、Number 或 String
     'prefer-rest-params': 2, // 必须使用解构 ...args 来代替 arguments
     'max-len': 0, // 此规则规定执行最大行长度以增加代码的可读性和可维护性
-    'eqeqeq': [2, 'always', { 'null': 'ignore' }], // 必须使用===和!==，和null对比时除外
+    'eqeqeq': [2, 'always', { 'null': 'ignore' }], // 必须使用 === 和 !== ，和 null 对比时除外
     'newline-per-chained-call': 0,
     'no-confusing-arrow': 0,
-    'no-console': 1, // 此规则规定是否能调用console对象的方法
+    'no-console': 1, // 此规则规定是否能调用 console 对象的方法
     'no-unused-vars': 2,
     'no-use-before-define': 0,
     'prefer-template': 2,
@@ -93,6 +93,8 @@ module.exports = {
     'react/self-closing-comp': 0,
     'react/sort-comp': 0,
     'require-yield': 0,
+    'react-hooks/rules-of-hooks': 2, // 检查 Hook 的规则
+    'react-hooks/exhaustive-deps': 2, // 检查 effect 的依赖
   },
   settings: {
     'import/resolver': {
