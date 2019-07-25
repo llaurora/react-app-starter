@@ -127,6 +127,7 @@ const webpackCommonConfig = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
+      'react-dom': '@hot-loader/react-dom',
       '@api': resolve('src/api'),
       '@util': resolve('src/util'),
     },
