@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 import { PersistGate } from 'redux-persist/integration/react';
 import {
@@ -16,11 +16,13 @@ import '../asset/style/common.scss';
 const Login = lazy(() => import('../app/Login')); // 登录页面
 const Index = lazy(() => import('../app/Index')); // 登录后主页
 
-const IndexRoute = ({ component: Component, ...rest }) => (
+const IndexRoute = connect(({ loginInfo: { isLogin } }) => ({
+  isLogin,
+}))(({ component: Component, isLogin, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      sessionStorage.getItem('username') ? ( // 登录与否 页面验证
+      isLogin ? ( // 登录与否 页面验证
         <Component {...props} />
       ) : (
         <Redirect
@@ -32,7 +34,7 @@ const IndexRoute = ({ component: Component, ...rest }) => (
       )
     }
   />
-);
+));
 
 IndexRoute.propTypes = {
   component: PropTypes.any,
