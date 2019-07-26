@@ -29,11 +29,25 @@ export default class Login extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener('keyup', e => {
-      if (e.keyCode === 13) {
-        this.goLogin();
-      }
-    });
+    document.addEventListener(
+      'keyup',
+      event => {
+        if (event.defaultPrevented) {
+          return; // 如果已取消默认操作，则不应执行任何操作
+        }
+        let handled = false;
+        const code = event.key || event.keyCode;
+        if (['Enter', 13].includes(code)) {
+          this.goLogin();
+          handled = true;
+        }
+
+        if (handled) {
+          event.preventDefault(); // 如果事件已处理，则禁止“双重操作”
+        }
+      },
+      true,
+    );
   }
 
   goLogin = () => {
@@ -52,10 +66,9 @@ export default class Login extends Component {
     })
       .then(data => {
         setTimeout(() => {
-          sessionStorage.setItem('username', data.userName);
           this.setState({ loading: false });
-          this.props.history.push('/');
           this.props.changeLoginState('CANCEL_LOGIN_STATE', data);
+          this.props.history.push('/');
         }, 1500);
       })
       .catch(() => {
