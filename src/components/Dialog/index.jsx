@@ -10,12 +10,14 @@ class DialogNew extends React.Component {
     onConfirm: PropTypes.func, // 弹框确认函数
     hasFooter: PropTypes.bool, // 弹框是否需要footer
     onClose: PropTypes.func, // 弹框关闭函数
-    children: PropTypes.node,
+    children: PropTypes.node.isRequired,
   };
 
   static defaultProps = {
-    width: '400px',
     title: null,
+    width: '400px',
+    onConfirm: () => {},
+    onClose: () => {},
     hasFooter: true,
   };
 

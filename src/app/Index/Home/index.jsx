@@ -10,6 +10,10 @@ Home.propTypes = {
   userName: PropTypes.string,
 };
 
+Home.defaultProps = {
+  userName: '',
+};
+
 export default connect(
   // state => ({
   //   userName: state.loginInfo.userInfo.userName,

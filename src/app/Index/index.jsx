@@ -36,5 +36,5 @@ export default function Index({ history }) {
 }
 
 Index.propTypes = {
-  history: PropTypes.object,
+  history: PropTypes.object.isRequired,
 };
