@@ -12,5 +12,5 @@ export default function NoMatch({ location: { pathname } }) {
 }
 
 NoMatch.propTypes = {
-  location: PropTypes.object,
+  location: PropTypes.object.isRequired,
 };

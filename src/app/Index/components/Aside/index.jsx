@@ -13,7 +13,11 @@ import * as loginAction from '../../../../redux/Login/loginAction';
 export default class Aside extends Component {
   static propTypes = {
     changeLoginState: PropTypes.func,
-    history: PropTypes.object,
+    history: PropTypes.object.isRequired,
+  };
+
+  static defaultProps = {
+    changeLoginState: () => {},
   };
 
   goLogOff = () => {
