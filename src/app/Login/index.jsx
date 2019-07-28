@@ -16,7 +16,11 @@ import * as loginAction from '../../redux/Login/loginAction'; // Action Creator
 export default class Login extends Component {
   static propTypes = {
     changeLoginState: PropTypes.func,
-    history: PropTypes.object,
+    history: PropTypes.object.isRequired,
+  };
+
+  static defaultProps = {
+    changeLoginState: () => {},
   };
 
   constructor(props) {

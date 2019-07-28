@@ -16,6 +16,10 @@ ChildCenter.propTypes = {
   userName: PropTypes.string,
 };
 
+ChildCenter.defaultProps = {
+  userName: '',
+};
+
 export default connect(({ loginInfo: { userInfo: { userName } } }) => {
   console.log('mapState', 'ChildCenter');
   return {
