@@ -18,8 +18,7 @@ export default class Aside extends Component {
 
   goLogOff = () => {
     this.props.changeLoginState('CLEAR_LOGIN_STATE');
-    sessionStorage.removeItem('username');
-    this.props.history.push('/');
+    this.props.history.replace('/');
   };
 
   render() {

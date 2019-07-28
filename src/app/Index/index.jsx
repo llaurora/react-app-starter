@@ -14,10 +14,10 @@ const PageFive = lazy(() => import('./PageFive')); // 第五页
 const PageSix = lazy(() => import('./PageSix')); // 第六页
 const PageSeven = lazy(() => import('./PageSeven')); // 第七页
 
-export default function Index({ history, location }) {
+export default function Index({ history }) {
   return (
     <div id="indexArea">
-      <Aside history={history} location={location} />
+      <Aside history={history} />
       <div id="routeContent">
         <Switch>
           <Route exact path="/" component={Home} />
@@ -36,6 +36,5 @@ export default function Index({ history, location }) {
 }
 
 Index.propTypes = {
-  location: PropTypes.object,
   history: PropTypes.object,
 };
