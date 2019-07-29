@@ -4,11 +4,7 @@ const webpackMerge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const webpackCommonConfig = require('./webpack.common.config');
-const {
-  devServerHost,
-  devServerPort,
-  devMockPort,
-} = require('./server.config');
+const { devServerHost, devServerPort } = require('./server.config');
 const publicPath = '/';
 
 const wepackDevConfig = {
@@ -90,18 +86,9 @@ const wepackDevConfig = {
     }),
     new FriendlyErrorsPlugin({
       compilationSuccessInfo: {
-        messages:
-          process.env.NODE_STAGE === 'mock'
-            /* eslint-disable */
-            ? [
-              `Your mockServer is running here：http://${devServerHost}:${devMockPort}`,
-              "-------------------------✂️✂️✂️-----------------------",
-              `Your application is running here：http://${devServerHost}:${devServerPort}`,
-            ]
-            : [
-              `Your application is running here：http://${devServerHost}:${devServerPort}`,
-            ],
-        /* eslint-enable */
+        messages: [
+          `Your application is running here：http://${devServerHost}:${devServerPort}`,
+        ],
       },
     }),
     new HtmlWebpackPlugin({
