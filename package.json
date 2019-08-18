@@ -18,7 +18,7 @@
     "lint:fix": "yarn run eslint:fix && yarn run stylelint:fix"
   },
   "dependencies": {
-    "@hot-loader/react-dom": "^16.8.6",
+    "@hot-loader/react-dom": "^16.9.0",
     "body-parser": "^1.19.0",
     "classnames": "^2.2.6",
     "concurrently": "^4.1.1",
@@ -27,7 +27,7 @@
     "mockjs": "^1.0.1-beta3",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
+    "react": "^16.9.0",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.4",
@@ -83,7 +83,7 @@
     "postcss-loader": "^3.0.0",
     "pre-commit": "^1.2.2",
     "prettier": "^1.18.2",
-    "react-hot-loader": "^4.12.6",
+    "react-hot-loader": "^4.12.11",
     "redux-devtools-extension": "^2.13.8",
     "resolve-url-loader": "^3.1.0",
     "sass-loader": "^7.1.0",
