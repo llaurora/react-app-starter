@@ -16,13 +16,9 @@ Home.defaultProps = {
 
 export default connect(
   // state => ({
-  //   userName: state.loginInfo.userInfo.userName,
+  //   userName: state.userInfo.userName,
   // }), // 从redux状态树用什么取什么
-  ({
-    loginInfo: {
-      userInfo: { userName },
-    },
-  }) => ({
+  ({ userInfo: { userName } }) => ({
     userName,
   }), // 从redux状态树用什么取什么
 )(Home);

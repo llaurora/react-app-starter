@@ -8,7 +8,7 @@ import rootReducer from '../redux/indexRuducer'; // 引入Reducer 一般一个�
 const persistConfig = {
   storage: storageSession,
   key: 'root',
-  whitelist: ['testPersist', 'loginInfo'],
+  whitelist: ['testPersist', 'userInfo'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

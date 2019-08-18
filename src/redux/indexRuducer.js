@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import loginInfo from './Login/loginReducer';
+import userInfo from './Login/loginReducer';
 import testPersist from './PageFive/pageFiveReducer';
 import testReselect from './PageSix/pageSixReducer';
 
 const rootReducer = combineReducers({
-  loginInfo,
+  userInfo,
   testPersist,
   testReselect,
 });
