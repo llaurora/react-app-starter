@@ -16,7 +16,7 @@ import '../asset/style/common.scss';
 const Login = lazy(() => import('../app/Login')); // 登录页面
 const Index = lazy(() => import('../app/Index')); // 登录后主页
 
-const IndexRoute = connect(({ loginInfo: { isLogin } }) => ({
+const IndexRoute = connect(({ userInfo: { isLogin } }) => ({
   isLogin,
 }))(({ component: Component, isLogin, ...rest }) => (
   <Route
