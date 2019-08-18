@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useCallback } from 'react';
 import Child from './components/Child';
 
 export default function PageFour() {
@@ -7,7 +7,8 @@ export default function PageFour() {
     name: 'hooks',
   });
 
-  const handleChange = useMemo(() => {
+  // useMemo 用于缓存计算结果，useCallback用于缓存函数
+  const handleChange = useCallback(() => {
     console.log('传递给子组件的方法');
   }, []);
 
