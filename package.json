@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.config.js --progress",
-    "dev:mock": "concurrently \"node ./mock/server.js\" \"cross-env NODE_STAGE=mock yarn run dev\"",
+    "mock:server": "nodemon ./mock/server.js",
+    "dev:mock": "concurrently \"yarn run mock:server\" \"cross-env NODE_STAGE=mock yarn run dev\"",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.build.config.js --progress --hide-modules --display-optimization-bailout",
     "build:test0": "cross-env NODE_STAGE=test0 yarn run build",
     "eslint": "eslint 'src/**/*.{js,jsx}'",
@@ -26,6 +27,7 @@
     "memoize-one": "^5.0.5",
     "mockjs": "^1.0.1-beta3",
     "moment": "^2.24.0",
+    "nodemon": "^1.19.1",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-redux": "^7.1.0",

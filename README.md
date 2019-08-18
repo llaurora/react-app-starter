@@ -20,6 +20,7 @@ $ yarn run build
 | yarn run  <script> | 解释 |
 | ------ | ------ |
 | `dev` | 启动开发环境，代码热更新HRM开启 |
+| `mock:server` | 启动mock服务模拟数据 |
 | `dev:mock` | 启动mock服务模拟数据并启动开发环境，代码热更新HRM开启 |
 | `build` | 生产环境打包，编译程序到build目录下 |
 | `build:test0` | test0生产环境打包，编译程序到build目录下 |
