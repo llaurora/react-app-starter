@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 抽取所有
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const autoprefixer = require('autoprefixer');
+const aliasConfig = require('./alias.config');
 const devMode = process.env.NODE_ENV === 'development';
 
 function resolve(dir) {
@@ -126,11 +127,7 @@ const webpackCommonConfig = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
-    alias: {
-      'react-dom': '@hot-loader/react-dom',
-      '@api': resolve('src/api'),
-      '@util': resolve('src/util'),
-    },
+    alias: aliasConfig.resolve.alias,
     modules: [
       // 指定webpack在解析模块时应该搜索哪些目录
       './src',
