@@ -99,11 +99,11 @@ module.exports = {
   settings: {
     'import/resolver': {
       'node': {
-        'extensions': ['.js','.jsx']
+        'extensions': ['.js','.jsx'],
       },
       'webpack': {
         'config': path.resolve(process.cwd(), 'config/webpack.common.config.js'),
       },
-    }
+    },
   },
 };
