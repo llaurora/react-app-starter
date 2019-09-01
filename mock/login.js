@@ -20,6 +20,7 @@ router.use('/checkLogin', (req, res) => {
     result: {
       userName: '@first',
       userPwd: 123456,
+      authority: ['pageone'],
     },
   });
   return res.json(data);
