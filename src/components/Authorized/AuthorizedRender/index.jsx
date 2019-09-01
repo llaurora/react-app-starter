@@ -1,19 +1,9 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { checkAuthority } from '../util';
 
-const AuthorizedRender = ({ authority, userAllAuthority, children }) => {
-  const checkAuthority = authorityList => {
-    let isCheckPass = true; // 如果不传递authority，则不进行权限校验
-    if (authorityList.length) {
-      isCheckPass = !!authorityList.find(item =>
-        userAllAuthority.includes(item),
-      );
-    }
-    return isCheckPass;
-  };
-
-  return checkAuthority(authority) ? children : null;
-};
+const AuthorizedRender = ({ authority, userAllAuthority, children }) =>
+  checkAuthority(authority, userAllAuthority) ? children : null;
 
 AuthorizedRender.propTypes = {
   authority: PropTypes.array, // 用户权限集合

@@ -2,40 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
+import { checkAuthority } from '../util';
 
 const AuthorizedRouter = ({
   authority,
   userAllAuthority,
   component: Component,
   ...rest
-}) => {
-  const checkAuthority = authorityList => {
-    let isCheckPass = true; // 如果不传递authority，则不进行权限校验
-    if (authorityList.length) {
-      isCheckPass = !!authorityList.find(item =>
-        userAllAuthority.includes(item),
-      );
+}) => (
+  <Route
+    {...rest}
+    render={props =>
+      checkAuthority(authority, userAllAuthority) ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: '/noauthorized',
+            state: { from: props.location },
+          }}
+        />
+      )
     }
-    return isCheckPass;
-  };
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        checkAuthority(authority) ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/noauthorized',
-              state: { from: props.location },
-            }}
-          />
-        )
-      }
-    />
-  );
-};
+  />
+);
 
 AuthorizedRouter.propTypes = {
   component: PropTypes.any.isRequired,
