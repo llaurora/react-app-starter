@@ -1,45 +1,15 @@
 import React, { lazy, Suspense } from 'react';
-import PropTypes from 'prop-types';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 import { PersistGate } from 'redux-persist/integration/react';
-import {
-  Route,
-  BrowserRouter as Router,
-  Switch,
-  Redirect,
-} from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { store, persistor } from './configureStore';
+import { AuthorizedLogin } from '@/components/Authorized';
 import globalLoading from '../asset/images/globalLoading.gif';
 import '../asset/style/common.scss';
 
 const Login = lazy(() => import('../app/Login')); // 登录页面
 const Index = lazy(() => import('../app/Index')); // 登录后主页
-
-const IndexRoute = connect(({ userInfo: { isLogin } }) => ({
-  isLogin,
-}))(({ component: Component, isLogin, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      isLogin ? ( // 登录与否 页面验证
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: '/login',
-            state: { from: props.location },
-          }}
-        />
-      )
-    }
-  />
-));
-
-IndexRoute.propTypes = {
-  component: PropTypes.any,
-  location: PropTypes.object,
-};
 
 const Loading = () => {
   const style = {
@@ -68,7 +38,7 @@ const Routers = () => (
         <Router forceRefresh={!supportsHistory}>
           <Switch>
             <Route path="/login" component={Login} />
-            <IndexRoute path="/" component={Index} />
+            <AuthorizedLogin path="/" component={Index} />
           </Switch>
         </Router>
       </Suspense>
