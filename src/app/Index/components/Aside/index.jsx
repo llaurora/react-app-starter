@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { AuthorizedRender } from '@/components/Authorized';
 import './style.scss';
 import * as loginAction from '../../../../redux/Login/loginAction';
 
@@ -31,9 +32,11 @@ export default class Aside extends Component {
         <ul>
           <li>侧边导航栏</li>
           <li>
-            <NavLink exact to="/pageone" activeClassName="activeLink">
-              第一页
-            </NavLink>
+            <AuthorizedRender authority={['pageone']}>
+              <NavLink exact to="/pageone" activeClassName="activeLink">
+                第一页
+              </NavLink>
+            </AuthorizedRender>
           </li>
           <li>
             <NavLink exact to="/pagetwo" activeClassName="activeLink">
