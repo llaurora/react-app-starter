@@ -20,7 +20,7 @@ ChildCenter.defaultProps = {
   userName: '',
 };
 
-export default connect(({ loginInfo: { userInfo: { userName } } }) => {
+export default connect(({ userInfo: { userName } }) => {
   console.log('mapState', 'ChildCenter');
   return {
     userName,
