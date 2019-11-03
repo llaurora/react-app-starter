@@ -12,7 +12,6 @@ module.exports = {
   context: resolve('./'),
   resolve: {
     alias: {
-      'react-dom': '@hot-loader/react-dom',
       '@': resolve('src'),
       '@api': resolve('src/api'),
       '@util': resolve('src/util'),
