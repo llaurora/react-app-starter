@@ -5,6 +5,7 @@ const cssnano = require('cssnano');
 const CopyWebpackPlugin = require('copy-webpack-plugin'); // 复制静态资源的插件
 const TerserPlugin = require('terser-webpack-plugin'); // Js压缩插件
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin'); // 主要用于Css压缩、去重
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 生产打包清空目录下文件
@@ -119,6 +120,8 @@ const wepackBuildConfig = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    // 避免系统对大小写不敏感而导致编译失败
+    new CaseSensitivePathsPlugin(),
     new BundleAnalyzerPlugin({
       // 可视化包块分析
       analyzerHost,
