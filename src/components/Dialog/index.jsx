@@ -1,7 +1,7 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import './style.scss';
+import styles from './index.scss';
 
 class DialogNew extends React.Component {
   static propTypes = {
@@ -42,18 +42,26 @@ class DialogNew extends React.Component {
       children,
     } = this.props;
     return createPortal(
-      <div className="modalArea" style={{ width }}>
+      <div className={styles.modalArea} style={{ width }}>
         <header>
           <p>{title}</p>
-          <p className="cancleSign" onClick={onClose} />
+          <p className={styles.cancleSign} onClick={onClose} />
         </header>
         <section>{children}</section>
         {hasFooter ? (
           <footer>
-            <button type="button" className="btn-confirm" onClick={onConfirm}>
+            <button
+              type="button"
+              className={styles.btnConfirm}
+              onClick={onConfirm}
+            >
               确定
             </button>
-            <button type="button" className="btn-cancel" onClick={onClose}>
+            <button
+              type="button"
+              className={styles.btnCancel}
+              onClick={onClose}
+            >
               取消
             </button>
           </footer>

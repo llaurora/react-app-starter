@@ -16,6 +16,9 @@ module.exports = {
     'property-no-vendor-prefix': true, // 禁止属性添加供应商前缀
     'value-no-vendor-prefix': true, // 禁止值添加供应商前缀
     'order/properties-alphabetical-order': null,
+    'selector-pseudo-class-no-unknown': [true, {
+      'ignorePseudoClasses': ['global', 'local']
+    }],
     'order/properties-order': [
       'font-family',
       'font-size',

@@ -5,11 +5,11 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { store, persistor } from './configureStore';
 import { AuthorizedLogin } from '@/components/Authorized';
-import globalLoading from '../asset/images/globalLoading.gif';
-import '../asset/style/common.scss';
+import globalLoading from '@/asset/images/globalLoading.gif';
+import '@/asset/styles/global.scss';
 
-const Login = lazy(() => import('../app/Login')); // 登录页面
-const Index = lazy(() => import('../app/Index')); // 登录后主页
+const Login = lazy(() => import('@/pages/Login')); // 登录页面
+const Index = lazy(() => import('@/pages/Index')); // 登录后主页
 
 const Loading = () => {
   const style = {
