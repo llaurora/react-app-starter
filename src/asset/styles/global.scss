@@ -1,31 +1,38 @@
-@import "./dominant";
-
 * {
   font-family: "Helvetica Neue", Helvetica, Arial, "Micros≈oft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
-  color: $default-fontColor;
+  color: $font-color;
   margin: 0;
   padding: 0;
 }
 
-li { list-style: none; }
+li {
+  list-style: none;
+}
 
 button,
 input,
-select { outline: none; }
+select {
+  outline: none;
+}
 
 a {
   text-decoration: none;
-  color: $default-fontColor;
+  color: $font-color;
 
   &:hover {
-    color: $dominant-hue;
+    color: $primary-color;
   }
 }
 
 html,
-body,
-#root {
+body {
   height: 100%;
+}
+
+:global {
+  #root {
+    height: 100%;
+  }
 }
 
 ::-moz-focus-inner { border: none; } /* 火狐按钮点击后虚线框去除 */
@@ -37,7 +44,7 @@ input:-webkit-autofill { /* 谷歌浏览器input框自动填充黄色背景去�
 
 @-webkit-keyframes autofill { /* stylelint-disable-line at-rule-no-vendor-prefix */
   to {
-    color: $default-fontColor;
+    color: $font-color;
     background: transparent;
   }
 }

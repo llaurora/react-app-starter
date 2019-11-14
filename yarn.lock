@@ -5040,6 +5040,11 @@ img-loader@^3.0.1:
   dependencies:
     loader-utils "^1.1.0"
 
+immer@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npm.taobao.org/immer/download/immer-5.0.0.tgz#07f462b7d95f7e86c214a861ecacd766d42b8c0a"
+  integrity sha1-B/Rit9lffobCFKhh7KzXZtQrjAo=
+
 import-cwd@^2.0.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/import-cwd/download/import-cwd-2.1.0.tgz#aa6cf36e722761285cb371ec6519f53e2435b0a9"

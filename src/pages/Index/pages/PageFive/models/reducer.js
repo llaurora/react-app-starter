@@ -1,12 +1,9 @@
+import produce from 'immer';
+
 const initialState = { count: 100 };
 
-export default function(state = initialState, action) {
+export default produce((draft, action) => {
   if (action.type === 'TEST_PERSIST_STATE') {
-    return {
-      ...state,
-      count: action.data,
-    };
+    draft.count = action.data;
   }
-
-  return state;
-}
+}, initialState);
