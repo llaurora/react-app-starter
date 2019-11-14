@@ -3,6 +3,7 @@
   "errorMsg": null,
   "result":{
     "userName":"Joker",
-    "userPwd":123456
+    "userPwd":123456,
+    "authority": ["pageone"]
   }
 }

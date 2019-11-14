@@ -1,3 +1,5 @@
+import produce from 'immer';
+
 const initialState = {
   numA: 10,
   numB: 10,
@@ -5,29 +7,26 @@ const initialState = {
   numD: 10,
 };
 
-export default function(state = initialState, action) {
+export default produce((draft, action) => {
   switch (action.type) {
     case 'CHANGE_SIX_STATE_A':
-      return {
-        ...state,
-        numA: action.data,
-      };
+      draft.numA = action.data;
+
+      return;
+
     case 'CHANGE_SIX_STATE_B':
-      return {
-        ...state,
-        numB: action.data,
-      };
+      draft.numB = action.data;
+
+      return;
+
     case 'CHANGE_SIX_STATE_C':
-      return {
-        ...state,
-        numC: action.data,
-      };
+      draft.numC = action.data;
+
+      return;
+
     case 'CHANGE_SIX_STATE_D':
-      return {
-        ...state,
-        numD: action.data,
-      };
-    default:
-      return state;
+      draft.numD = action.data;
+
+    // no default
   }
-}
+}, initialState);

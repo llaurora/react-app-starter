@@ -2,28 +2,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { AuthorizedRender } from '@/components/Authorized';
-import * as userInfoAction from '@/models/userInfo/action';
 import styles from './index.scss';
 
-@connect(
-  null,
-  dispatch => bindActionCreators({ ...userInfoAction }, dispatch),
-)
+@connect()
 export default class Aside extends Component {
   static propTypes = {
-    changeLoginState: PropTypes.func,
+    dispatch: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
   };
 
-  static defaultProps = {
-    changeLoginState: () => {},
-  };
-
   goLogOff = () => {
-    this.props.changeLoginState('CLEAR_LOGIN_STATE');
-    this.props.history.replace('/');
+    const { dispatch, history } = this.props;
+    dispatch({ type: 'CLEAR_LOGIN_STATE' });
+    history.replace('/');
   };
 
   render() {

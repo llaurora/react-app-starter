@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ChildLeft from './ChildLeft';
-import ChildCenter from './ChildCenter';
-import ChildRight from './ChildRight';
+import ChildLeft from './components/ChildLeft';
+import ChildCenter from './components/ChildCenter';
+import ChildRight from './components/ChildRight';
 import styles from './index.scss';
 
 function PageSix({ dispatch, numA, numB, numC, numD }) {

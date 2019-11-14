@@ -78,8 +78,10 @@ module.exports = {
     'newline-per-chained-call': 0,
     'no-confusing-arrow': 0,
     'no-console': 1, // 此规则规定是否能调用 console 对象的方法
+    'no-param-reassign': 1,
     'no-unused-vars': 2,
     'no-use-before-define': 0,
+    'consistent-return': 1,
     'prefer-template': 2,
     'react/destructuring-assignment': 0,
     'react/jsx-closing-tag-location': 0,
