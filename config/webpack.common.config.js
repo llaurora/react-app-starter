@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 抽取所有js中的css独立打包到一个css中,减少http请求
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const WebpackBar = require('webpackbar');
+const flexbugsFixes = require('postcss-flexbugs-fixes');
 const autoprefixer = require('autoprefixer');
 const aliasConfig = require('./alias.config');
 const devMode = process.env.NODE_ENV === 'development';
@@ -42,8 +43,14 @@ const webpackCommonConfig = {
           /* eslint-enable */
           {
             loader: 'css-loader',
+            // 开启CSS Modules
             options: {
               importLoaders: 1,
+              modules: {
+                localIdentName: devMode
+                  ? '[path][name]__[local]'
+                  : '[hash:base64]',
+              },
             },
           },
           'resolve-url-loader',
@@ -54,11 +61,18 @@ const webpackCommonConfig = {
             },
           },
           {
+            loader: 'sass-resources-loader',
+            options: {
+              resources: resolve('src/asset/styles/variable.scss'),
+            },
+          },
+          {
             loader: 'postcss-loader', // 自动给css添加浏览器兼容前缀
             options: {
               sourceMap: true,
               plugins() {
                 return [
+                  flexbugsFixes,
                   autoprefixer({ overrideBrowserslist: ['last 40 versions'] }),
                 ];
               },
