@@ -6,8 +6,8 @@ export default produce((draft, action) => {
   switch (action.type) {
     case 'CANCEL_LOGIN_STATE':
       draft.isLogin = true;
-      draft.userName = action.data.userName;
-      draft.authority = action.data.authority;
+      draft.userName = action.payload.userName;
+      draft.authority = action.payload.authority;
 
       return;
 
@@ -24,8 +24,8 @@ export default produce((draft, action) => {
 //       return {
 //         ...state,
 //         isLogin: true,
-//         userName: action.data.userName,
-//         authority: action.data.authority,
+//         userName: action.payload.userName,
+//         authority: action.payload.authority,
 //       };
 //     case 'CLEAR_LOGIN_STATE':
 //       return initialState;

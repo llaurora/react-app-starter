@@ -1,7 +1,7 @@
-export function changeLoginState(type, data = {}) {
+export function changeLoginState(type, payload = {}) {
   return {
     type,
-    data,
+    payload,
   };
 }
 

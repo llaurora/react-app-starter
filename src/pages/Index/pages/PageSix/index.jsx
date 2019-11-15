@@ -22,7 +22,7 @@ function PageSix({ dispatch, numA, numB, numC, numD }) {
     };
     dispatch({
       type: `CHANGE_SIX_STATE_${type}`,
-      data: numobj[`num${type}`] + 20,
+      payload: numobj[`num${type}`] + 20,
     });
   }
 
