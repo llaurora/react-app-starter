@@ -23,7 +23,9 @@ router.use('/checkLogin', (req, res) => {
       authority: ['pageone'],
     },
   });
-  return res.json(data);
+  setTimeout(() => {
+    res.json(data);
+  }, 3000);
 });
 
 module.exports = router;
