@@ -8,7 +8,7 @@ import rootReducer from '@/models/rootReducer'; // 引入Reducer 一般一个项
 const persistConfig = {
   storage: storageSession,
   key: 'root',
-  whitelist: ['testPersist', 'userInfo'],
+  whitelist: ['userInfo'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
