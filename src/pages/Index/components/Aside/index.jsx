@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AuthorizedRender } from '@/components/Authorized';
 import styles from './index.scss';
 
 @connect()
+@withRouter
 export default class Aside extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,

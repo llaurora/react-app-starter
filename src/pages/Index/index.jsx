@@ -1,5 +1,4 @@
 import React, { lazy } from 'react';
-import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 import { AuthorizedRouter } from '@/components/Authorized';
 import Aside from './components/Aside';
@@ -16,10 +15,10 @@ const PageFive = lazy(() => import('./pages/PageFive')); // 第五页
 const PageSix = lazy(() => import('./pages/PageSix')); // 第六页
 const PageSeven = lazy(() => import('./pages/PageSeven')); // 第七页
 
-export default function Index({ history }) {
+export default function Index() {
   return (
     <div id={styles.indexArea}>
-      <Aside history={history} />
+      <Aside />
       <div id={styles.routeContent}>
         <Switch>
           <Route exact path="/" component={Home} />
@@ -42,7 +41,3 @@ export default function Index({ history }) {
     </div>
   );
 }
-
-Index.propTypes = {
-  history: PropTypes.object.isRequired,
-};
