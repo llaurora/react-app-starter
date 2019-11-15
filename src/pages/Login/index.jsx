@@ -68,11 +68,9 @@ export default class Login extends Component {
       method: 'get',
     })
       .then(data => {
-        setTimeout(() => {
-          this.setState({ loading: false });
-          this.props.changeLoginState('CANCEL_LOGIN_STATE', data);
-          this.props.history.replace('/');
-        }, 1500);
+        this.setState({ loading: false });
+        this.props.changeLoginState('CANCEL_LOGIN_STATE', data);
+        this.props.history.replace('/');
       })
       .catch(() => {
         this.setState({ loading: false });
