@@ -2,11 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-function PageFive({ count, dispatch }) {
+function PageFive({ dispatch, count, operator }) {
   function dispatchTestPersist() {
     dispatch({
       type: 'TEST_PERSIST_STATE',
-      data: count + 100,
+      data: {
+        count: count + 100,
+        operator: `${operator}1`,
+      },
     });
   }
 
@@ -14,7 +17,8 @@ function PageFive({ count, dispatch }) {
     <div>
       <h3>这是第5页</h3>
       <hr />
-      <span>count：{count}</span>
+      <p>count：{count}</p>
+      <p>operator: {operator}</p>
       <br />
       <button type="button" onClick={dispatchTestPersist}>
         点我+
@@ -24,17 +28,18 @@ function PageFive({ count, dispatch }) {
 }
 
 PageFive.propTypes = {
-  count: PropTypes.number,
   dispatch: PropTypes.func,
+  count: PropTypes.number.isRequired,
+  operator: PropTypes.string.isRequired,
 };
 
 PageFive.defaultProps = {
-  count: 100,
   dispatch: () => {},
 };
 
 export default connect(
-  ({ testPersist: { count } }) => ({
+  ({ testPersist: { count, operator } }) => ({
     count,
+    operator,
   }), // 从redux状态树用什么取什么
 )(PageFive);
