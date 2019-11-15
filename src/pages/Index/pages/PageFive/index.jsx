@@ -6,7 +6,7 @@ function PageFive({ dispatch, count, operator }) {
   function dispatchTestPersist() {
     dispatch({
       type: 'TEST_PERSIST_STATE',
-      data: {
+      payload: {
         count: count + 100,
         operator: `${operator}1`,
       },

@@ -6,8 +6,8 @@ const initialState = { count: 100, operator: 'operator', bool: false };
 
 const testPersistReducer = produce((draft, action) => {
   if (action.type === 'TEST_PERSIST_STATE') {
-    draft.count = action.data.count;
-    draft.operator = action.data.operator;
+    draft.count = action.payload.count;
+    draft.operator = action.payload.operator;
   }
 }, initialState);
 

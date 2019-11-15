@@ -10,22 +10,22 @@ const initialState = {
 export default produce((draft, action) => {
   switch (action.type) {
     case 'CHANGE_SIX_STATE_A':
-      draft.numA = action.data;
+      draft.numA = action.payload;
 
       return;
 
     case 'CHANGE_SIX_STATE_B':
-      draft.numB = action.data;
+      draft.numB = action.payload;
 
       return;
 
     case 'CHANGE_SIX_STATE_C':
-      draft.numC = action.data;
+      draft.numC = action.payload;
 
       return;
 
     case 'CHANGE_SIX_STATE_D':
-      draft.numD = action.data;
+      draft.numD = action.payload;
 
     // no default
   }
