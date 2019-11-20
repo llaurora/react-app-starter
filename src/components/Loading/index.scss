@@ -1,0 +1,19 @@
+div {
+  &.loadingWrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &.globalLoading {
+    left: 0;
+  }
+
+  &.localLoading {
+    left: $nav-width + $nav-margin;
+  }
+}

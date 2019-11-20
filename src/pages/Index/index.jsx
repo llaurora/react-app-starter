@@ -1,6 +1,7 @@
-import React, { lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { AuthorizedRouter } from '@/components/Authorized';
+import Loading from '@/components/Loading';
 import Aside from './components/Aside';
 import styles from './index.scss';
 
@@ -20,23 +21,25 @@ export default function Index() {
     <div id={styles.indexArea}>
       <Aside />
       <div id={styles.routeContent}>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <AuthorizedRouter
-            path="/pageone"
-            component={PageOne}
-            authority={['pageone']}
-          />
-          {/* 如果不传递authority，用AuthorizedRouter或者 Route 作用一样，不进行权限校验/> */}
-          <AuthorizedRouter path="/pagetwo" component={PageTwo} />
-          <Route path="/pagethree" component={PageThree} />
-          <Route path="/pagefour" component={PageFour} />
-          <Route path="/pagefive" component={PageFive} />
-          <Route path="/pagesix" component={PageSix} />
-          <Route path="/pageseven" component={PageSeven} />
-          <Route path="/noauthorized" component={NoAuthorized} />
-          <Route component={NoMatch} />
-        </Switch>
+        <Suspense fallback={<Loading />}>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <AuthorizedRouter
+              path="/pageone"
+              component={PageOne}
+              authority={['pageone']}
+            />
+            {/* 如果不传递authority，用AuthorizedRouter或者 Route 作用一样，不进行权限校验/> */}
+            <AuthorizedRouter path="/pagetwo" component={PageTwo} />
+            <Route path="/pagethree" component={PageThree} />
+            <Route path="/pagefour" component={PageFour} />
+            <Route path="/pagefive" component={PageFive} />
+            <Route path="/pagesix" component={PageSix} />
+            <Route path="/pageseven" component={PageSeven} />
+            <Route path="/noauthorized" component={NoAuthorized} />
+            <Route component={NoMatch} />
+          </Switch>
+        </Suspense>
       </div>
     </div>
   );
