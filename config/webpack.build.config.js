@@ -10,9 +10,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 生产打包清空目录下文件
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer'); // 包体组成分析
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 const eslintFriendlyFormatter = require('eslint-friendly-formatter');
 const webpackCommonConfig = require('./webpack.common.config');
 const { analyzerHost, analyzerPort } = require('./server.config');
+
+const smp = new SpeedMeasurePlugin();
 
 function resolve(dir) {
   return path.resolve(process.cwd(), dir);
@@ -166,4 +169,4 @@ const wepackBuildConfig = {
   devtool: 'sourceMap',
 };
 
-module.exports = webpackMerge(webpackCommonConfig, wepackBuildConfig);
+module.exports = smp.wrap(webpackMerge(webpackCommonConfig, wepackBuildConfig));
