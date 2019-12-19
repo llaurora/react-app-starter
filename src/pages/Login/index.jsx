@@ -8,10 +8,7 @@ import imgLoading from '@/asset/images/loading.svg';
 import * as userInfoAction from '@/models/userInfo/action'; // Action Creator
 import styles from './index.scss';
 
-@connect(
-  null,
-  dispatch => bindActionCreators({ ...userInfoAction }, dispatch),
-)
+@connect(null, dispatch => bindActionCreators({ ...userInfoAction }, dispatch))
 export default class Login extends Component {
   static propTypes = {
     changeLoginState: PropTypes.func,

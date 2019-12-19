@@ -64,7 +64,4 @@ Aside.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export default compose(
-  connect(),
-  withRouter,
-)(Aside);
+export default compose(connect(), withRouter)(Aside);
