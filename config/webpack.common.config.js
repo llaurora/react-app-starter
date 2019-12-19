@@ -2,8 +2,6 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 抽取所有js中的css独立打包到一个css中,减少http请求
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const WebpackBar = require('webpackbar');
-const flexbugsFixes = require('postcss-flexbugs-fixes');
-const autoprefixer = require('autoprefixer');
 const aliasConfig = require('./alias.config');
 const devMode = process.env.NODE_ENV === 'development';
 
@@ -13,19 +11,21 @@ function resolve(dir) {
 
 const webpackCommonConfig = {
   mode: devMode ? 'development' : 'production', // 模式
-  entry: {
-    main: ['./src/main.jsx'],
-  },
-  performance: {
-    // 是否关闭当输出的js文件的大小超过推荐限制大小(244k)时出现warning警告
-    hints: devMode ? false : 'warning',
-  },
+  entry: './src/main.jsx',
   module: {
     rules: [
       {
         test: /\.jsx|js$/,
         include: [resolve('src')],
-        use: ['babel-loader'],
+        use: [
+          'thread-loader',
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+            },
+          },
+        ],
       },
       {
         test: /\.(sa|sc|c)ss$/,
@@ -45,11 +45,11 @@ const webpackCommonConfig = {
             loader: 'css-loader',
             // 开启CSS Modules
             options: {
-              importLoaders: 1,
+              importLoaders: 4,
               modules: {
                 localIdentName: devMode
                   ? '[path][name]__[local]'
-                  : '[hash:base64]',
+                  : '[contenthash:base64]',
               },
             },
           },
@@ -68,15 +68,6 @@ const webpackCommonConfig = {
           },
           {
             loader: 'postcss-loader', // 自动给css添加浏览器兼容前缀
-            options: {
-              sourceMap: true,
-              plugins() {
-                return [
-                  flexbugsFixes,
-                  autoprefixer({ overrideBrowserslist: ['last 40 versions'] }),
-                ];
-              },
-            },
           },
         ],
       },
@@ -98,9 +89,7 @@ const webpackCommonConfig = {
           {
             loader: 'file-loader',
             options: {
-              name: devMode
-                ? 'images/favicon.[ext]'
-                : 'images/favicon.[hash:8].[ext]',
+              name: devMode ? '[name].[ext]' : '[name].[contenthash:8].[ext]',
             },
           },
         ],
@@ -112,16 +101,25 @@ const webpackCommonConfig = {
         include: [resolve('src')],
         use: [
           {
-            loader: 'url-loader', // url-loader是file-loader的加强版。url-loader不依赖于file-loader，即使用url-loader时，只需要安装url-loader即可，不需要安装file-loader，因为url-loader内置了file-loader
+            // url-loader是file-loader的加强版，除了能做file-loader的事情外，在文件大小低于指定的限制时，可以返回一个 DataURL
+            // url-loader不依赖于file-loader，即使用url-loader时，只需要安装url-loader即可，不需要安装file-loader，因为url-loader内置了file-loader
+            loader: 'url-loader',
             options: {
-              limit: 5000, // 小于5000b的图片文件将被url-loader编码成base64写进css里,从而减少服务器请求，当然css文件体积更大;
-              name: 'images/[name].[hash:8].[ext]', // 设置最终images路径(文件大小大于limit，url-loader会调用file-loader进行处理，参数也会直接传给file-loader);
+              // 小于5000b的图片文件将被url-loader编码成base64写进css或者js里,从而减少服务器请求，当然css或者js文件体积更大;
+              // 大于5000b的图片文件，url-loader会调用file-loader进行处理，参数也会直接传给file-loader
+              limit: 5000,
+              name: devMode ? '[name].[ext]' : '[name].[contenthash:8].[ext]',
+              outputPath: 'images', // 设置最终images路径;
+              esModules: true,
               query: `random=${new Date().getTime()}`,
             },
           },
           {
-            // 压缩图片(另一个压缩图片：image-webpack-loader) 先压缩再判断是否小于上面的limit再决定是否转base64;
-            loader: 'img-loader?minimize&optimizationLevel=5&progressive=true',
+            // 压缩图片(另一个压缩图片：img-loader) 先压缩再判断是否小于上面的limit再决定是否转base64;
+            loader: 'image-webpack-loader',
+            options: {
+              disable: true,
+            },
           },
         ],
       },
@@ -132,7 +130,9 @@ const webpackCommonConfig = {
           {
             loader: 'file-loader',
             options: {
-              name: 'fonts/[name].[hash:8].[ext]',
+              name: devMode ? '[name].[ext]' : '[name].[contenthash:8].[ext]',
+              outputPath: 'fonts',
+              esModules: true,
             },
           },
         ],
@@ -142,11 +142,6 @@ const webpackCommonConfig = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: aliasConfig.resolve.alias,
-    modules: [
-      // 指定webpack在解析模块时应该搜索哪些目录
-      './src',
-      'node_modules',
-    ],
   },
   plugins: [
     new WebpackBar(),
@@ -169,4 +164,5 @@ const webpackCommonConfig = {
     }),
   ],
 };
+
 module.exports = webpackCommonConfig;
