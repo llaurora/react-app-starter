@@ -3,9 +3,10 @@ import { Provider } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import { store, persistor } from './configureStore';
 import { AuthorizedLogin } from '@/components/Authorized';
 import Loading from '@/components/Loading';
+import { store, persistor } from './configureStore';
+import ErrorBoundary from './ErrorBoundary';
 import '@/asset/styles/global.scss';
 
 const Login = lazy(() => import('@/pages/Login')); // 登录页面
@@ -17,12 +18,14 @@ const Routers = () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <Suspense fallback={<Loading scope="global" />}>
-        <Router forceRefresh={!supportsHistory}>
-          <Switch>
-            <Route path="/login" component={Login} />
-            <AuthorizedLogin path="/" component={Index} />
-          </Switch>
-        </Router>
+        <ErrorBoundary>
+          <Router forceRefresh={!supportsHistory}>
+            <Switch>
+              <Route path="/login" component={Login} />
+              <AuthorizedLogin path="/" component={Index} />
+            </Switch>
+          </Router>
+        </ErrorBoundary>
       </Suspense>
     </PersistGate>
   </Provider>
