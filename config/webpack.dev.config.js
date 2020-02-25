@@ -75,9 +75,12 @@ const wepackDevConfig = {
     },
   },
   watchOptions: {
-    poll: 1000, // 监测修改的时间(ms)
-    aggregateTimeout: 400, // 第一个文件更改后，在重建之前添加延迟。这允许webpack将在此时间段内所做的任何其他更改聚合到一个重建中
-    ignored: /node_modules/, // 不监测
+    // 判断文件是否发生变化是通过不停询问系统指定文件有没有变化实现的，默认每秒（1000ms）询问一次
+    poll: 1000,
+    // 第一个文件更改后，在重建之前添加延迟，默认 300ms。这允许webpack将在此时间段内所做的任何其他更改聚合到一个重建中
+    aggregateTimeout: 400,
+    // 不监听的文件或者文件夹，默认为空，支持正则匹配
+    ignored: /node_modules/,
   },
   plugins: [
     // new webpack.HotModuleReplacementPlugin(),//热加载，当配置了devServer的hot和inline参数之后，webpack会帮我们把HotModuleReplacementPlugin自动添加进来而不用我们再手动添加
