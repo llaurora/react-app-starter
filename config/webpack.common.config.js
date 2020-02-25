@@ -2,12 +2,21 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 抽取所有js中的css独立打包到一个css中,减少http请求
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const WebpackBar = require('webpackbar');
+const threadLoader = require('thread-loader');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const aliasConfig = require('./alias.config');
 const devMode = process.env.NODE_ENV === 'development';
 
 function resolve(dir) {
   return path.resolve(process.cwd(), dir);
 }
+
+const jsWorkerPool = {
+  workers: 2,
+  poolTimeout: 2000,
+};
+
+threadLoader.warmup(jsWorkerPool, ['babel-loader']);
 
 const webpackCommonConfig = {
   mode: devMode ? 'development' : 'production', // 模式
@@ -18,7 +27,10 @@ const webpackCommonConfig = {
         test: /\.jsx|js$/,
         include: [resolve('src')],
         use: [
-          'thread-loader',
+          {
+            loader: 'thread-loader',
+            options: jsWorkerPool,
+          },
           {
             loader: 'babel-loader',
             options: {
@@ -142,9 +154,11 @@ const webpackCommonConfig = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: aliasConfig.resolve.alias,
+    mainFields: ['jsnext:main', 'browser', 'main'], // 优先采用 ES6 的那份代码
   },
   plugins: [
     new WebpackBar(),
+    new HardSourceWebpackPlugin(), // 缩短连续构建时间
     new StyleLintPlugin({
       context: 'src',
       files: ['**/*.s?(a|c)ss'],
