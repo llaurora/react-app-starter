@@ -5896,10 +5896,10 @@ imagemin@7.0.1, imagemin@^7.0.0:
     p-pipe "^3.0.0"
     replace-ext "^1.0.0"
 
-immer@^5.0.2:
-  version "5.0.2"
-  resolved "https://registry.npm.taobao.org/immer/download/immer-5.0.2.tgz#34eb50c69abb8c04acd0f942244c5eefe62a4e4e"
-  integrity sha1-NOtQxpq7jASs0PlCJExe7+YqTk4=
+immer@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-8.0.1.tgz#9c73db683e2b3975c424fb0572af5889877ae656"
+  integrity sha512-aqXhGP7//Gui2+UrEtvxZxSquQVXTpZ7KDxfCcKAF3Vysvw0CViVaW9RZ1j1xlIYqaaaipBoqdqeibkc18PNvA==
 
 import-cwd@^2.0.0:
   version "2.1.0"
