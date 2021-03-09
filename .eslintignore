@@ -1,1 +1,6 @@
-build/
+/node_modules
+/scripts/
+/mock/
+/dist/
+es/**/*
+lib/**/*

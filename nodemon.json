@@ -1,15 +1,15 @@
 {
-  "restartable": "rs",
-  "ignore": [
-    ".git",
-    "node_modules/**/node_modules",
-    "bulid"
-  ],
-  "verbose": true,
-  "watch": ["./mock"],
-  "env": {
-    "NODE_ENV": "development"
-  },
-  "ext": "js,json",
-  "delay": 2500
+    "restartable": "rs",
+    "ignore": [
+        ".git",
+        "node_modules/**/node_modules",
+        "bulid"
+    ],
+    "verbose": true,
+    "watch": ["./mock"],
+    "env": {
+        "NODE_ENV": "development"
+    },
+    "ext": "js,json",
+    "delay": 2500
 }
