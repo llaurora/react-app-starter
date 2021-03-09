@@ -1,0 +1,14 @@
+.basicLayout {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    height: 100%;
+    .sectionContent {
+        flex: 1;
+        box-sizing: border-box;
+        height: 100%;
+        overflow-y: auto;
+        @include custom-scrollbar;
+    }
+}

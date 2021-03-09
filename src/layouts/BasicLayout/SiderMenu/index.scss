@@ -1,0 +1,17 @@
+.siderMenu {
+    height: 100%;
+    @include hidden-scrollbar;
+    border-right: 1px solid $border-color-base;
+    .title {
+        padding-left: 24px;
+        color: $label-color;
+        font-weight: 500;
+        font-size: $font-size-xl;
+        text-align: center;
+    }
+    :global {
+        .ant-menu-inline {
+            border-right: none;
+        }
+    }
+}
