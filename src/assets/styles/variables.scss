@@ -1,0 +1,21 @@
+// -------- Colors -----------
+$primary-color: #1890ff;
+$warning-color: #faad14;
+$error-color: #ff4d4f;
+$black: #000;
+// Base Scaffolding Variables
+$label-color: rgba($black, 0.85);
+$text-color: rgba($black, 0.65);
+$font-size-base: 14px;
+$font-size-lg: $font-size-base + 2px;
+$font-size-xl: $font-size-lg + 2px;
+$font-size-sm: $font-size-base - 2px;
+// Border
+$border-color-base: #f0f0f0;
+$border-radius-base: 4px;
+$border-radius-sm: 2px;
+// Sider
+$sider-width: 120px;
+//Scrollbar
+$scrollbar-width: 10px;
+$scrollbar-bg: rgba(223, 223, 223, 1);

@@ -1,0 +1,18 @@
+@mixin hidden-scrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+    &::-webkit-scrollbar {  /* Chrome Safari */
+        display: none;
+    }
+}
+
+@mixin custom-scrollbar {
+    &::-webkit-scrollbar {
+        width: $scrollbar-width;
+        height: 1px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: $scrollbar-bg;
+        border-radius: $scrollbar-width;
+    }
+}
