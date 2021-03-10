@@ -1,5 +1,5 @@
 import { Route, Redirect, RouteComponentProps } from "react-router-dom";
-import { checkBatchAuthority } from "../utils";
+import { checkBatchAuthority } from "./utils";
 
 export default function AuthorizedRoute({ authority, component: Component, ...rest }) {
     return (

@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { checkBatchAuthority } from "../utils";
+import { checkBatchAuthority } from "./utils";
 
 interface AuthorizedRenderProps {
     authority: string[];
