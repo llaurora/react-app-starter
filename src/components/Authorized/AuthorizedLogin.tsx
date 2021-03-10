@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Redirect, RouteComponentProps } from "react-router-dom";
-import { getStoreUserInfo } from "../utils";
+import { getStoreUserInfo } from "./utils";
 
 export default function AuthorizedLogin({ component: Component, ...rest }) {
     const userInfo = getStoreUserInfo();
