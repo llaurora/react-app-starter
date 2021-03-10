@@ -2,5 +2,6 @@
 /scripts/
 /mock/
 /dist/
+postcss.config.js
 es/**/*
 lib/**/*
