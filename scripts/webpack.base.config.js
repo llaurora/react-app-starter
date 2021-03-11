@@ -59,7 +59,14 @@ module.exports = {
                 test: /\.(sa|sc|c)ss$/,
                 include: SRC_DIR,
                 use: [
-                    devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+                    devMode
+                        ? "style-loader"
+                        : {
+                            loader: MiniCssExtractPlugin.loader,
+                            options: {
+                                publicPath: "../",
+                            },
+                        },
                     {
                         loader: "css-loader",
                         options: {
@@ -86,7 +93,14 @@ module.exports = {
                 test: /\.less$/,
                 include: /[\\/]node_modules[\\/].*antd/,
                 use: [
-                    devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+                    devMode
+                        ? "style-loader"
+                        : {
+                            loader: MiniCssExtractPlugin.loader,
+                            options: {
+                                publicPath: "../",
+                            },
+                        },
                     "css-loader",
                     {
                         loader: "less-loader",
