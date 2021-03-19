@@ -29,6 +29,9 @@ module.exports = {
         sourceType: "module",
     },
     settings: {
+        react: {
+            version: "detect",
+        },
         "import/resolver": {
             node: {
                 extensions: [".tsx", ".ts", ".js", ".json"],
