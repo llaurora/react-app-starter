@@ -19,7 +19,6 @@ app.use(
     createProxyMiddleware(["/mock"], {
         target: PROXY || `http://localhost:${MOCK_PORT}`,
         changeOrigin: true,
-        logLevel: "debug",
     }),
 );
 app.use(

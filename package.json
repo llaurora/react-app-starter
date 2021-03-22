@@ -10,7 +10,7 @@
     },
     "scripts": {
         "mock:server": "nodemon ./mock/server.js",
-        "start": "concurrently \"yarn run mock:server\" \"cross-env NODE_ENV=development nodemon scripts/server.js\"",
+        "start": "concurrently \"yarn run mock:server\" \"cross-env NODE_ENV=development node scripts/server.js\"",
         "build": "cross-env NODE_ENV=production webpack --progress --config scripts/webpack.build.config.js",
         "eslint": "eslint src/**/*.{ts,tsx,js}",
         "stylelint": "stylelint src/**/*.{css,scss,sass}",
