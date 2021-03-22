@@ -3,9 +3,9 @@
     "ignore": [
         ".git",
         "node_modules/**/node_modules",
-        "bulid"
+        "dist"
     ],
-    "verbose": true,
+    "verbose": false,
     "watch": ["./mock"],
     "env": {
         "NODE_ENV": "development"
