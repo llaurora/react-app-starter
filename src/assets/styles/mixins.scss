@@ -6,35 +6,35 @@
     }
 }
 
-@mixin custom-scrollbar {
+@mixin custom-scrollbar($background: $scrollbar-bg) {
     &::-webkit-scrollbar {
         width: $scrollbar-size;
         height: $scrollbar-size;
     }
     &::-webkit-scrollbar-thumb {
-        background: $scrollbar-bg;
+        background: $background;
         border-radius: $scrollbar-size;
     }
 }
 
-@mixin custom-vertical-scrollbar {
+@mixin custom-vertical-scrollbar($background: $scrollbar-bg) {
     &::-webkit-scrollbar {
         width: $scrollbar-size;
         height: 0;
     }
     &::-webkit-scrollbar-thumb {
-        background: $scrollbar-bg;
+        background: $background;
         border-radius: $scrollbar-size;
     }
 }
 
-@mixin custom-horizontal-scrollbar {
+@mixin custom-horizontal-scrollbar($background: $scrollbar-bg) {
     &::-webkit-scrollbar {
         width: 0;
         height: $scrollbar-size;
     }
     &::-webkit-scrollbar-thumb {
-        background: $scrollbar-bg;
+        background: $background;
         border-radius: $scrollbar-size;
     }
 }
