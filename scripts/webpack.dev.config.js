@@ -1,4 +1,3 @@
-const path = require("path");
 const webpack = require("webpack");
 const { merge } = require("webpack-merge");
 const WebpackBar = require("webpackbar");
@@ -8,7 +7,7 @@ const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"
 const baseConfig = require("./webpack.base.config");
 
 const ifaces = require("os").networkInterfaces();
-const PORT = process.env.DEV_PORT || 8080;
+const PORT = process.env.PORT || 8080;
 const protocol = String(PORT) === "443" ? "https://" : "http://";
 
 module.exports = merge(baseConfig, {
