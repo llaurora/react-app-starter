@@ -1,9 +1,7 @@
 const Mock = require("mockjs");
-const express = require("express");
-const router = express.Router();
 
-router.use("/getUserInfo", (req, res) => {
-    setTimeout(() => {
+module.exports = {
+    'POST /mock/user/getUserInfo': (req, res) => {
         res.json(
             Mock.mock({
                 state: "SUCCESS",
@@ -15,7 +13,5 @@ router.use("/getUserInfo", (req, res) => {
                 },
             }),
         );
-    }, 2000);
-});
-
-module.exports = router;
+    },
+}
