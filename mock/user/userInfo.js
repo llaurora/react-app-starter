@@ -1,7 +1,7 @@
 const Mock = require("mockjs");
 
 module.exports = {
-    'POST /mock/user/getUserInfo': (req, res) => {
+    'POST /user/getUserInfo': (req, res) => {
         res.json(
             Mock.mock({
                 state: "SUCCESS",

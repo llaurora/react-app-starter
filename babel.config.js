@@ -16,18 +16,13 @@ module.exports = function (api) {
             ],
         ],
         plugins: [
+            "@babel/plugin-transform-runtime",
             [
                 "babel-plugin-import",
                 {
                     libraryName: "antd",
                     libraryDirectory: "es",
                     style: true,
-                },
-            ],
-            [
-                "@babel/plugin-transform-runtime",
-                {
-                    regenerator: false,
                 },
             ],
         ],
