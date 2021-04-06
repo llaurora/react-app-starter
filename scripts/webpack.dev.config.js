@@ -34,7 +34,9 @@ module.exports = merge(baseConfig, {
     plugins: [
         new WebpackBar(),
         new webpack.HotModuleReplacementPlugin(),
-        new ReactRefreshWebpackPlugin(),
+        new ReactRefreshWebpackPlugin({
+            sockIntegration: "whm",
+        }),
         new FriendlyErrorsWebpackPlugin({
             compilationSuccessInfo: {
                 messages: Object.values(ifaces).reduce(
@@ -55,7 +57,7 @@ module.exports = merge(baseConfig, {
                 }
                 const error = errors[0];
                 notifier.notify({
-                    title: "webpack编译失败",
+                    title: "Webpack error",
                     message: severity + ": " + error.name,
                     subtitle: error.file || "",
                 });
