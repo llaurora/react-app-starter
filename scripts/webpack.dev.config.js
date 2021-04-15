@@ -35,7 +35,9 @@ module.exports = merge(baseConfig, {
         new WebpackBar(),
         new webpack.HotModuleReplacementPlugin(),
         new ReactRefreshWebpackPlugin({
-            sockIntegration: "whm",
+            overlay: {
+                sockIntegration: "whm",
+            },
         }),
         new FriendlyErrorsWebpackPlugin({
             compilationSuccessInfo: {
