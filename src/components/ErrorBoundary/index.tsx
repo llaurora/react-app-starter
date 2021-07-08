@@ -1,38 +1,39 @@
-import { Component, ErrorInfo, PropsWithChildren } from "react";
+import { Component, PropsWithChildren, ReactNode } from "react";
 
-interface State {
-    error: Error;
-    errorInfo: ErrorInfo;
+interface Props {
+    fallback?: ReactNode;
 }
 
-export default class ErrorBoundary extends Component<PropsWithChildren<any>, State> {
+interface State {
+    hasError: boolean;
+    errorInfo: string;
+}
+
+export default class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
     static getDerivedStateFromError(error: Error) {
-        return { error };
+        return { hasError: true, errorInfo: error?.toString() };
     }
 
     constructor(props) {
         super(props);
         this.state = {
-            error: null,
+            hasError: false,
             errorInfo: null,
         };
     }
 
-    componentDidCatch(error: Error, info: ErrorInfo): void {
-        this.setState({ error, errorInfo: info });
-    }
-
     render() {
-        const { error, errorInfo } = this.state;
-        const { children } = this.props;
+        const { hasError, errorInfo } = this.state;
+        const { children, fallback } = this.props;
 
-        if (errorInfo) {
+        if (hasError) {
             return (
-                <div>
-                    <h1>Something went wrong.</h1>
-                    <div>{error?.toString()}</div>
-                    <div>{errorInfo?.componentStack}</div>
-                </div>
+                fallback ?? (
+                    <div>
+                        <h1>Something went wrong.</h1>
+                        {errorInfo ? <div>{errorInfo}</div> : null}
+                    </div>
+                )
             );
         }
 
