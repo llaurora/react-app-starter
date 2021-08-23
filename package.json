@@ -18,6 +18,7 @@
         "eslint:fix": "yarn run eslint --fix",
         "stylelint:fix": "yarn run stylelint --fix",
         "lint:fix": "yarn run eslint:fix && yarn run stylelint:fix",
+        "pre-commit": "lint-staged",
         "postinstall": "husky install"
     },
     "dependencies": {
