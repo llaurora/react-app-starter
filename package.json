@@ -28,7 +28,7 @@
         "axios": "^0.21.1",
         "classnames": "^2.2.6",
         "core-js": "^3.9.1",
-        "immer": "^8.0.1",
+        "immer": "^9.0.6",
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
         "react-router-dom": "^5.1.2"
