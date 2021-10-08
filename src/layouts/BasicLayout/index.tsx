@@ -1,4 +1,4 @@
-import { Suspense, useMemo, lazy } from "react";
+import { Suspense, useMemo, lazy, FC } from "react";
 import { Route, Switch } from "react-router-dom";
 import { routes } from "@/routes";
 import Loading from "@/components/Loading";
@@ -12,7 +12,7 @@ import styles from "./index.scss";
 const NoAuthorized = lazy(() => import("@/pages/NoAuthorized"));
 const NoMatch = lazy(() => import("@/pages/NoMatch"));
 
-export default function BasicLayout() {
+const BasicLayout: FC = () => {
     const flattenRoutes = useMemo(() => getFlattenRoutes(routes), []);
 
     return (
@@ -41,4 +41,6 @@ export default function BasicLayout() {
             </MenuContext.Provider>
         </div>
     );
-}
+};
+
+export default BasicLayout;

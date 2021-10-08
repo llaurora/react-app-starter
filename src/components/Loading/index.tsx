@@ -1,13 +1,13 @@
-import React, { memo } from "react";
+import { memo, FC } from "react";
 import classnames from "classnames";
 import loadingSrc from "@/assets/images/loading.gif";
 import styles from "./index.scss";
 
-interface LoadingProps {
+interface LoadingProperties {
     scope?: string;
 }
 
-function Loading({ scope = "local" }: LoadingProps) {
+const Loading: FC<LoadingProperties> = ({ scope = "local" }) => {
     return (
         <div
             className={classnames(styles.loadingWrap, {
@@ -18,6 +18,6 @@ function Loading({ scope = "local" }: LoadingProps) {
             <img src={loadingSrc} alt="加载中..." />
         </div>
     );
-}
+};
 
 export default memo(Loading);

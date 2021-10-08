@@ -1,40 +1,42 @@
 module.exports = {
+    root: true,
     parser: "@typescript-eslint/parser",
-    extends: [
-        "alloy",
-        "alloy/react",
-        "alloy/typescript",
-        "plugin:import/typescript",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:react-hooks/recommended",
-        "plugin:prettier/recommended",
-    ],
-    plugins: ["@typescript-eslint", "unicorn"],
-    env: {
-        browser: true,
-        es2021: true,
-        node: true,
-    },
-    globals: {
-        document: true,
-        navigator: true,
-        window: true,
-        node: true,
-    },
     parserOptions: {
-        ecmaFeatures: {
-            jsx: true,
-        },
         ecmaVersion: 2021,
         sourceType: "module",
+        ecmaFeatures: {
+            jsx: true,
+            legacyDecorators: true,
+        },
+    },
+    extends: [
+        "airbnb",
+        "airbnb/hooks",
+        "plugin:react/recommended",
+        "plugin:import/typescript",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:unicorn/recommended",
+        "prettier",
+        "plugin:prettier/recommended",
+    ],
+    plugins: ["react", "@typescript-eslint", "unicorn", "prettier"],
+    env: {
+        jest: true,
+        browser: true,
+        node: true,
+        es6: true,
     },
     settings: {
         react: {
+            pragma: "React",
             version: "detect",
         },
         "import/resolver": {
             node: {
                 extensions: [".tsx", ".ts", ".js", ".json"],
+            },
+            typescript: {
+                project: "./tsconfig.json",
             },
         },
     },
@@ -46,14 +48,45 @@ module.exports = {
             },
         },
     ],
+    globals: {
+        document: true,
+        navigator: true,
+        window: true,
+        node: true,
+    },
     rules: {
-        // 'off'或者0表示关闭规则，'warn'或者1将规则打开为警告（不影响退出代码),'error'或者2- 将规则打开为错误（触发时退出代码为1）
         "prettier/prettier": 2,
-        "@typescript-eslint/explicit-member-accessibility": 0,
-        "@typescript-eslint/explicit-module-boundary-types": 0,
+        "no-continue": 0,
+        "unicorn/no-null": 0,
+        "no-bitwise": [2, { allow: ["~"] }],
+        "no-param-reassign": [2, { props: true, ignorePropertyModificationsFor: ["draft"] }],
+        "react/display-name": 0,
+        "react/jsx-props-no-spreading": 0,
+        "react/prop-types": 0,
+        "react/jsx-uses-react": 0,
+        "react/react-in-jsx-scope": 0,
+        "react/require-default-props": 0,
+        "jsx-a11y/click-events-have-key-events": 0,
+        "jsx-a11y/no-static-element-interactions": 0,
+        "jsx-a11y/no-noninteractive-element-interactions": 0,
         "@typescript-eslint/no-unused-vars": 2,
         "react-hooks/rules-of-hooks": 2,
-        "react-hooks/exhaustive-deps": 1,
+        "react-hooks/exhaustive-deps": 2,
+        "unicorn/no-array-reduce": 0,
+        "unicorn/no-array-for-each": 0,
+        "unicorn/prefer-module": 0,
+        "react/no-array-index-key": 1,
+        "react/jsx-filename-extension": [2, { extensions: [".tsx", ".ts", ".jsx", ".js"] }],
+        "import/extensions": [
+            2,
+            "ignorePackages",
+            {
+                js: "never",
+                jsx: "never",
+                ts: "never",
+                tsx: "never",
+            },
+        ],
         "unicorn/filename-case": [
             2,
             {

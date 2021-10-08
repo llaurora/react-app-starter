@@ -26,13 +26,13 @@ export function setStorage(key: string, value: any, type: "session" | "local" = 
  * @param type
  */
 export function getStorage(key: string, type: "session" | "local" = "local"): any {
-    const getVal = type === "local" ? localStorage.getItem(key) : sessionStorage.getItem(key);
+    const getValue = type === "local" ? localStorage.getItem(key) : sessionStorage.getItem(key);
     return (() => {
         let transTarget: string;
         try {
-            transTarget = JSON.parse(getVal);
+            transTarget = JSON.parse(getValue);
         } catch {
-            transTarget = getVal;
+            transTarget = getValue;
         }
         return transTarget;
     })();

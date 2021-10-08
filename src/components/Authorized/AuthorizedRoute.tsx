@@ -1,22 +1,32 @@
+import { FC, ReactType } from "react";
 import { Route, Redirect, RouteComponentProps } from "react-router-dom";
 import { checkBatchAuthority } from "./utils";
 
-export default function AuthorizedRoute({ authority, component: Component, ...rest }) {
+interface AuthorizedRouteProperties {
+    component: ReactType;
+    authority: string[];
+    path: string;
+    exact?: boolean;
+}
+
+const AuthorizedRoute: FC<AuthorizedRouteProperties> = ({ authority, component: Component, ...rest }) => {
     return (
         <Route
             {...rest}
-            render={(props: RouteComponentProps) =>
+            render={(properties: RouteComponentProps) =>
                 checkBatchAuthority(authority) ? (
-                    <Component {...props} />
+                    <Component {...properties} />
                 ) : (
                     <Redirect
                         to={{
                             pathname: "/noauthorized",
-                            state: { from: props.location },
+                            state: { from: properties.location },
                         }}
                     />
                 )
             }
         />
     );
-}
+};
+
+export default AuthorizedRoute;

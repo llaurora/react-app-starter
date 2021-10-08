@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance } from "axios";
 import { notification } from "antd";
 
 interface RequestConfig extends AxiosRequestConfig {
@@ -23,8 +23,8 @@ const debounceNotify = () => {
 
 const errorNotify = debounceNotify();
 
-const request = axios.create({
-    timeout: 30000,
+const request: AxiosInstance = axios.create({
+    timeout: 30_000,
     headers: {
         "Content-Type": "application/json;charset=UTF-8",
         "X-Requested-With": "XMLHttpRequest",
@@ -33,16 +33,16 @@ const request = axios.create({
 
 request.interceptors.response.use((response: AxiosResponse) => {
     const {
-        data: { state, data, result },
+        data: { state, data, message },
     } = response;
     if (state === "SUCCESS") {
         return data;
     }
-    throw new Error(result);
+    throw new Error(message);
 });
 
-export default (url: string, options?: RequestConfig) =>
-    new Promise((resolve, reject) => {
+export default <T>(url: string, options?: RequestConfig) =>
+    new Promise<T>((resolve, reject) => {
         if (!navigator.onLine) {
             reject(new Error("Please check network configuration"));
         }
@@ -60,5 +60,5 @@ export default (url: string, options?: RequestConfig) =>
         })
         .catch((error) => {
             errorNotify(error);
-            throw new Error();
+            throw new Error(error);
         });

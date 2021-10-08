@@ -1,9 +1,12 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, FC } from "react";
 import { checkBatchAuthority } from "./utils";
 
-interface AuthorizedRenderProps {
+interface AuthorizedRenderProperties {
     authority: string[];
 }
-export default function AuthorizedRender({ authority, children }: PropsWithChildren<AuthorizedRenderProps>) {
+
+const AuthorizedRender: FC<PropsWithChildren<AuthorizedRenderProperties>> = ({ authority, children }) => {
     return checkBatchAuthority(authority) ? children : null;
-}
+};
+
+export default AuthorizedRender;

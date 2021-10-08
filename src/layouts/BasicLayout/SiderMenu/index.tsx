@@ -8,7 +8,14 @@ import styles from "./index.scss";
 
 const { SubMenu } = Menu;
 
-function SiderMenu() {
+const conversionPath = (path) => {
+    if (path && path.indexOf("http") === 0) {
+        return path;
+    }
+    return `/${path || ""}`.replace(/\/+/g, "/");
+};
+
+const SiderMenu = () => {
     const { routes, flattenRoutes } = useContext(MenuContext);
     const { pathname } = useLocation();
     const [selectedKey, setSelectedKey] = useState<string[]>([]);
@@ -21,19 +28,11 @@ function SiderMenu() {
         if (current) {
             setSelectedKey([current.path]);
             setOpenKeys(urlToList(current.path));
-            return;
         }
     }, [flattenRoutes, pathname]);
 
     const onOpenChange = (keys) => {
         setOpenKeys(keys);
-    };
-
-    const conversionPath = (path) => {
-        if (path && path.indexOf("http") === 0) {
-            return path;
-        }
-        return `/${path || ""}`.replace(/\/+/g, "/");
     };
 
     const getMenuItemPath = (item: RouteConfig) => {
@@ -57,6 +56,14 @@ function SiderMenu() {
         );
     };
 
+    const getNavMenuItems = (routesData: RouteConfig[]) => {
+        if (!Array.isArray(routesData)) {
+            return null;
+        }
+        // eslint-disable-next-line no-use-before-define
+        return routesData.map((item: RouteConfig) => getSubMenuOrItem(item));
+    };
+
     const getSubMenuOrItem = (item: RouteConfig) => {
         if ([!item.name, item.hideInMenu].includes(true)) {
             return null;
@@ -71,13 +78,6 @@ function SiderMenu() {
         return <Menu.Item key={item.path}>{getMenuItemPath(item)}</Menu.Item>;
     };
 
-    const getNavMenuItems = (routesData: RouteConfig[]) => {
-        if (!Array.isArray(routesData)) {
-            return null;
-        }
-        return routesData.map((item: RouteConfig) => getSubMenuOrItem(item));
-    };
-
     return (
         <div style={{ width: 200 }} className={styles.siderMenu}>
             <span className={styles.title}>React App Init</span>
@@ -86,6 +86,6 @@ function SiderMenu() {
             </Menu>
         </div>
     );
-}
+};
 
 export default memo(SiderMenu);

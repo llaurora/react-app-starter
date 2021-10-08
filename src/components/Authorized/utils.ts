@@ -1,8 +1,14 @@
 import { getStorage } from "@/utils";
 
-export const getStoreUserInfo = () => getStorage("userInfo", "session");
+interface UserInfo {
+    authorities: string[];
+    userName: string;
+    userPwd: string;
+}
 
-export const checkAuthority = (code: string, force?: boolean) => {
+export const getStoreUserInfo = (): UserInfo => getStorage("userInfo", "session");
+
+export const checkAuthority = (code: string, force?: boolean): boolean => {
     if (code === undefined) {
         return true;
     }
@@ -10,10 +16,10 @@ export const checkAuthority = (code: string, force?: boolean) => {
         return force;
     }
     const userInfo = getStoreUserInfo();
-    return (userInfo?.authorities || []).some((item: string) => item === code);
+    return (userInfo?.authorities || []).includes(code);
 };
 
-export const checkBatchAuthority = (authorities: string[], force?: boolean) => {
+export const checkBatchAuthority = (authorities: string[], force?: boolean): boolean => {
     if (authorities === undefined) {
         return true;
     }

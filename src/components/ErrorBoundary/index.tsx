@@ -1,6 +1,6 @@
 import { Component, PropsWithChildren, ReactNode } from "react";
 
-interface Props {
+interface Properties {
     fallback?: ReactNode;
 }
 
@@ -9,13 +9,13 @@ interface State {
     errorInfo: string;
 }
 
-export default class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
+export default class ErrorBoundary extends Component<PropsWithChildren<Properties>, State> {
     static getDerivedStateFromError(error: Error) {
         return { hasError: true, errorInfo: error?.toString() };
     }
 
-    constructor(props) {
-        super(props);
+    constructor(properties) {
+        super(properties);
         this.state = {
             hasError: false,
             errorInfo: null,

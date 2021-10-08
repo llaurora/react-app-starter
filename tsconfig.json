@@ -17,5 +17,5 @@
         "target": "ESNext",
         "lib": ["dom", "ESNext"],
     },
-    "exclude": ["node_modules", "lib", "es"]
+    "includes": ["./src/**/*"]
 }

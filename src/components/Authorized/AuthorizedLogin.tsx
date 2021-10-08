@@ -1,24 +1,30 @@
-import React from "react";
+import { FC, ReactType } from "react";
 import { Route, Redirect, RouteComponentProps } from "react-router-dom";
 import { getStoreUserInfo } from "./utils";
 
-export default function AuthorizedLogin({ component: Component, ...rest }) {
+interface AuthorizedLoginProperties {
+    component: ReactType;
+}
+
+const AuthorizedLogin: FC<AuthorizedLoginProperties> = ({ component: PropertyComponent, ...rest }) => {
     const userInfo = getStoreUserInfo();
     return (
         <Route
             {...rest}
-            render={(props: RouteComponentProps) =>
+            render={(properties: RouteComponentProps) =>
                 userInfo ? (
-                    <Component {...props} />
+                    <PropertyComponent {...properties} />
                 ) : (
                     <Redirect
                         to={{
                             pathname: "/login",
-                            state: { from: props.location },
+                            state: { from: properties.location },
                         }}
                     />
                 )
             }
         />
     );
-}
+};
+
+export default AuthorizedLogin;

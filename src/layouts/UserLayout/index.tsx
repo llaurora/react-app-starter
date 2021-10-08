@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FC } from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Input, Button } from "antd";
 import { setStorage } from "@/utils";
@@ -15,22 +15,23 @@ const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
 };
 
-export default function UserLayout() {
+const UserLayout: FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const history = useHistory();
 
-    const onFinish = (values) => {
+    const onFinish = async (values) => {
         setLoading(true);
-        getUserInfo(values)
-            .then((data) => {
-                console.log("Login Success:", data);
-                setStorage("userInfo", data, "session");
+        try {
+            const userInfo = await getUserInfo(values);
+            if (userInfo) {
+                console.log("Login Success:", userInfo);
+                setStorage("userInfo", userInfo, "session");
                 setLoading(false);
                 history.replace("/");
-            })
-            .catch(() => {
-                setLoading(false);
-            });
+            }
+        } catch {
+            setLoading(false);
+        }
     };
 
     return (
@@ -61,4 +62,6 @@ export default function UserLayout() {
             </Form>
         </div>
     );
-}
+};
+
+export default UserLayout;
