@@ -12,8 +12,8 @@
     "scripts": {
         "start": "cross-env NODE_ENV=development nodemon scripts/server.js",
         "build": "cross-env NODE_ENV=production webpack --progress --config scripts/webpack.build.config.js",
-        "eslint": "eslint src/**/*.{ts,tsx,js}",
-        "stylelint": "stylelint src/**/*.{css,scss,sass}",
+        "eslint": "eslint \"src/**/*.{ts,tsx,js}\"",
+        "stylelint": "stylelint \"src/**/*.{css,scss,sass}\"",
         "lint": "yarn run eslint && yarn run stylelint",
         "eslint:fix": "yarn run eslint --fix",
         "stylelint:fix": "yarn run stylelint --fix",
