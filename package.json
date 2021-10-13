@@ -7,7 +7,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/DlLucky/react-redux-app-init"
+        "url": "https://github.com/llaurora/react-app-starter"
     },
     "scripts": {
         "start": "cross-env NODE_ENV=development nodemon scripts/server.js",
