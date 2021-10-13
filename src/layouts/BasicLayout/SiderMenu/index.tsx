@@ -80,7 +80,7 @@ const SiderMenu = () => {
 
     return (
         <div style={{ width: 200 }} className={styles.siderMenu}>
-            <span className={styles.title}>React App Init</span>
+            <span className={styles.title}>React App Starter</span>
             <Menu mode="inline" selectedKeys={selectedKey} openKeys={openKeys} onOpenChange={onOpenChange}>
                 {getNavMenuItems(routes)}
             </Menu>
