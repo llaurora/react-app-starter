@@ -38,7 +38,7 @@ const UserLayout: FC = () => {
         <div className={styles.userLayout}>
             <Form className={styles.formCard} onFinish={onFinish} {...layout}>
                 <Item {...tailLayout}>
-                    <span className={styles.title}>React App Init</span>
+                    <span className={styles.title}>React App Starter</span>
                 </Item>
                 <Item
                     label="Username"
