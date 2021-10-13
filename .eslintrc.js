@@ -57,6 +57,7 @@ module.exports = {
     rules: {
         "prettier/prettier": 2,
         "no-continue": 0,
+        "no-console": 1,
         "unicorn/no-null": 0,
         "no-bitwise": [2, { allow: ["~"] }],
         "no-param-reassign": [2, { props: true, ignorePropertyModificationsFor: ["draft"] }],
