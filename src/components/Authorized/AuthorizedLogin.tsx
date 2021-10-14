@@ -1,17 +1,13 @@
-import { FC, ReactType } from "react";
-import { Route, Redirect, RouteComponentProps } from "react-router-dom";
+import { FC } from "react";
+import { Route, Redirect, RouteProps } from "react-router-dom";
 import { getStoreUserInfo } from "./utils";
 
-interface AuthorizedLoginProperties {
-    component: ReactType;
-}
-
-const AuthorizedLogin: FC<AuthorizedLoginProperties> = ({ component: PropertyComponent, ...rest }) => {
+const AuthorizedLogin: FC<RouteProps> = ({ component: PropertyComponent, ...rest }) => {
     const userInfo = getStoreUserInfo();
     return (
         <Route
             {...rest}
-            render={(properties: RouteComponentProps) =>
+            render={(properties) =>
                 userInfo ? (
                     <PropertyComponent {...properties} />
                 ) : (

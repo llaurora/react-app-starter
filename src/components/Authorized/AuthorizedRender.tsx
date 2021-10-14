@@ -1,11 +1,11 @@
-import { PropsWithChildren, FC } from "react";
+import { PropsWithChildren, ReactNode } from "react";
 import { checkBatchAuthority } from "./utils";
 
 interface AuthorizedRenderProperties {
     authority: string[];
 }
 
-const AuthorizedRender: FC<PropsWithChildren<AuthorizedRenderProperties>> = ({ authority, children }) => {
+const AuthorizedRender: ReactNode = ({ authority, children }: PropsWithChildren<AuthorizedRenderProperties>) => {
     return checkBatchAuthority(authority) ? children : null;
 };
 

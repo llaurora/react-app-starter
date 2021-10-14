@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, FC } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Loading from "@/components/Loading";
@@ -11,7 +11,7 @@ const supportsHistory = "pushState" in window.history;
 const UserLayout = lazy(() => import("@/layouts/UserLayout"));
 const BasicLayout = lazy(() => import("@/layouts/BasicLayout"));
 
-function App() {
+const App: FC = () => {
     return (
         <Suspense fallback={<Loading scope="global" />}>
             <ErrorBoundary>
@@ -24,6 +24,6 @@ function App() {
             </ErrorBoundary>
         </Suspense>
     );
-}
+};
 
 ReactDOM.render(<App />, document.querySelector("#root"));
