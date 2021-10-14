@@ -120,9 +120,9 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: "react-redux-app",
+            title: "react-app-starter",
             filename: "index.html",
-            template: path.resolve(process.cwd(), "./public/indexModal.html"), // 模板文件路径
+            template: path.resolve(process.cwd(), "./public/template.html"), // template path
             inject: true,
         }),
     ],
