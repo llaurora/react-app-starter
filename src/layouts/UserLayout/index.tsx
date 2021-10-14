@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Form, Input, Button } from "antd";
 import { setStorage } from "@/utils";
 import { getUserInfo } from "@/services";
+import { USER_KEY } from "@/components/Authorized/utils";
 import styles from "./index.scss";
 
 const { Item } = Form;
@@ -25,7 +26,7 @@ const UserLayout: FC = () => {
             const userInfo = await getUserInfo(values);
             if (userInfo) {
                 console.log("Login Success:", userInfo);
-                setStorage("userInfo", userInfo, "session");
+                setStorage(USER_KEY, userInfo, "session");
                 setLoading(false);
                 history.replace("/");
             }

@@ -6,7 +6,9 @@ interface UserInfo {
     userPwd: string;
 }
 
-export const getStoreUserInfo = (): UserInfo => getStorage("userInfo", "session");
+export const USER_KEY = "userInfo";
+
+export const getStoreUserInfo = (): UserInfo => getStorage(USER_KEY, "session");
 
 export const checkAuthority = (code: string, force?: boolean): boolean => {
     if (code === undefined) {

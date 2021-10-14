@@ -1,7 +1,9 @@
-import { memo, useContext, useEffect, useState } from "react";
+import { memo, useContext, useEffect, useState, FC } from "react";
 import { Menu } from "antd";
-import { Link, useLocation, matchPath } from "react-router-dom";
+import { LogoutOutlined } from "@ant-design/icons";
+import { Link, useLocation, matchPath, useHistory } from "react-router-dom";
 import { RouteConfig } from "@/routes";
+import { USER_KEY } from "@/components/Authorized/utils";
 import MenuContext from "../MenuContext";
 import { urlToList } from "../utils";
 import styles from "./index.scss";
@@ -15,9 +17,10 @@ const conversionPath = (path) => {
     return `/${path || ""}`.replace(/\/+/g, "/");
 };
 
-const SiderMenu = () => {
+const SiderMenu: FC = () => {
     const { routes, flattenRoutes } = useContext(MenuContext);
     const { pathname } = useLocation();
+    const history = useHistory();
     const [selectedKey, setSelectedKey] = useState<string[]>([]);
     const [openKeys, setOpenKeys] = useState<string[]>([]);
 
@@ -33,6 +36,11 @@ const SiderMenu = () => {
 
     const onOpenChange = (keys) => {
         setOpenKeys(keys);
+    };
+
+    const onLogout = () => {
+        sessionStorage.removeItem(USER_KEY);
+        history.push("/login");
     };
 
     const getMenuItemPath = (item: RouteConfig) => {
@@ -79,11 +87,17 @@ const SiderMenu = () => {
     };
 
     return (
-        <div style={{ width: 200 }} className={styles.siderMenu}>
+        <div className={styles.siderMenu}>
             <span className={styles.title}>React App Starter</span>
-            <Menu mode="inline" selectedKeys={selectedKey} openKeys={openKeys} onOpenChange={onOpenChange}>
-                {getNavMenuItems(routes)}
-            </Menu>
+            <div className={styles.routes}>
+                <Menu mode="inline" selectedKeys={selectedKey} openKeys={openKeys} onOpenChange={onOpenChange}>
+                    {getNavMenuItems(routes)}
+                </Menu>
+            </div>
+            <div className={styles.logout} onClick={onLogout}>
+                <LogoutOutlined />
+                <span className={styles.label}>Logout</span>
+            </div>
         </div>
     );
 };
