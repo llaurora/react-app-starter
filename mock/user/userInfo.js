@@ -5,7 +5,7 @@ module.exports = {
         res.json(
             Mock.mock({
                 state: "SUCCESS",
-                message: null,
+                message: "",
                 data: {
                     userName: "@first",
                     userPwd: 123456,
