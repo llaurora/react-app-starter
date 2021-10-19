@@ -3486,10 +3486,10 @@ eslint-plugin-prettier@^4.0.0:
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
-eslint-plugin-react-hooks@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.npmmirror.com/eslint-plugin-react-hooks/download/eslint-plugin-react-hooks-4.2.0.tgz?cache=0&sync_timestamp=1634314636571&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Feslint-plugin-react-hooks%2Fdownload%2Feslint-plugin-react-hooks-4.2.0.tgz#8c229c268d468956334c943bb45fc860280f5556"
-  integrity sha1-jCKcJo1GiVYzTJQ7tF/IYCgPVVY=
+eslint-plugin-react-hooks@^4.2.1-alpha-996da67b2-20211018:
+  version "4.2.1-alpha-996da67b2-20211018"
+  resolved "https://registry.npmmirror.com/eslint-plugin-react-hooks/download/eslint-plugin-react-hooks-4.2.1-alpha-996da67b2-20211018.tgz?cache=0&sync_timestamp=1634575905545&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Feslint-plugin-react-hooks%2Fdownload%2Feslint-plugin-react-hooks-4.2.1-alpha-996da67b2-20211018.tgz#8e30084dc941d8664a7f464431bcd647c24ce6e4"
+  integrity sha1-jjAITclB2GZKf0ZEMbzWR8JM5uQ=
 
 eslint-plugin-react@^7.26.1:
   version "7.26.1"
