@@ -1,15 +1,23 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance, AxiosPromise } from "axios";
 import { notification } from "antd";
 
-export type RequestResponse<T = any> = Promise<AxiosPromise<T>>;
+export type RequestResponse<T = unknown> = Promise<AxiosPromise<T>>;
 
 interface RequestConfig extends AxiosRequestConfig {
     prefix?: string;
 }
 
+type State = "SUCCESS" | "FAILED";
+
+interface AxiosResponseData<T = unknown> {
+    state: State;
+    data: T;
+    message?: string;
+}
+
 const STATE_SUCCESS = "SUCCESS";
 
-const request: AxiosInstance = axios.create({
+const instance: AxiosInstance = axios.create({
     timeout: 30_000,
     headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -17,7 +25,7 @@ const request: AxiosInstance = axios.create({
     },
 });
 
-request.interceptors.request.use((config: RequestConfig) => {
+instance.interceptors.request.use((config: RequestConfig) => {
     const { url, prefix, ...restConfig } = config;
     if (!navigator.onLine) {
         throw new Error("Please check network configuration");
@@ -28,7 +36,7 @@ request.interceptors.request.use((config: RequestConfig) => {
     };
 });
 
-request.interceptors.response.use((response: AxiosResponse) => {
+instance.interceptors.response.use((response: AxiosResponse<AxiosResponseData>) => {
     const {
         data: { state, data, message },
     } = response;
@@ -41,7 +49,12 @@ request.interceptors.response.use((response: AxiosResponse) => {
 export default async <T>(url: string, options?: RequestConfig): RequestResponse<T> => {
     try {
         const { method = "post", data, ...restOptions } = options;
-        return await request(url, { method, ...restOptions, ...(method === "get" ? { params: data } : { data }) });
+        return await instance.request<T>({
+            url,
+            method,
+            ...restOptions,
+            ...(method === "get" ? { params: data } : { data }),
+        });
     } catch (error) {
         notification.error({
             message: "Request Failure",
