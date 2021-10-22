@@ -1,7 +1,7 @@
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance, AxiosPromise } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance } from "axios";
 import { notification } from "antd";
 
-export type RequestResponse<T = unknown> = Promise<AxiosPromise<T>>;
+export type RequestResponse<T = unknown> = Promise<AxiosResponse<T>["data"]>;
 
 interface RequestConfig extends AxiosRequestConfig {
     prefix?: string;
@@ -17,7 +17,7 @@ interface AxiosResponseData<T = unknown> {
 
 const STATE_SUCCESS = "SUCCESS";
 
-const instance: AxiosInstance = axios.create({
+const axiosRequest: AxiosInstance = axios.create({
     timeout: 30_000,
     headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -25,7 +25,7 @@ const instance: AxiosInstance = axios.create({
     },
 });
 
-instance.interceptors.request.use((config: RequestConfig) => {
+axiosRequest.interceptors.request.use((config: RequestConfig) => {
     const { url, prefix, ...restConfig } = config;
     if (!navigator.onLine) {
         throw new Error("Please check network configuration");
@@ -36,7 +36,7 @@ instance.interceptors.request.use((config: RequestConfig) => {
     };
 });
 
-instance.interceptors.response.use((response: AxiosResponse<AxiosResponseData>) => {
+axiosRequest.interceptors.response.use((response: AxiosResponse<AxiosResponseData>) => {
     const {
         data: { state, data, message },
     } = response;
@@ -49,7 +49,7 @@ instance.interceptors.response.use((response: AxiosResponse<AxiosResponseData>) 
 export default async <T>(url: string, options?: RequestConfig): RequestResponse<T> => {
     try {
         const { method = "post", data, ...restOptions } = options;
-        return await instance.request<T>({
+        return axiosRequest.request<unknown, RequestResponse<T>>({
             url,
             method,
             ...restOptions,
