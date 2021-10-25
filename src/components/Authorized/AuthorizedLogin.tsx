@@ -2,19 +2,19 @@ import { FC } from "react";
 import { Route, Redirect, RouteProps } from "react-router-dom";
 import { getStoreUserInfo } from "./utils";
 
-const AuthorizedLogin: FC<RouteProps> = ({ component: PropertyComponent, ...rest }) => {
+const AuthorizedLogin: FC<RouteProps> = ({ children, ...rest }) => {
     const userInfo = getStoreUserInfo();
     return (
         <Route
             {...rest}
-            render={(properties) =>
+            render={({ location }) =>
                 userInfo ? (
-                    <PropertyComponent {...properties} />
+                    children
                 ) : (
                     <Redirect
                         to={{
                             pathname: "/login",
-                            state: { from: properties.location },
+                            state: { from: location },
                         }}
                     />
                 )

@@ -32,8 +32,12 @@ const BasicLayout: FC = () => {
                                         component={item.component}
                                     />
                                 ))}
-                                <Route path="/noauthorized" component={NoAuthorized} />
-                                <Route component={NoMatch} />
+                                <Route path="/noauthorized">
+                                    <NoAuthorized />
+                                </Route>
+                                <Route path="*">
+                                    <NoMatch />
+                                </Route>
                             </Switch>
                         </ErrorBoundary>
                     </Suspense>

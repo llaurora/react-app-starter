@@ -17,8 +17,12 @@ const App: FC = () => {
             <ErrorBoundary>
                 <BrowserRouter forceRefresh={!supportsHistory}>
                     <Switch>
-                        <Route path="/login" component={UserLayout} />
-                        <AuthorizedLogin path="/" component={BasicLayout} />
+                        <Route path="/login">
+                            <UserLayout />
+                        </Route>
+                        <AuthorizedLogin path="/">
+                            <BasicLayout />
+                        </AuthorizedLogin>
                     </Switch>
                 </BrowserRouter>
             </ErrorBoundary>
