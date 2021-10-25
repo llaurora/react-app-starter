@@ -49,7 +49,7 @@ axiosRequest.interceptors.response.use((response: AxiosResponse<AxiosResponseDat
 export default async <T>(url: string, options?: RequestConfig): RequestResponse<T> => {
     try {
         const { method = "post", data, ...restOptions } = options;
-        return axiosRequest.request<unknown, RequestResponse<T>>({
+        return await axiosRequest.request<unknown, RequestResponse<T>>({
             url,
             method,
             ...restOptions,
