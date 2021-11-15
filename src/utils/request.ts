@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance } from "axios";
 import { notification } from "antd";
 
-export type RequestResponse<T = unknown> = Promise<AxiosResponse<T>["data"]>;
+export type RequestResponse<T = any> = Promise<AxiosResponse<T>["data"]>;
 
 interface RequestConfig extends AxiosRequestConfig {
     prefix?: string;
@@ -9,11 +9,13 @@ interface RequestConfig extends AxiosRequestConfig {
 
 type State = "SUCCESS" | "FAILED";
 
-interface AxiosResponseData<T = unknown> {
+interface AxiosResponseResult<T = any> {
     state: State;
     data: T;
     message?: string;
 }
+
+type AxiosResponseData<T = any> = AxiosResponseResult<T>["data"];
 
 const STATE_SUCCESS = "SUCCESS";
 
@@ -36,7 +38,7 @@ axiosRequest.interceptors.request.use((config: RequestConfig) => {
     };
 });
 
-axiosRequest.interceptors.response.use((response: AxiosResponse<AxiosResponseData>) => {
+axiosRequest.interceptors.response.use((response: AxiosResponse<AxiosResponseResult>) => {
     const {
         data: { state, data, message },
     } = response;
@@ -46,10 +48,10 @@ axiosRequest.interceptors.response.use((response: AxiosResponse<AxiosResponseDat
     throw new Error(message);
 });
 
-export default async <T>(url: string, options?: RequestConfig): RequestResponse<T> => {
+export default async <T = any>(url: string, options?: RequestConfig): RequestResponse<AxiosResponseData<T>> => {
     try {
         const { method = "post", data, ...restOptions } = options;
-        return await axiosRequest.request<unknown, RequestResponse<T>>({
+        return await axiosRequest.request<T, RequestResponse<AxiosResponseData<T>>>({
             url,
             method,
             ...restOptions,

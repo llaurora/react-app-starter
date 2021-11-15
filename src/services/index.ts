@@ -1,6 +1,6 @@
-import request, { RequestResponse } from "@/utils/request";
+import request from "@/utils/request";
 
-export const getUserInfo = <T = API.UserInfo>(parameters: API.LoginParameters): RequestResponse<T> => {
+export const getUserInfo = <T = API.UserInfo>(parameters: API.LoginParameters) => {
     return request<T>("/user/getUserInfo", { data: parameters, prefix: "mock" });
 };
 
