@@ -76,6 +76,7 @@ module.exports = {
         "unicorn/no-array-reduce": 0,
         "unicorn/no-array-for-each": 0,
         "unicorn/prefer-module": 0,
+        "unicorn/prevent-abbreviations": 0,
         "react/no-array-index-key": 1,
         "react/jsx-filename-extension": [2, { extensions: [".tsx", ".ts", ".jsx", ".js"] }],
         "import/extensions": [
