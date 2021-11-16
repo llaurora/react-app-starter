@@ -1,6 +1,5 @@
 const path = require("path");
 const { merge } = require("webpack-merge");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
@@ -19,6 +18,7 @@ module.exports = merge(baseConfig, {
     entry: "./src/index.tsx",
     output: {
         publicPath: "",
+        clean: true,
         path: path.resolve(process.cwd(), "dist"),
         filename: "js/[name].[contenthash].js",
         chunkFilename: "js/[name].[contenthash].js",
@@ -27,7 +27,6 @@ module.exports = merge(baseConfig, {
         hints: false,
     },
     plugins: [
-        new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             ignoreOrder: true,
             filename: "css/[name].[contenthash].css",
