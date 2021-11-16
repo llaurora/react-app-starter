@@ -79,6 +79,7 @@ module.exports = {
         "unicorn/prevent-abbreviations": 0,
         "react/no-array-index-key": 1,
         "react/jsx-filename-extension": [2, { extensions: [".tsx", ".ts", ".jsx", ".js"] }],
+        "react/function-component-definition": [2, { namedComponents: "arrow-function" }],
         "import/extensions": [
             2,
             "ignorePackages",

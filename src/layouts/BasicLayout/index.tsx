@@ -15,9 +15,11 @@ const NoMatch = lazy(() => import("@/pages/NoMatch"));
 const BasicLayout: FC = () => {
     const flattenRoutes = useMemo(() => getFlattenRoutes(routes), []);
 
+    const providerValues = useMemo(() => ({ routes, flattenRoutes }), [flattenRoutes]);
+
     return (
         <div className={styles.basicLayout}>
-            <MenuContext.Provider value={{ routes, flattenRoutes }}>
+            <MenuContext.Provider value={providerValues}>
                 <SiderMenu />
                 <section className={styles.sectionContent}>
                     <Suspense fallback={<Loading />}>
