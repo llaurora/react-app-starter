@@ -4,7 +4,7 @@ import { notification } from "antd";
 export type RequestResponse<T = any> = Promise<AxiosResponse<T>["data"]>;
 
 interface RequestConfig extends AxiosRequestConfig {
-    prefix?: string;
+    mock?: boolean;
 }
 
 type State = "SUCCESS" | "FAILED";
@@ -28,13 +28,14 @@ const axiosRequest: AxiosInstance = axios.create({
 });
 
 axiosRequest.interceptors.request.use((config: RequestConfig) => {
-    const { url, prefix, ...restConfig } = config;
+    const { url, mock, ...restConfig } = config;
     if (!navigator.onLine) {
         throw new Error("Please check network configuration");
     }
+    const enableMock = mock && process.env.NODE_ENV === "development";
     return {
         ...restConfig,
-        url: prefix ? `/${prefix}${url}` : url,
+        url: enableMock ? `/mock${url}` : url,
     };
 });
 
