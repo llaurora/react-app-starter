@@ -7,10 +7,11 @@ const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
 const { createProxyMiddleware } = require("http-proxy-middleware");
 const webpackConfig = require("./webpack.dev.config");
+
 const compiler = webpack(webpackConfig);
 const app = express();
 
-const { PORT = 8080, PROXY, MOCK } = process.env;
+const { PORT = 8080, PROXY } = process.env;
 
 const readFileList = (dir, mocks) => {
     const gather = {};
@@ -39,18 +40,30 @@ const registerMocks = () => {
     return router;
 };
 
-if (MOCK !== "none") {
-    app.use("/mock", registerMocks());
-}
+const loadProxyRouter = () => {
+    let router;
+    try {
+        router = require("../proxyrouter");
+    } catch {
+        router = {};
+    }
+    return router;
+};
 
-if (PROXY) {
-    app.use(
-        createProxyMiddleware(["/api"], {
-            target: PROXY,
-            changeOrigin: true,
-        }),
-    );
-}
+const proxyrouter = loadProxyRouter();
+
+// 1、Local Mock has priority over PROXY
+// 2、Please add a mock prefix before using Local Mock
+app.use(
+    createProxyMiddleware((pathname) => /^\/(?!mock\/)(user|api)/.test(pathname), {
+        target: PROXY,
+        changeOrigin: true,
+        router: proxyrouter,
+        logLevel: "silent",
+    }),
+);
+
+app.use("/mock", registerMocks());
 
 app.use((req, res, next) => {
     if (!/(\.(?!html)\w+$|__webpack.*)/.test(req.url)) {

@@ -3,5 +3,6 @@
 /mock/
 /dist/
 postcss.config.js
+proxy-router.js
 es/**/*
 lib/**/*
