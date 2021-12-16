@@ -93,6 +93,7 @@ module.exports = {
                 tsx: "never",
             },
         ],
+        "import/no-anonymous-default-export": 2,
         "unicorn/filename-case": [
             2,
             {
