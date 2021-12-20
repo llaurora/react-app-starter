@@ -1,5 +1,5 @@
 import { useState, FC } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Form, Input, Button } from "antd";
 import { setStorage } from "@/utils";
 import { getUserInfo } from "@/services";
@@ -18,7 +18,7 @@ const tailLayout = {
 
 const UserLayout: FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const onFinish = async (values) => {
         setLoading(true);
@@ -28,7 +28,7 @@ const UserLayout: FC = () => {
                 console.log("Login Success:", userInfo);
                 setStorage(USER_KEY, userInfo, "session");
                 setLoading(false);
-                history.replace("/");
+                navigate("/", { replace: true });
             }
         } catch {
             setLoading(false);

@@ -4,8 +4,9 @@ import { HomeOutlined, LineChartOutlined, PieChartOutlined, GlobalOutlined } fro
 export interface RouteConfigPure {
     path: string;
     name: string;
-    exact?: boolean;
-    component?: ReactNode;
+    index?: boolean;
+    element?: ReactNode | null;
+    caseSensitive?: boolean;
     authority?: string[];
     hideInMenu?: boolean;
     hideChildrenInMenu?: boolean;
@@ -14,50 +15,66 @@ export interface RouteConfigPure {
 }
 
 export interface RouteConfig extends RouteConfigPure {
-    routes?: RouteConfig[];
+    children?: RouteConfig[];
 }
+
+const Home = lazy(() => import("@/pages/Home"));
+const NoAuthorized = lazy(() => import("@/pages/NoAuthorized"));
+const NoMatch = lazy(() => import("@/pages/NoMatch"));
+const Child1 = lazy(() => import("@/pages/Example/Child1"));
+const Child2 = lazy(() => import("@/pages/Example/Child2"));
+const PageOne = lazy(() => import("@/pages/PageOne"));
+const Welcome = lazy(() => import("@/pages/Welcome"));
 
 export const routes: RouteConfig[] = [
     {
         path: "/",
         name: "Home",
-        exact: true,
         icon: <HomeOutlined />,
         authority: ["home"],
-        component: lazy(() => import("@/pages/Home")),
+        element: <Home />,
     },
     {
-        path: "/example",
+        path: "noauthorized",
+        name: "Noauth",
+        hideInMenu: true,
+        element: <NoAuthorized />,
+    },
+    {
+        path: "example",
         name: "Example",
-        exact: true,
         icon: <LineChartOutlined />,
-        routes: [
+        children: [
             {
-                path: "/example/child1",
+                path: "child1",
                 name: "Child 1",
-                component: lazy(() => import("@/pages/Example/Child1")),
+                element: <Child1 />,
             },
             {
-                path: "/example/child2",
+                path: "child2",
                 name: "Child 2",
-                component: lazy(() => import("@/pages/Example/Child2")),
+                element: <Child2 />,
             },
         ],
     },
     {
-        path: "/pageone",
+        path: "pageone",
         name: "Pageone",
-        exact: true,
         authority: ["pageone"],
         icon: <PieChartOutlined />,
-        component: lazy(() => import("@/pages/PageOne")),
+        element: <PageOne />,
     },
     {
-        path: "/welcome",
+        path: "welcome",
         name: "Welcome",
-        exact: true,
         authority: ["welcome"],
         icon: <GlobalOutlined />,
-        component: lazy(() => import("@/pages/Welcome")),
+        element: <Welcome />,
+    },
+    {
+        path: "*",
+        name: "NoMatch",
+        hideInMenu: true,
+        element: <NoMatch />,
     },
 ];

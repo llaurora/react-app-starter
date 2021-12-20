@@ -1,50 +1,48 @@
-import { Suspense, useMemo, lazy, FC } from "react";
-import { Route, Switch } from "react-router-dom";
-import { routes } from "@/routes";
+import { Suspense, useMemo, FC } from "react";
+import { Routes, Route } from "react-router-dom";
 import Loading from "@/components/Loading";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import { RouteConfig, routes } from "@/routes";
 import { AuthorizedRoute } from "@/components/Authorized";
 import SiderMenu from "./SiderMenu";
-import MenuContext from "./MenuContext";
-import { getFlattenRoutes } from "./utils";
 import styles from "./index.scss";
 
-const NoAuthorized = lazy(() => import("@/pages/NoAuthorized"));
-const NoMatch = lazy(() => import("@/pages/NoMatch"));
+const getFlattenRoutes = (routesData: RouteConfig[], parentpath?: string) => {
+    let flattenRoutes = [];
+    routesData.forEach((item) => {
+        const { children, path, ...rest } = item;
+        flattenRoutes.push({ ...rest, path: parentpath ? `${parentpath}/${path}` : path });
+        if (Array.isArray(children)) {
+            flattenRoutes = [...flattenRoutes, ...getFlattenRoutes(children, path)];
+        }
+    });
+    return flattenRoutes;
+};
 
 const BasicLayout: FC = () => {
     const flattenRoutes = useMemo(() => getFlattenRoutes(routes), []);
 
-    const providerValues = useMemo(() => ({ routes, flattenRoutes }), [flattenRoutes]);
-
     return (
         <div className={styles.basicLayout}>
-            <MenuContext.Provider value={providerValues}>
-                <SiderMenu />
-                <section className={styles.sectionContent}>
-                    <Suspense fallback={<Loading />}>
-                        <ErrorBoundary>
-                            <Switch>
-                                {flattenRoutes.map((item) => (
-                                    <AuthorizedRoute
-                                        authority={item.authority}
-                                        key={item.path}
-                                        path={item.path}
-                                        exact={item.exact}
-                                        component={item.component}
-                                    />
-                                ))}
-                                <Route path="/noauthorized">
-                                    <NoAuthorized />
-                                </Route>
-                                <Route path="*">
-                                    <NoMatch />
-                                </Route>
-                            </Switch>
-                        </ErrorBoundary>
-                    </Suspense>
-                </section>
-            </MenuContext.Provider>
+            <SiderMenu flattenRoutes={flattenRoutes} />
+            <section className={styles.sectionContent}>
+                <Suspense fallback={<Loading />}>
+                    <ErrorBoundary>
+                        <Routes>
+                            {flattenRoutes.map((item) => (
+                                <Route
+                                    key={item.path}
+                                    path={item.path}
+                                    caseSensitive={item.caseSensitive}
+                                    element={
+                                        <AuthorizedRoute authority={item.authority}>{item.element}</AuthorizedRoute>
+                                    }
+                                />
+                            ))}
+                        </Routes>
+                    </ErrorBoundary>
+                </Suspense>
+            </section>
         </div>
     );
 };
