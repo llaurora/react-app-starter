@@ -1,33 +1,25 @@
 import { memo, useEffect, useState } from "react";
 import { Menu } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
-import { Link, useLocation, matchPath, useNavigate } from "react-router-dom";
+import { Link, useLocation, matchRoutes, useNavigate } from "react-router-dom";
 import { routes, RouteConfig } from "@/routes";
 import { USER_KEY } from "@/components/Authorized/utils";
 import styles from "./index.scss";
 
 const { SubMenu } = Menu;
 
-const urlToList = (url) => {
-    const urlList = url.split("/").filter((bool) => bool);
-    return urlList.map((urlItem, index) => `${urlList.slice(0, index + 1).join("/")}`);
-};
-
-const SiderMenu = ({ flattenRoutes }) => {
+const SiderMenu = () => {
     const { pathname } = useLocation();
     const navigate = useNavigate();
     const [selectedKey, setSelectedKey] = useState<string[]>([]);
     const [openKeys, setOpenKeys] = useState<string[]>([]);
 
     useEffect(() => {
-        const current = flattenRoutes.find((item: RouteConfig) =>
-            matchPath({ path: item.path, caseSensitive: item.caseSensitive }, pathname),
-        );
-        if (current) {
-            setSelectedKey([current.path]);
-            setOpenKeys(urlToList(current.path));
-        }
-    }, [flattenRoutes, pathname]);
+        const matchList = matchRoutes(routes, pathname);
+        const matcherPathnames = matchList.map((item) => item.pathname.slice(item.pathname.length > 1 ? 1 : 0));
+        setSelectedKey(matcherPathnames);
+        setOpenKeys(matcherPathnames);
+    }, [pathname]);
 
     const onOpenChange = (keys) => {
         setOpenKeys(keys);

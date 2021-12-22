@@ -21,6 +21,7 @@ export interface RouteConfig extends RouteConfigPure {
 const Home = lazy(() => import("@/pages/Home"));
 const NoAuthorized = lazy(() => import("@/pages/NoAuthorized"));
 const NoMatch = lazy(() => import("@/pages/NoMatch"));
+const Example = lazy(() => import("@/pages/Example"));
 const Child1 = lazy(() => import("@/pages/Example/Child1"));
 const Child2 = lazy(() => import("@/pages/Example/Child2"));
 const PageOne = lazy(() => import("@/pages/PageOne"));
@@ -44,6 +45,7 @@ export const routes: RouteConfig[] = [
         path: "example",
         name: "Example",
         icon: <LineChartOutlined />,
+        element: <Example />,
         children: [
             {
                 path: "child1",
@@ -67,7 +69,7 @@ export const routes: RouteConfig[] = [
     {
         path: "welcome",
         name: "Welcome",
-        authority: ["welcome"],
+        authority: ["welcome"], // Welcome Menu will be hidden in practical projects
         icon: <GlobalOutlined />,
         element: <Welcome />,
     },
