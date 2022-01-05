@@ -14,10 +14,10 @@
         "build": "cross-env NODE_ENV=production webpack --progress --config scripts/webpack.build.config.js",
         "eslint": "eslint \"src/**/*.{ts,tsx,js}\"",
         "stylelint": "stylelint \"src/**/*.{css,scss,sass}\"",
-        "lint": "yarn run eslint && yarn run stylelint",
-        "eslint:fix": "yarn run eslint --fix",
-        "stylelint:fix": "yarn run stylelint --fix",
-        "lint:fix": "yarn run eslint:fix && yarn run stylelint:fix"
+        "lint": "pnpm eslint && pnpm stylelint",
+        "eslint:fix": "pnpm eslint -- --fix",
+        "stylelint:fix": "pnpm stylelint -- --fix",
+        "lint:fix": "pnpm eslint:fix && pnpm stylelint:fix"
     },
     "dependencies": {
         "@ant-design/icons": "^4.7.0",

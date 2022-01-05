@@ -1,6 +1,7 @@
 @mixin hidden-scrollbar {
     scrollbar-width: none;
     -ms-overflow-style: none;
+
     &::-webkit-scrollbar {
         display: none;
     }
@@ -11,6 +12,7 @@
         width: $scrollbar-size;
         height: $scrollbar-size;
     }
+
     &::-webkit-scrollbar-thumb {
         background: $background;
         border-radius: $scrollbar-size;
@@ -22,6 +24,7 @@
         width: $scrollbar-size;
         height: 0;
     }
+
     &::-webkit-scrollbar-thumb {
         background: $background;
         border-radius: $scrollbar-size;
@@ -33,6 +36,7 @@
         width: 0;
         height: $scrollbar-size;
     }
+
     &::-webkit-scrollbar-thumb {
         background: $background;
         border-radius: $scrollbar-size;
