@@ -1,8 +1,8 @@
 {
     "src/**/*.{ts,tsx,js}": [
-        "yarn run eslint:fix"
+        "eslint --fix"
     ],
     "src/**/*.{css,scss,sass}": [
-        "yarn run stylelint:fix"
+        "stylelint --fix"
     ]
 }
