@@ -10,7 +10,7 @@
         "url": "https://github.com/llaurora/react-app-starter"
     },
     "scripts": {
-        "start": "cross-env NODE_ENV=development nodemon scripts/server.js",
+        "start": "cross-env NODE_ENV=development nodemon server.js",
         "build": "cross-env NODE_ENV=production webpack --progress --config scripts/webpack.build.config.js",
         "eslint": "eslint \"src/**/*.{ts,tsx,js}\"",
         "stylelint": "stylelint \"src/**/*.{css,scss,sass}\"",

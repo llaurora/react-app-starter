@@ -6,7 +6,7 @@ const webpack = require("webpack");
 const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
 const { createProxyMiddleware } = require("http-proxy-middleware");
-const webpackConfig = require("./webpack.dev.config");
+const webpackConfig = require("./scripts/webpack.dev.config");
 
 const compiler = webpack(webpackConfig);
 const app = express();
@@ -43,7 +43,7 @@ const registerMocks = () => {
 const loadProxyRouter = () => {
     let router;
     try {
-        router = require("../proxyrouter");
+        router = require("./proxyrouter");
     } catch {
         router = {};
     }

@@ -4,5 +4,6 @@
 /dist/
 postcss.config.js
 proxy-router.js
+server.js
 es/**/*
 lib/**/*
