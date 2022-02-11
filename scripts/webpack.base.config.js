@@ -18,7 +18,6 @@ module.exports = {
         },
     },
     resolve: {
-        modules: [SRC_DIR, resolve("node_modules")],
         extensions: [".ts", ".tsx", ".js", ".json"],
         alias: {
             "@": resolve("src"),
