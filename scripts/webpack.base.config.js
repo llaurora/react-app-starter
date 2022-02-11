@@ -129,6 +129,7 @@ module.exports = {
             title: "react-app-starter",
             filename: "index.html",
             template: path.resolve(process.cwd(), "./public/template.html"), // template path
+            favicon: path.resolve(process.cwd(), "./public/favicon.ico"),
             inject: true,
         }),
     ],
