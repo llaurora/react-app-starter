@@ -2,7 +2,7 @@
     "name": "react-redux-app",
     "version": "1.0.0",
     "private": true,
-    "description": "",
+    "description": "Quickly create a light react+typescript app",
     "main": "index.tsx",
     "license": "MIT",
     "repository": {
