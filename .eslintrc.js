@@ -57,6 +57,7 @@ module.exports = {
     rules: {
         "prettier/prettier": 2,
         "no-continue": 0,
+        "no-shadow": 0,
         "no-console": 1,
         "unicorn/no-null": 0,
         "no-bitwise": [2, { allow: ["~"] }],
@@ -71,6 +72,7 @@ module.exports = {
         "jsx-a11y/no-static-element-interactions": 0,
         "jsx-a11y/no-noninteractive-element-interactions": 0,
         "@typescript-eslint/no-unused-vars": 2,
+        "@typescript-eslint/no-shadow": 2,
         "react-hooks/rules-of-hooks": 2,
         "react-hooks/exhaustive-deps": 2,
         "unicorn/no-array-reduce": 0,
