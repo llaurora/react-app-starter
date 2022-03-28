@@ -59,7 +59,6 @@ app.use(
         target: PROXY,
         changeOrigin: true,
         router: proxyrouter,
-        logLevel: "silent",
     }),
 );
 
@@ -78,11 +77,7 @@ app.use(
     }),
 );
 
-app.use(
-    webpackHotMiddleware(compiler, {
-        log: false,
-    }),
-);
+app.use(webpackHotMiddleware(compiler));
 
 app.listen(PORT, () => {
     console.log("\033[40;35mStarting the development server ...\033[0m");

@@ -4,9 +4,11 @@ const WebpackBar = require("webpackbar");
 const notifier = require("node-notifier");
 const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const ErrorOverlayPlugin = require("error-overlay-webpack-plugin");
 const baseConfig = require("./webpack.base.config");
 
 const ifaces = require("os").networkInterfaces();
+
 const PORT = process.env.PORT || 8080;
 const protocol = String(PORT) === "443" ? "https://" : "http://";
 
@@ -19,7 +21,7 @@ module.exports = merge(baseConfig, {
         chunkModules: false,
         errors: false,
     },
-    devtool: "eval-cheap-module-source-map",
+    devtool: "cheap-module-source-map",
     entry: ["./src/index.tsx", "webpack-hot-middleware/client"],
     output: {
         filename: "[name].js",
@@ -35,15 +37,14 @@ module.exports = merge(baseConfig, {
         new WebpackBar(),
         new webpack.HotModuleReplacementPlugin(),
         new ReactRefreshWebpackPlugin({
-            overlay: {
-                sockIntegration: "whm",
-            },
+            overlay: false,
         }),
+        new ErrorOverlayPlugin(),
         new FriendlyErrorsWebpackPlugin({
             compilationSuccessInfo: {
                 messages: Object.values(ifaces).reduce(
                     (prev, cur) => {
-                        for (let iface of cur) {
+                        for (const iface of cur) {
                             if (iface.family === "IPv4") {
                                 prev.push(`${protocol}${iface.address}:${PORT}`);
                             }
@@ -60,7 +61,7 @@ module.exports = merge(baseConfig, {
                 const error = errors[0];
                 notifier.notify({
                     title: "Webpack error",
-                    message: severity + ": " + error.name,
+                    message: `${severity}: ${error.name}`,
                     subtitle: error.file || "",
                 });
             },
