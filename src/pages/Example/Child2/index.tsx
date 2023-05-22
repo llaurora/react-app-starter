@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 
 const Child2: FC = () => {
     return <h1>Child 2</h1>;

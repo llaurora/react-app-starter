@@ -1,4 +1,5 @@
-import { lazy, ReactNode } from "react";
+import type { ReactNode } from "react";
+import { lazy } from "react";
 import { HomeOutlined, LineChartOutlined, PieChartOutlined, GlobalOutlined } from "@ant-design/icons";
 
 export interface RouteConfigPure {

@@ -1,4 +1,5 @@
-import { lazy, Suspense, FC } from "react";
+import type { FC } from "react";
+import { lazy, Suspense } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Loading from "@/components/Loading";

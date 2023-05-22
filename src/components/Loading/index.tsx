@@ -1,4 +1,5 @@
-import { memo, FC } from "react";
+import type { FC } from "react";
+import { memo } from "react";
 import classnames from "classnames";
 import loadingSrc from "@/assets/images/loading.gif";
 import styles from "./index.scss";

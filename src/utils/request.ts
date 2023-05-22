@@ -1,4 +1,5 @@
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance } from "axios";
+import type { AxiosRequestConfig, AxiosResponse, AxiosInstance } from "axios";
+import axios from "axios";
 import { notification } from "antd";
 
 export type RequestResponse<T = any> = Promise<AxiosResponse<T>["data"]>;

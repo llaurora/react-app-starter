@@ -1,8 +1,10 @@
-import { Suspense, FC } from "react";
+import type { FC } from "react";
+import { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import Loading from "@/components/Loading";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import { RouteConfig, routes } from "@/routes";
+import type { RouteConfig } from "@/routes";
+import { routes } from "@/routes";
 import { AuthorizedRoute } from "@/components/Authorized";
 import SiderMenu from "./SiderMenu";
 import styles from "./index.scss";

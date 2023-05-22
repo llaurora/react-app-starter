@@ -1,4 +1,5 @@
-import { Component, PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
+import { Component } from "react";
 
 interface Properties {
     fallback?: ReactNode;

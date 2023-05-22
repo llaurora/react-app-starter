@@ -2,7 +2,8 @@ import { memo, useEffect, useState } from "react";
 import { Menu } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
 import { Link, useLocation, matchRoutes, useNavigate } from "react-router-dom";
-import { routes, RouteConfig } from "@/routes";
+import type { RouteConfig } from "@/routes";
+import { routes } from "@/routes";
 import { USER_KEY } from "@/components/Authorized/utils";
 import styles from "./index.scss";
 
