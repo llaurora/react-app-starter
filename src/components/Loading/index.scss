@@ -1,19 +1,19 @@
 div {
-  &.loadingWrap {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    &.loadingWrap {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-  &.globalLoading {
-    left: 0;
-  }
+    &.globalLoading {
+        left: 0;
+    }
 
-  &.localLoading {
-    left: $sider-width;
-  }
+    &.localLoading {
+        left: $sider-width;
+    }
 }

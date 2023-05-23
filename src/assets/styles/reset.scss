@@ -1,6 +1,24 @@
-body,ul,li,dl,dt,dd,p,ol,h1,h2,h3,h4,h5,h6,form,img,table,fieldset,legend {
-    margin:0;
-    padding:0;
+body,
+ul,
+li,
+dl,
+dt,
+dd,
+p,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+img,
+table,
+fieldset,
+legend {
+    margin: 0;
+    padding: 0;
 }
 
 html {
@@ -10,25 +28,27 @@ html {
 ul,
 li,
 ol {
-    list-style:none;
+    list-style: none;
 }
 
 ul {
     margin-block-start: auto;
     margin-block-end: auto;
     padding-inline-start: 0;
+    margin-bottom: 0;
 }
 
-img,fieldset {
-    border:0;
+img,
+fieldset {
+    border: 0;
 }
 
-input,a {
-    outline:none;
+input,
+a {
+    outline: none;
 }
 
-body {
-    font-size: 14px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica, 'PingFang SC',
-    'Hiragino Sans GB', 'Microsoft YaHei', SimSun, sans-serif;
+input::-ms-clear,
+input::-ms-reveal {
+    display: none;
 }
