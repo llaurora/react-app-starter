@@ -94,40 +94,13 @@ module.exports = {
                     },
                 ],
             },
-            {
-                test: /\.less$/,
-                include: /[\\/]node_modules[\\/].*antd/,
-                use: [
-                    devMode
-                        ? "style-loader"
-                        : {
-                            loader: MiniCssExtractPlugin.loader,
-                            options: {
-                                publicPath: "../",
-                            },
-                        },
-                    "css-loader",
-                    {
-                        loader: "less-loader",
-                        options: {
-                            lessOptions: {
-                                javascriptEnabled: true,
-                                modifyVars: {
-                                    "@border-radius-base": "4px",
-                                    "@text-color": "rgba(0, 0, 0, 0.65)",
-                                },
-                            },
-                        },
-                    },
-                ],
-            },
         ],
     },
     plugins: [
         new HtmlWebpackPlugin({
             title: "react-app-starter",
             filename: "index.html",
-            template: path.resolve(process.cwd(), "./public/template.html"), // template path
+            template: path.resolve(process.cwd(), "./public/template.html"),
             favicon: path.resolve(process.cwd(), "./public/favicon.ico"),
             inject: true,
         }),
