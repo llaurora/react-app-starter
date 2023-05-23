@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { lazy, Suspense } from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import { ConfigProvider } from "antd";
 import dayjs from "dayjs";
 import zhCN from "antd/locale/zh_CN";
@@ -48,4 +48,5 @@ const App: FC = () => {
     );
 };
 
-ReactDOM.render(<App />, document.querySelector("#root"));
+const root = ReactDOM.createRoot(document.querySelector("#root"));
+root.render(<App />);
