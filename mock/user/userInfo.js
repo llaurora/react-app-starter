@@ -9,7 +9,7 @@ module.exports = {
                 data: {
                     userName: "@first",
                     userPwd: 123456,
-                    authorities: ["home", "pageone"],
+                    authorities: ["pageone"],
                 },
             }),
         );

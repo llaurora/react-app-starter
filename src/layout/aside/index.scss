@@ -1,0 +1,34 @@
+.asideMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    border-right: 1px solid $border-color-base;
+
+    :global {
+        .ant-menu-inline-collapsed {
+            width: 100%;
+        }
+
+        .ant-menu-light.ant-menu-root {
+            &.ant-menu-inline,
+            &.ant-menu-inline-collapsed {
+                border: none;
+            }
+        }
+    }
+
+    .title {
+        margin: 8px 0;
+        color: $label-color;
+        font-weight: 500;
+        font-size: $font-size-xl;
+    }
+
+    .menuContainer {
+        flex: 1;
+        overflow-y: auto;
+
+        @include hidden-scrollbar;
+    }
+}

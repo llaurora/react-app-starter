@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 require("dotenv").config();
 
-const devMode = process.env.NODE_ENV === "development";
+const DEV_MODE = process.env.NODE_ENV === "development";
 const ROOT_DIR = path.resolve(__dirname, "..");
 const resolve = (...args) => path.resolve(ROOT_DIR, ...args);
 const SRC_DIR = resolve("src");
@@ -30,7 +30,7 @@ module.exports = {
                 loader: "babel-loader",
                 include: SRC_DIR,
                 options: {
-                    plugins: [devMode && require.resolve("react-refresh/babel")].filter(Boolean),
+                    plugins: [DEV_MODE && require.resolve("react-refresh/babel")].filter(Boolean),
                 },
             },
             {
@@ -38,7 +38,7 @@ module.exports = {
                 include: SRC_DIR,
                 type: "asset",
                 generator: {
-                    filename: devMode ? "[name][ext]" : "images/[hash][ext][query]",
+                    filename: DEV_MODE ? "[name][ext]" : "images/[hash][ext][query]",
                 },
                 parser: {
                     dataUrlCondition: {
@@ -51,14 +51,14 @@ module.exports = {
                 include: SRC_DIR,
                 type: "asset/resource",
                 generator: {
-                    filename: devMode ? "[name][ext]" : "fonts/[hash][ext][query]",
+                    filename: DEV_MODE ? "[name][ext]" : "fonts/[hash][ext][query]",
                 },
             },
             {
                 test: /\.(sa|sc|c)ss$/,
                 include: SRC_DIR,
                 use: [
-                    devMode
+                    DEV_MODE
                         ? "style-loader"
                         : {
                             loader: MiniCssExtractPlugin.loader,
@@ -70,7 +70,7 @@ module.exports = {
                         loader: "css-loader",
                         options: {
                             modules: {
-                                localIdentName: devMode ? "[path][name]__[local]" : "[hash:base64]",
+                                localIdentName: DEV_MODE ? "[path][name]__[local]" : "[hash:base64]",
                             },
                         },
                     },

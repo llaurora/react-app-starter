@@ -1,0 +1,17 @@
+.login {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .formCard {
+        width: 480px;
+    }
+
+    .title {
+        color: $label-color;
+        font-weight: 700;
+        font-size: 32px;
+    }
+}

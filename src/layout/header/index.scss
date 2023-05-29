@@ -1,0 +1,37 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+}
+
+.collapsedIcon {
+    font-size: $font-size-xl;
+    cursor: pointer;
+
+    &:hover {
+        color: $primary-color;
+    }
+}
+
+.userMenu {
+    display: flex;
+    align-items: center;
+    color: $text-color;
+    font-size: $font-size-base;
+    cursor: pointer;
+
+    .userName {
+        display: inline-block;
+        min-width: 20px;
+        max-width: 100px;
+        margin: 0 4px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .downIcon {
+        margin: 0 4px;
+    }
+}
