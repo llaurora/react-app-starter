@@ -9,10 +9,10 @@ const PageTwo = () => {
             <hr />
             <Button
                 onClick={() => {
-                    navigate("/example/pagetwo/child");
+                    navigate("/example/pagetwo/detail");
                 }}
             >
-                navigate to subpage
+                navigate to detail
             </Button>
         </>
     );

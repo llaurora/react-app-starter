@@ -8,7 +8,7 @@ import Loading from "@/components/loading";
 import AuthorizedLogin from "@/components/authorizedLogin";
 
 const Layout = lazy(() => import("@/layout"));
-const Login = lazy(() => import("@/modules/login"));
+const Login = lazy(() => import("@/pages/login"));
 
 const App = () => {
     return (

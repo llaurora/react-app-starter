@@ -14,18 +14,18 @@ import {
     KEY_EXAMPLE_PAGE_ONE,
     KEY_EXAMPLE_PAGE_TWO,
     KEY_EXAMPLE_PAGE_THREE,
-    KEY_EXAMPLE_PAGE_TWO_CHILD,
+    KEY_EXAMPLE_PAGE_TWO_DETAIL,
 } from "./constants";
 import { transFlattenRoutes } from "./utils";
 
-const NoMatch = lazy(() => import("@/modules/noMatch"));
-const NoAuth = lazy(() => import("@/modules/noAuth"));
-const Home = lazy(() => import("@/modules/home"));
-const PageOne = lazy(() => import("@/modules/pageOne"));
-const PageTwo = lazy(() => import("@/modules/pageTwo"));
-const ChildPage = lazy(() => import("@/modules/pageTwo/pages/childPage"));
-const PageThree = lazy(() => import("@/modules/pageThree"));
-const Welcome = lazy(() => import("@/modules/welcome"));
+const NoMatch = lazy(() => import("@/pages/noMatch"));
+const NoAuth = lazy(() => import("@/pages/noAuth"));
+const Home = lazy(() => import("@/pages/home"));
+const PageOne = lazy(() => import("@/pages/pageOne"));
+const PageTwo = lazy(() => import("@/pages/pageTwo"));
+const PageTwoDetail = lazy(() => import("@/pages/pageTwo/subpage/detail"));
+const PageThree = lazy(() => import("@/pages/pageThree"));
+const Welcome = lazy(() => import("@/pages/welcome"));
 
 export interface RouteConfig {
     key: string; // unique in the whole tree 整颗树唯一
@@ -79,10 +79,10 @@ const routeConfigs: RouteConfig[] = [
                 element: <PageTwo />,
             },
             {
-                path: "pagetwo/child",
-                key: KEY_EXAMPLE_PAGE_TWO_CHILD,
+                path: "pagetwo/detail",
+                key: KEY_EXAMPLE_PAGE_TWO_DETAIL,
                 hitParentKey: KEY_EXAMPLE_PAGE_TWO,
-                element: <ChildPage />,
+                element: <PageTwoDetail />,
             },
             {
                 path: "pagethree",

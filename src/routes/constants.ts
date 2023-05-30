@@ -6,7 +6,7 @@ export const KEY_HOME = "home";
 export const KEY_EXAMPLE = "example";
 export const KEY_EXAMPLE_PAGE_ONE = "example/pageone";
 export const KEY_EXAMPLE_PAGE_TWO = "example/pagetwo";
-export const KEY_EXAMPLE_PAGE_TWO_CHILD = "example/pagetwo/child";
+export const KEY_EXAMPLE_PAGE_TWO_DETAIL = "example/pagetwo/detail";
 export const KEY_EXAMPLE_PAGE_THREE = "example/pagethree";
 
 export const KEY_WELCOME = "welcome";
