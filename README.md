@@ -24,7 +24,7 @@ $ git clone https://github.com/llaurora/react-app-starter.git
 $ cd react-app-starter
 $ pnpm install
 $ pnpm run start
-// or start with Vite
+# or start with Vite
 $ pnpm run vite
 ~~~
 
