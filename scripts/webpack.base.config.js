@@ -98,11 +98,9 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: "react-app-starter",
             filename: "index.html",
-            template: path.resolve(process.cwd(), "./public/template.html"),
-            favicon: path.resolve(process.cwd(), "./public/favicon.ico"),
-            inject: true,
+            template: path.resolve(process.cwd(), "./index.html"),
+            favicon: path.resolve(process.cwd(), "./favicon.ico"),
         }),
     ],
 };

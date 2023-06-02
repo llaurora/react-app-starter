@@ -83,7 +83,7 @@ axiosRequest.interceptors.request.use((config: RequestConfig) => {
     const enableMock = mock && process.env.NODE_ENV === "development";
     return {
         ...restConfig,
-        url: !/^(http|https)/.test(url) || enableMock ? `/mock${url}` : url,
+        url: /^(http|https)/.test(url) ? url : enableMock ? `/mock${url}` : url,
     };
 });
 

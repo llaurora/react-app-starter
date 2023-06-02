@@ -31,7 +31,7 @@ const registerMocks = () => {
             extended: true,
         }),
     );
-    const MOCK_DIR = path.join(process.cwd(), "mock");
+    const MOCK_DIR = path.join(process.cwd(), "mock/express");
     const gatherMocks = readFileList(MOCK_DIR);
     Object.entries(gatherMocks).forEach(([key, func]) => {
         const [method, url] = key.split(" ");
