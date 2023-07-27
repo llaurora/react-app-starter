@@ -2,7 +2,7 @@ import { lazy } from "react";
 import type { ReactNode } from "react";
 import type { RouteObject } from "react-router-dom";
 import { ROOT_URL } from "@/constants";
-import { GlobalOutlined, HomeOutlined, LineChartOutlined } from "@ant-design/icons";
+import { GlobalOutlined, HomeOutlined, LineChartOutlined, ProfileOutlined } from "@ant-design/icons";
 import { AUTH_MENU_EXAMPLE_PAGE_ONE, AUTH_MENU_EXAMPLE_PAGE_THREE } from "@/auth/code";
 import {
     MENU_LABEL_MAP,
@@ -15,6 +15,9 @@ import {
     KEY_EXAMPLE_PAGE_TWO,
     KEY_EXAMPLE_PAGE_THREE,
     KEY_EXAMPLE_PAGE_TWO_DETAIL,
+    KEY_PAGE_FOUR,
+    KEY_PAGE_FOUR_INDEX,
+    KEY_PAGE_FOUR_DETAIL,
 } from "./constants";
 import { transFlattenRoutes } from "./utils";
 
@@ -25,6 +28,8 @@ const PageOne = lazy(() => import("@/pages/pageOne"));
 const PageTwo = lazy(() => import("@/pages/pageTwo"));
 const PageTwoDetail = lazy(() => import("@/pages/pageTwo/subpage/detail"));
 const PageThree = lazy(() => import("@/pages/pageThree"));
+const PageFour = lazy(() => import("@/pages/pageFour"));
+const PageFourDetail = lazy(() => import("@/pages/pageFour/subpage/detail"));
 const Welcome = lazy(() => import("@/pages/welcome"));
 
 export interface RouteConfig {
@@ -37,16 +42,19 @@ export interface RouteConfig {
     authority?: string | string[];
     hiddenInMenu?: boolean;
     children?: RouteConfig[];
+    hasIndexElement?: boolean;
     hitParentKey?: string; // Hit menu for selecting the parent page when displaying a tertiary page 用于在展示三级页面时，选中父级页面的菜单
 }
 
 export type FlattenRoute = RouteObject & {
     key: string;
-    name: ReactNode;
-    pathname: string;
-    keyPaths: string[];
-    labelPaths: ReactNode[];
+    name?: ReactNode;
+    pathname?: string;
+    keyPaths?: string[];
+    elementBoolPaths?: boolean[]; // for breadcrunmb
+    labelPaths?: ReactNode[];
     hitParentKey?: string;
+    authority?: string | string[];
     children?: FlattenRoute[];
 };
 
@@ -101,6 +109,27 @@ const routeConfigs: RouteConfig[] = [
         element: <Welcome />,
     },
     {
+        path: "pagefour",
+        key: KEY_PAGE_FOUR,
+        label: MENU_LABEL_MAP[KEY_PAGE_FOUR],
+        icon: <ProfileOutlined />,
+        hasIndexElement: true,
+        children: [
+            {
+                index: true,
+                key: KEY_PAGE_FOUR_INDEX,
+                element: <PageFour />,
+            },
+            {
+                path: "detail",
+                key: KEY_PAGE_FOUR_DETAIL,
+                element: <PageFourDetail />,
+                hiddenInMenu: true,
+                hitParentKey: KEY_PAGE_FOUR,
+            },
+        ],
+    },
+    {
         path: "noauthorized",
         key: KEY_NO_AUTH,
         hiddenInMenu: true,
@@ -114,6 +143,6 @@ const routeConfigs: RouteConfig[] = [
     },
 ];
 
-const flattenRoutes: FlattenRoute[] = transFlattenRoutes(routeConfigs, "", [], []);
+const flattenRoutes: FlattenRoute[] = transFlattenRoutes(routeConfigs, "", [], [], []);
 
 export { flattenRoutes, routeConfigs };
