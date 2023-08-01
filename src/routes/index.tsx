@@ -50,9 +50,10 @@ export type FlattenRoute = RouteObject & {
     key: string;
     name?: ReactNode;
     pathname?: string;
-    keyPaths?: string[];
-    elementBoolPaths?: boolean[]; // for breadcrunmb
+    elementBoolPaths?: boolean[];
     labelPaths?: ReactNode[];
+    keyPaths?: string[];
+    routePaths?: string[];
     hitParentKey?: string;
     authority?: string | string[];
     children?: FlattenRoute[];
@@ -143,6 +144,13 @@ const routeConfigs: RouteConfig[] = [
     },
 ];
 
-const flattenRoutes: FlattenRoute[] = transFlattenRoutes(routeConfigs, "", [], [], []);
+const flattenRoutes: FlattenRoute[] = transFlattenRoutes({
+    configs: routeConfigs,
+    parentPath: "",
+    parentKeys: [],
+    parentNames: [],
+    parentElementBoolPaths: [],
+    flattenRoutes: [],
+});
 
 export { flattenRoutes, routeConfigs };

@@ -2,13 +2,23 @@ import type { ReactNode } from "react";
 import type { FlattenRoute, RouteConfig } from "@/routes/index";
 import { ROOT_URL, ROUTE_SEPARATOR } from "@/constants";
 
-export const transFlattenRoutes = (
-    configs: RouteConfig[],
-    parentPath: string,
-    parentNames: ReactNode[],
-    parentElementBoolPaths: boolean[],
-    flattenRoutes: FlattenRoute[],
-): FlattenRoute[] => {
+interface FuncFlattenRoutesParams {
+    configs: RouteConfig[];
+    parentPath: string;
+    parentKeys: string[];
+    parentNames: ReactNode[];
+    parentElementBoolPaths: boolean[];
+    flattenRoutes: FlattenRoute[];
+}
+
+export const transFlattenRoutes = ({
+    configs,
+    parentPath,
+    parentKeys,
+    parentNames,
+    parentElementBoolPaths,
+    flattenRoutes,
+}: FuncFlattenRoutesParams): FlattenRoute[] => {
     configs.forEach((item: RouteConfig) => {
         const { key, path, element, label, children, hitParentKey, index, hasIndexElement, authority } = item;
         const combinePath = index
@@ -31,6 +41,7 @@ export const transFlattenRoutes = (
         }
         const transLabelPaths = label ? [...parentNames, label] : parentNames;
         const transElementBoolPaths = [...parentElementBoolPaths, !!element || hasIndexElement];
+        const combineKeys = [...parentKeys, key];
         flattenRoutes.push({
             key,
             path,
@@ -39,12 +50,20 @@ export const transFlattenRoutes = (
             name: label,
             hitParentKey,
             pathname: transCombinePath ? `${ROOT_URL}${transCombinePath}` : transCombinePath,
-            keyPaths: combinePath?.split(ROUTE_SEPARATOR),
+            routePaths: combinePath?.split(ROUTE_SEPARATOR),
+            keyPaths: combineKeys,
             labelPaths: transLabelPaths,
             elementBoolPaths: transElementBoolPaths,
         });
         if (Array.isArray(children) && children.length > 0) {
-            transFlattenRoutes(children, combinePath, transLabelPaths, transElementBoolPaths, flattenRoutes);
+            transFlattenRoutes({
+                flattenRoutes,
+                configs: children,
+                parentPath: combinePath,
+                parentKeys: combineKeys,
+                parentNames: transLabelPaths,
+                parentElementBoolPaths: transElementBoolPaths,
+            });
         }
     });
     return flattenRoutes;
