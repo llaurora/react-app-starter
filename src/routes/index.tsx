@@ -1,7 +1,6 @@
 import { lazy } from "react";
 import type { ReactNode } from "react";
 import type { RouteObject } from "react-router-dom";
-import { ROOT_URL } from "@/constants";
 import { GlobalOutlined, HomeOutlined, LineChartOutlined, ProfileOutlined } from "@ant-design/icons";
 import { AUTH_MENU_EXAMPLE_PAGE_ONE, AUTH_MENU_EXAMPLE_PAGE_THREE } from "@/auth/code";
 import {
@@ -63,7 +62,6 @@ const routeConfigs: RouteConfig[] = [
     {
         index: true,
         key: KEY_HOME,
-        path: ROOT_URL,
         label: MENU_LABEL_MAP[KEY_HOME],
         icon: <HomeOutlined />,
         element: <Home />,
@@ -150,6 +148,7 @@ const flattenRoutes: FlattenRoute[] = transFlattenRoutes({
     parentKeys: [],
     parentNames: [],
     parentElementBoolPaths: [],
+    routePaths: [],
     flattenRoutes: [],
 });
 

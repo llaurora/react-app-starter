@@ -20,16 +20,20 @@ const useMenuRoutes = (routeConfigs: RouteConfig[]) => {
             const menus: ItemType[] = [];
             configs.forEach((item: RouteConfig) => {
                 const { key, path, element, label, icon, hiddenInMenu, children, authority, index } = item;
-                const baseRoute = {
-                    path,
-                    element: element ? <AuthorizedRoute authority={authority}>{element}</AuthorizedRoute> : element,
-                };
+                const authElement = element ? (
+                    <AuthorizedRoute authority={authority}>{element}</AuthorizedRoute>
+                ) : (
+                    element
+                );
                 const route: RouteObject = index
                     ? {
                           index,
-                          ...baseRoute,
+                          element: authElement,
                       }
-                    : baseRoute;
+                    : {
+                          path,
+                          element: authElement,
+                      };
                 let childMenus: ItemType[] = [];
                 const combinePath = parentPath === "" ? path : `${parentPath}${ROUTE_SEPARATOR}${path}`;
                 const transKeyNames = label ? [...parentNames, label] : parentNames;

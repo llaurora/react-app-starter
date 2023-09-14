@@ -9,6 +9,7 @@ interface FuncFlattenRoutesParams {
     parentNames: ReactNode[];
     parentElementBoolPaths: boolean[];
     flattenRoutes: FlattenRoute[];
+    routePaths: string[];
 }
 
 export const transFlattenRoutes = ({
@@ -17,6 +18,7 @@ export const transFlattenRoutes = ({
     parentKeys,
     parentNames,
     parentElementBoolPaths,
+    routePaths,
     flattenRoutes,
 }: FuncFlattenRoutesParams): FlattenRoute[] => {
     configs.forEach((item: RouteConfig) => {
@@ -32,13 +34,13 @@ export const transFlattenRoutes = ({
             flattenRoutes.push({
                 index,
                 key,
-                path,
                 element,
                 pathname,
                 authority,
             });
             return;
         }
+        const currentRoutePaths = [...routePaths, pathname].filter((str: string) => str !== "");
         const transLabelPaths = label ? [...parentNames, label] : parentNames;
         const transElementBoolPaths = [...parentElementBoolPaths, !!element || hasIndexElement];
         const combineKeys = [...parentKeys, key];
@@ -50,7 +52,7 @@ export const transFlattenRoutes = ({
             name: label,
             hitParentKey,
             pathname: transCombinePath ? `${ROOT_URL}${transCombinePath}` : transCombinePath,
-            routePaths: combinePath?.split(ROUTE_SEPARATOR),
+            routePaths: currentRoutePaths,
             keyPaths: combineKeys,
             labelPaths: transLabelPaths,
             elementBoolPaths: transElementBoolPaths,
@@ -63,6 +65,7 @@ export const transFlattenRoutes = ({
                 parentKeys: combineKeys,
                 parentNames: transLabelPaths,
                 parentElementBoolPaths: transElementBoolPaths,
+                routePaths: currentRoutePaths,
             });
         }
     });
